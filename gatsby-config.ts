@@ -9,7 +9,7 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
-  plugins: ["gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-postcss", {
+  plugins: ["gatsby-plugin-image", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/icon.png"
@@ -34,6 +34,12 @@ const config: GatsbyConfig = {
     options: {
       pathToConfigModule: 'src/utils/typography.Ts'
     }
+  },{
+    resolve: `gatsby-plugin-sass`,
+    options: {
+      // Configure SASS to process Tailwind
+      postCssPlugins: [require('tailwindcss')],
+    },
   }
   ]
 };
