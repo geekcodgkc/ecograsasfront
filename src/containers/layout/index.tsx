@@ -1,7 +1,13 @@
 import React from 'react'
+import './index.scss'
 
-export default function Layout() {
+export default function Layout({ children }: React.PropsWithChildren) {
   return (
-    <div>Laexport default function Layout</div>
+    <>
+      <main className="">
+        <h1>hello</h1>
+        {children}
+      </main>
+    </>
   )
 }
