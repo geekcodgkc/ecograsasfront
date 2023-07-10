@@ -1,13 +1,16 @@
 import React from 'react'
 import '../../styles/global.scss'
+import NavBar from '../../components/nav'
+import Footer from '../../components/footer'
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <>
-      <main className="min-w-full bg-[#34d399]">
-        <h1 className='text-3xl font-bold underline'>hello</h1>
-        {children}
-      </main>
+      <NavBar />
+        <main className="min-w-full bg-[#34d399] min-h-screen">
+          {children}
+        </main>
+      <Footer />
     </>
   )
 }

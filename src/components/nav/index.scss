@@ -1,0 +1,20 @@
+.register-button{
+    color: white;
+    background: #000;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    border: solid 0.15rem black;
+    transition-duration: 0.15s;
+}
+
+.register-button:hover{
+    color: black;
+    background: white;
+    border-radius: 0.25rem;
+    border: solid 0.15rem black;
+    transition-duration: 0.15s;
+}
+
+.nav-hover:hover {
+    color: #60794d;
+}
