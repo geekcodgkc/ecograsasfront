@@ -10,6 +10,7 @@ const typography = new Typography({
     ],
     bodyFontFamily: [
         'Poppins',
+        'Roboto',
         'Oxygen',
     ],
     googleFonts: [
