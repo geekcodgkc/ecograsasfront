@@ -32,7 +32,7 @@ const config: GatsbyConfig = {
   {
     resolve: `gatsby-plugin-typography`,
     options: {
-      pathToConfigModule: 'src/utils/typography.js'
+      pathToConfigModule: 'src/utils/typography.Ts'
     }
   }
   ]
