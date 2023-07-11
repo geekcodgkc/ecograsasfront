@@ -11,13 +11,16 @@ export default function NavBar() {
 				</Link>
 			</div>
 			<div className="items-center flex gap-x-4 tracking-widest">
-				<Link to="/" className="font-medium px-4 duration-150 nav-hover">
+				<Link
+					to="/products"
+					className="font-medium px-4 duration-150 nav-hover"
+				>
 					Productos
 				</Link>
-				<Link to="/" className="font-medium px-4 duration-150 nav-hover">
+				<Link to="/about" className="font-medium px-4 duration-150 nav-hover">
 					About
 				</Link>
-				<Link to="/" className="font-medium px-4 duration-150 nav-hover">
+				<Link to="/blog" className="font-medium px-4 duration-150 nav-hover">
 					Blog
 				</Link>
 				<button type="button" className="register-button ml-16">
