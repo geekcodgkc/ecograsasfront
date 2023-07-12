@@ -18,3 +18,37 @@
 .nav-hover:hover {
     color: #60794d;
 }
+
+.side-nav {
+    display: none;
+}
+
+.sideNavOpen {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .page-links {
+        display: none;
+    }
+    #nav {
+        padding: 16px;
+    }
+    .side-nav {
+        display: flex;
+        position: fixed;
+        top: 0;
+        transition-duration: 0.3s;
+    }
+    .nav-close {
+        right: -50%;
+        transition-duration: 0.3s;
+    }
+    .nav-open {
+        right: 0;
+        transition-duration: 0.3s;
+    }
+    .sideNavOpen {
+        display: flex;
+    }
+}
