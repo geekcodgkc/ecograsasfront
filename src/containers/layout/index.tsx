@@ -7,7 +7,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
 	return (
 		<>
 			<NavBar />
-			<main className="w-full bg-slate-100 min-h-screen flex ">{children}</main>
+			<main className="w-full bg-slate-100 min-h-screen flex flex-wrap">
+				{children}
+			</main>
 			<Footer />
 		</>
 	);
