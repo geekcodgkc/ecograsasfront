@@ -1,5 +1,6 @@
 .left-child, .right-child {
     flex-basis: 45%;
+    z-index: 2;
 }
 
 .action-button-1 {
@@ -12,6 +13,11 @@
     border: solid 0.15rem black;
     transition-duration: 0.15s;
     align-self: center;
+    gap: 8px
+}
+
+#with-padding {
+    padding: attr(data);
 }
 
 .action-button-1:hover{
@@ -23,6 +29,7 @@
 }
 
 @media (max-width: 1023px) {
+    
     .left-child {
         flex-basis: 90%;
     }
@@ -32,6 +39,10 @@
 }
 
 @media (max-width: 500px) {
+    .section-container {
+        flex-direction: column-reverse;
+    }
+
     .left-child, .right-child {
         flex-basis: 100%;
     }

@@ -4,33 +4,17 @@ import "./index.scss";
 interface SectionProps {
 	LeftChild: React.FC;
 	RightChild: React.FC;
-	padding?: "string";
-	background_image?: string;
+	padding?: string;
 }
 
-const styles = {
-	backgroundColor: "rgba(0,0,0,0)",
-	backgroundImage: "",
-	backgroundPosition: "center",
-	backgroundRepeat: "round",
-};
-
 export default function SectionDouble({
+	padding = "p-12",
 	LeftChild,
 	RightChild,
-	padding,
-	background_image,
 }: SectionProps) {
-	if (background_image) {
-		styles.backgroundImage = `url(${background_image})`;
-	}
-
 	return (
 		<div
-			className="m-auto max-w-screen-xl section-container p-12 justify-center flex flex-wrap gap-12"
-			id={padding ? "with-padding" : "no-padding"}
-			style={styles}
-			data-padding={`${padding}`}
+			className={`m-auto max-w-screen-xl section-container justify-center flex flex-wrap gap-12 ${padding}`}
 		>
 			<div className="left-child aspect-video overflow-hidden rounded-lg">
 				{LeftChild && <LeftChild />}

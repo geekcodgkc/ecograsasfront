@@ -4,6 +4,7 @@ import SectionDouble from "../../components/SectionDouble";
 import YoutubeEmbed from "../../components/Youtube";
 import { navigate } from "gatsby";
 import { BsArrowRight } from "react-icons/bs";
+import "./index.scss";
 
 const Iframe = () => {
 	return (
@@ -51,8 +52,8 @@ export default function Home() {
 	return (
 		<>
 			<Hero />
-			<section className="w-full">
-				<SectionDouble LeftChild={Iframe} RightChild={Left} />
+			<section className="w-full farmin-background relative">
+				<SectionDouble LeftChild={Iframe} RightChild={Left} padding="py-24" />
 			</section>
 		</>
 	);
