@@ -3,11 +3,12 @@ import { Link } from "gatsby";
 import { AiFillInstagram } from "react-icons/ai";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 import { GrMail } from "react-icons/gr";
+import "./index.scss";
 
 export default function Footer() {
 	return (
 		<footer className="min-w-full bg-lime-500 pt-10 flex flex-wrap justify-around">
-			<div className="ml-6">
+			<div className="ml-6 socials-container">
 				<h2 className="font-bold text-3xl mb-4">
 					Impulsando los mejores
 					<br /> productos
@@ -44,8 +45,8 @@ export default function Footer() {
 					</Link>
 				</div>
 			</div>
-			<header className="w-full flex justify-items-stretch max-w-[650px]">
-				<div className="basis-1/2 flex flex-col">
+			<header className="w-full flex justify-items-stretch max-w-[650px] flex-wrap links-container">
+				<div className="basis-1/2 flex flex-col" id="quick-links">
 					<h3 className="font-bold text-3xl mb-4">Informaci&oacute;n</h3>
 					<ul className="w-full">
 						<li>
@@ -74,7 +75,7 @@ export default function Footer() {
 						</li>
 					</ul>
 				</div>
-				<div className="basis-1/2 flex flex-col">
+				<div className="basis-1/2 flex flex-col" id="quick-links">
 					<h3 className="font-bold text-3xl mb-4">Enlaces R&aacute;pidos</h3>
 					<ul className="w-full">
 						<li>

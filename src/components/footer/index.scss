@@ -1,0 +1,29 @@
+@media (max-width: 1024px) {
+    .links-container {
+        margin-top: 2rem;
+    }
+    .socials-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .socials-container {
+        width: 100%;
+        align-items: start;
+        text-align: left;
+    }
+    .links-container {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        margin: 1rem 2rem;
+        gap: 12px;
+        justify-content: center;
+        #quick-links {
+            flex-basis: 100%;
+        }
+    }
+}
