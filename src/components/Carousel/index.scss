@@ -1,0 +1,32 @@
+#carouselContainer {
+    left: 0px;
+    transition-duration: 500ms;
+}
+
+#buttonsContainerCarousel {
+    text-decoration: none;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+    transition-duration: 500ms;
+}
+
+.dot-active {
+    transition-duration: 500ms;
+    width: 30px;
+    border-radius: 5px;
+}
+
+@media (max-width: 699px) {
+    #buttonsContainerCarousel {
+        display: none;
+    }
+    #carouselParent {
+        width: 100%;
+        padding: 0 2rem;
+    }
+}
