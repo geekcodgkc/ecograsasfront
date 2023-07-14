@@ -1,9 +1,38 @@
 .cardContainer {
     border-radius: 10px;
-    width: 400px;
-    font-weight: 800;
-    text-align: center;
-    font-size: 32px;
-    background-color: red;
+    max-width: 400px;
+    min-width: 400px;
+    padding-top: 200px;
+    background-color: rgba(255, 255, 255, 0);
     height: max-content;
+    overflow: hidden;
+}
+
+.cardContentContainer {
+    gap: 11px;
+    button {
+        margin-top: 16px;
+    }
+    button:hover {
+        background-color: rgba(0,0,0, 0);
+    }
+    background: linear-gradient(rgba(0,2,2, 0.01), 15%, rgba(0,0,0, 0.6), 90%, rgba(0,2,2, 0.05));
+    color: white;
+}
+
+.cardContentContainer * {
+    z-index: 2;
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: .2;
+    background-size: cover;
 }

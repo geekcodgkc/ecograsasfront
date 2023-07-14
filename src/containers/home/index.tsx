@@ -61,71 +61,57 @@ export default function Home() {
 			<section className="w-full">
 				<Carousel>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Manteca Repostera"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Margarina Untable"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Aceite RBD de Palma"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Margarina Multiuso Con Sal"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Margarina de Palma"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Margarina de Palma Baja en sal Hojaldre"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Manteca Vegetal Galletera"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}
 					/>
 					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={BackImg}
-					/>
-					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={BackImg}
-					/>
-					<ProductCard
-						title="Card Title"
-						description="Card description for this card"
+						title="Manteca Vegetal Galletera Tipo Shortering"
+						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
 						img={BackImg}

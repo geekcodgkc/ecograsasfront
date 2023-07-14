@@ -20,25 +20,31 @@ export default function ProductCard({
 	img,
 	...rest
 }: ProductCardInterface) {
-	const [size, setSize] = useState(300);
-	const windowSize = useRef<number[]>([window.innerWidth]);
-
-	useEffect(() => {
-		if (windowSize.current) {
-			setSize(windowSize.current[0]);
-		}
-	}, [windowSize]);
+	useEffect(() => {}, []);
 
 	const handleButton = () => {
 		navigate(`${actionRoute}`);
 	};
 
 	return (
-		<div className="flex p-4 flex-col cardContainer">
-			<h3>titulo de la tarjeta</h3>
-			<button type="button" className={"action-button-1"}>
-				algo
-			</button>
+		<div className="cardContainer shadow-lg relative">
+			<div
+				className="backgroundImage"
+				style={{
+					backgroundImage: `url(${img})`,
+				}}
+			/>
+			<div className="cardContentContainer p-4 flex flex-col">
+				<h3 className="text-center w-full mb-4 font-bold text-xl">{title}</h3>
+				<p className="font-light">{description}</p>
+				<button
+					type="button"
+					className={"action-button-1"}
+					onClick={handleButton}
+				>
+					{buttonText} <FaArrowRightLong />
+				</button>
+			</div>
 		</div>
 	);
 }
