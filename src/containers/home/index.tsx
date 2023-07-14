@@ -122,7 +122,7 @@ export default function Home() {
 					/>
 				</Carousel>
 			</section>
-			<section>
+			<section className="w-full">
 				<InstructionsBanner />
 			</section>
 		</>
