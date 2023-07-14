@@ -18,7 +18,6 @@ export default function ProductCard({
 	buttonText,
 	actionRoute,
 	img,
-	...rest
 }: ProductCardInterface) {
 	useEffect(() => {}, []);
 

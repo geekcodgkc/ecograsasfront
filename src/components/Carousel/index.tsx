@@ -1,10 +1,9 @@
-import React, { cloneElement, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./index.scss";
 
 interface CarouselProps {
 	children: React.ReactElement[];
-	//elementsPerView?: number;
 }
 
 export default function CarouselComponent({ children }: CarouselProps) {
@@ -14,6 +13,8 @@ export default function CarouselComponent({ children }: CarouselProps) {
 	const [offset, setOffset] = useState(0);
 	const elements = children.length;
 	const carouselContainerRef = useRef<HTMLDivElement>(null);
+
+	const isBrowser = () => typeof window !== "undefined";
 
 	const genDots = (): [number[], number[]] => {
 		const dotsNumber: [number[], number[]] = [[], []];
@@ -27,42 +28,47 @@ export default function CarouselComponent({ children }: CarouselProps) {
 	const [dotsLg, dotsTablet] = genDots();
 
 	const handleResize = () => {
-		const windowSize = window.innerWidth;
+		const windowSize = isBrowser() && window.innerWidth;
 		setOffset(0);
 		setStep(0);
 
-		if (windowSize < 1440) {
+		if (typeof windowSize === "number") {
+			if (windowSize < 1440) {
+				if (carouselContainerRef.current) {
+					const width = carouselContainerRef.current.scrollWidth;
+					const widthContainer = (width / elements) * 2;
+					setMaxWidth(widthContainer);
+				}
+				return;
+			}
 			if (carouselContainerRef.current) {
 				const width = carouselContainerRef.current.scrollWidth;
-				const widthContainer = (width / elements) * 2;
+				const widthContainer = (width / elements) * 3;
 				setMaxWidth(widthContainer);
 			}
-			return;
-		}
-		if (carouselContainerRef.current) {
-			const width = carouselContainerRef.current.scrollWidth;
-			const widthContainer = (width / elements) * 3;
-			setMaxWidth(widthContainer);
 		}
 	};
 
-	window.addEventListener("resize", () => {
-		handleResize();
-	});
+	isBrowser() &&
+		window.addEventListener("resize", () => {
+			handleResize();
+		});
 
 	useEffect(() => {
-		if (carouselContainerRef.current) {
-			const width = carouselContainerRef.current.scrollWidth;
-			const contentHeight = carouselContainerRef.current.scrollHeight;
-			const divider = window.innerWidth < 1440 ? 2 : 3;
-			const widthContainer = (width / elements) * divider;
-			setMaxWidth(widthContainer);
-			setHeight(contentHeight);
-		}
+		if (isBrowser()) {
+			if (carouselContainerRef.current) {
+				const width = carouselContainerRef.current.scrollWidth;
+				const contentHeight = carouselContainerRef.current.scrollHeight;
+				const divider = window.innerWidth < 1440 ? 2 : 3;
+				const widthContainer = (width / elements) * divider;
+				setMaxWidth(widthContainer);
+				setHeight(contentHeight);
+			}
 
-		return () => {
-			window.removeEventListener("resize", handleResize);
-		};
+			return () => {
+				window.removeEventListener("resize", handleResize);
+			};
+		}
 	}, [carouselContainerRef]);
 
 	const handlePage = (i: number) => {
