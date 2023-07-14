@@ -9,6 +9,7 @@ import Carousel from "../../components/Carousel";
 import ProductCard from "../../components/ProductCard";
 import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.jpg";
 import InstructionsBanner from "../../components/InstructionBanner";
+import SellerCard from "../../components/SellerCard";
 
 const Iframe = () => {
 	return (
@@ -124,6 +125,14 @@ export default function Home() {
 			</section>
 			<section className="w-full">
 				<InstructionsBanner />
+			</section>
+			<section className="w-full flex flex-wrap justify-center gap-x-8 gap-y-16 py-12">
+				<h2 className="text-center font-bold text-4xl w-full">
+					Contamos Con un Equipo excelente
+				</h2>
+				<SellerCard name="Julian" phone="+584243251030" />
+				<SellerCard name="Maria" phone="+584243251030" />
+				<SellerCard name="Elena" phone="+584243251030" />
 			</section>
 		</>
 	);
