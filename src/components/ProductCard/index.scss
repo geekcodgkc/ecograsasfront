@@ -2,7 +2,9 @@
     border-radius: 10px;
     max-width: 400px;
     min-width: 400px;
-    padding-top: 200px;
+    min-height: 400px;
+    display: flex;
+    align-items: flex-end;
     background-color: rgba(255, 255, 255, 0);
     height: max-content;
     overflow: hidden;

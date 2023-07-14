@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { navigate } from "gatsby";
 import { FaArrowRightLong } from "react-icons/fa6";
 import "./index.scss";

@@ -7,8 +7,11 @@ import { BsArrowRight } from "react-icons/bs";
 import "./index.scss";
 import Carousel from "../../components/Carousel";
 import ProductCard from "../../components/ProductCard";
-import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.jpg";
+import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.webp";
 import InstructionsBanner from "../../components/InstructionBanner";
+import SellerCard from "../../components/SellerCard";
+import EventsCard from "../../components/EventsCard";
+import eventImg from "../../images/eventsImg.webp";
 
 const Iframe = () => {
 	return (
@@ -124,6 +127,40 @@ export default function Home() {
 			</section>
 			<section className="w-full">
 				<InstructionsBanner />
+			</section>
+			<section className="w-full flex flex-wrap justify-center gap-x-8 gap-y-16 py-12 sellerSectionBackground relative">
+				<h2 className="text-center font-bold text-4xl w-full">
+					Contamos Con un Equipo excelente
+				</h2>
+				<SellerCard name="Julian" phone="+584243251030" />
+				<SellerCard name="Maria" phone="+584243251030" />
+				<SellerCard name="Elena" phone="+584243251030" />
+			</section>
+			<section className="mx-auto w-11/12 py-12 justify-center flex flex-wrap gap-x-8 gap-y-16">
+				<h2 className="text-center font-bold text-4xl w-full mb-16">
+					Prox&iacute;mos Eventos
+				</h2>
+				<EventsCard
+					img={eventImg}
+					title="Taller de Reposteria"
+					description="mejores practicas e utilizacion de nuestros productos"
+					date="22/09/2023"
+					hour="9:30 AM"
+				/>
+				<EventsCard
+					img={eventImg}
+					title="Taller de Reposteria"
+					description="mejores practicas e utilizacion de nuestros productos"
+					date="22/09/2023"
+					hour="9:30 AM"
+				/>
+				<EventsCard
+					img={eventImg}
+					title="Taller de Reposteria"
+					description="mejores practicas e utilizacion de nuestros productos"
+					date="22/09/2023"
+					hour="9:30 AM"
+				/>
 			</section>
 		</>
 	);

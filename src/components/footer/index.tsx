@@ -15,34 +15,38 @@ export default function Footer() {
 				</h2>
 				<h3 className="font-bold text-1xl mb-4">contactanos en ...</h3>
 				<div className="flex flex-row socialsIcons gap-3 items-center text-3xl">
-					<Link
+					<a
 						target="_blank"
+						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						to="https://instagram.com"
+						href="https://instagram.com"
 					>
 						<AiFillInstagram className="" />
-					</Link>
-					<Link
+					</a>
+					<a
 						target="_blank"
+						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						to="https://facebook.com"
+						href="https://facebook.com"
 					>
 						<BsFacebook />
-					</Link>
-					<Link
+					</a>
+					<a
 						target="_blank"
+						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						to="mailto:test@test.net"
+						href="mailto:test@test.net"
 					>
 						<GrMail />
-					</Link>
-					<Link
+					</a>
+					<a
 						target="_blank"
+						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						to="https://youtube.com"
+						href="https://youtube.com"
 					>
 						<BsYoutube />
-					</Link>
+					</a>
 				</div>
 			</div>
 			<header className="w-full flex justify-items-stretch max-w-[650px] flex-wrap links-container">
