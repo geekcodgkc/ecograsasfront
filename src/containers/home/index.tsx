@@ -138,7 +138,7 @@ export default function Home() {
 			</section>
 			<section className="mx-auto w-11/12 py-12 justify-center flex flex-wrap gap-x-8 gap-y-16">
 				<h2 className="text-center font-bold text-4xl w-full mb-16">
-					Proximos Eventos
+					Prox&iacute;mos Eventos
 				</h2>
 				<EventsCard
 					img={eventImg}
