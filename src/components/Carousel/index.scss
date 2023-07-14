@@ -1,32 +1,61 @@
-#carouselContainer {
-    left: 0px;
+.carouselContainer {
+    overflow: hidden;
+    height: max-content;
+    margin: 0 auto;
+    display: block;
+}
+
+.carouselElement {
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    height: max-content;
     transition-duration: 500ms;
 }
 
-#buttonsContainerCarousel {
-    text-decoration: none;
+.dots-M {
+    display: none;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    background-color: black;
-    border-radius: 50%;
-    transition-duration: 500ms;
+.dots-lg {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    gap: 16px;
+    .pag-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: black;
+        transition-duration: 500ms;
+    }
+    .dot-active {
+        width: 36px;
+        border-radius: 6px;
+    }
 }
 
-.dot-active {
-    transition-duration: 500ms;
-    width: 30px;
-    border-radius: 5px;
-}
-
-@media (max-width: 699px) {
-    #buttonsContainerCarousel {
+@media (max-width: 1439px) {
+    .dots-lg {
         display: none;
     }
-    #carouselParent {
-        width: 100%;
-        padding: 0 2rem;
+    .dots-M {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    gap: 16px;
+    .pag-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: black;
+        transition-duration: 500ms;
+    }
+    .dot-active {
+        width: 36px;
+        border-radius: 6px;
     }
 }
+} 

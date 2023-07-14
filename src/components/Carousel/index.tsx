@@ -1,86 +1,127 @@
 import React, { cloneElement, useState, useRef, useEffect } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./index.scss";
 
 interface CarouselProps {
 	children: React.ReactElement[];
-	elementsPerView?: number;
+	//elementsPerView?: number;
 }
 
-export default function Carousel({
-	children,
-	elementsPerView = 3,
-}: CarouselProps) {
-	const [offset, setOffset] = useState(0);
-	const [width, setWidth] = useState(0);
+export default function CarouselComponent({ children }: CarouselProps) {
 	const [step, setStep] = useState(0);
-	const elWidth = useRef<HTMLDivElement>(null);
-	const Steps: number[] = [];
-	const elementsNumber = children.length;
+	const [maxWidth, setMaxWidth] = useState(800);
+	const [height, setHeight] = useState(200);
+	const [offset, setOffset] = useState(0);
+	const elements = children.length;
+	const carouselContainerRef = useRef<HTMLDivElement>(null);
 
-	for (let i = 0; i < Math.ceil(elementsNumber / elementsPerView); i++) {
-		Steps.push(i);
-	}
+	const genDots = (): [number[], number[]] => {
+		const dotsNumber: [number[], number[]] = [[], []];
+		[Math.ceil(elements / 3), Math.ceil(elements / 2)].forEach((dot, index) => {
+			for (let i = 0; i < dot; i++) {
+				dotsNumber[index].push(i);
+			}
+		});
+		return dotsNumber;
+	};
+	const [dotsLg, dotsTablet] = genDots();
 
-	useEffect(() => {
-		if (elWidth.current) {
-			setWidth(elWidth.current.scrollWidth);
-		}
-	}, [elWidth]);
+	const handleResize = () => {
+		const windowSize = window.innerWidth;
+		setOffset(0);
+		setStep(0);
 
-	const handleClick = (step: number) => {
-		const stepFrom = 0;
-		setStep(step);
-		if (step === 0) {
-			setOffset(0);
+		if (windowSize < 1440) {
+			if (carouselContainerRef.current) {
+				const width = carouselContainerRef.current.scrollWidth;
+				const widthContainer = (width / elements) * 2;
+				setMaxWidth(widthContainer);
+			}
 			return;
 		}
-		const singleStep = (width / elementsNumber) * elementsPerView;
-		const jump = stepFrom - singleStep * step;
-		setOffset(jump);
+		if (carouselContainerRef.current) {
+			const width = carouselContainerRef.current.scrollWidth;
+			const widthContainer = (width / elements) * 3;
+			setMaxWidth(widthContainer);
+		}
+	};
+
+	window.addEventListener("resize", () => {
+		handleResize();
+	});
+
+	useEffect(() => {
+		if (carouselContainerRef.current) {
+			const width = carouselContainerRef.current.scrollWidth;
+			const contentHeight = carouselContainerRef.current.scrollHeight;
+			console.log(height);
+			const widthContainer = (width / elements) * 3;
+			setMaxWidth(widthContainer);
+			setHeight(contentHeight);
+		}
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, [carouselContainerRef]);
+
+	const handlePage = (i: number) => {
+		setStep(i);
+		setOffset(maxWidth * i);
 	};
 
 	return (
-		<div className="w-full flex justify-center flex-wrap py-16">
-			<div className="w-full h-max">
+		<div className="flex w-full pt-24 flex-wrap">
+			<div
+				className={"relative carouselContainer"}
+				style={{
+					maxWidth: `${maxWidth}px`,
+					width: `${maxWidth}px`,
+					height: `${height}px`,
+					minHeight: `${height}px`,
+				}}
+				ref={carouselContainerRef}
+			>
 				<div
-					className="relative mx-auto overflow-hidden h-max h-52"
-					style={{
-						maxWidth: `${
-							Math.ceil(width / elementsNumber) * elementsPerView
-						}px`,
-					}}
-					id="carouselParent"
+					style={{ left: `-${offset}px` }}
+					className={"absolute flex gap-8 carouselElement px-8"}
 				>
-					<div
-						className="absolute flex-row container flex"
-						id="carouselContainer"
-						ref={elWidth}
-						style={{ left: `${offset}px` }}
-					>
-						{children.map((Child) => {
-							return cloneElement(Child, {
-								className: "bg-black text-white p-12 border-white border-2",
-							});
-						})}
-					</div>
+					{children}
 				</div>
 			</div>
-			<div
-				className="w-full flex justify-center gap-2"
-				id="buttonsContainerCarousel"
-			>
-				{Steps.map((_e, i) => {
-					return (
-						<span
-							key={i + 1}
-							className={`dot ${step === i ? "dot-active" : ""}`}
-							onClick={() => {
-								handleClick(i);
-							}}
-							onKeyDown={(e) => {}}
-						/>
-					);
-				})}
+			<div className="dotsContainer w-full flex justify-center gap-12">
+				<div className="dots-lg">
+					{dotsLg.map((dot, i) => {
+						return (
+							<span
+								key={dot}
+								className={`pag-dot ${step === i ? "dot-active" : ""}`}
+								onClick={() => {
+									handlePage(i);
+								}}
+								onKeyUp={() => {}}
+							>
+								{" "}
+							</span>
+						);
+					})}
+				</div>
+				<div className="dots-M">
+					{dotsTablet.map((dot, i) => {
+						return (
+							<span
+								key={dot}
+								className={`pag-dot ${step === i ? "dot-active" : ""}`}
+								onClick={() => {
+									handlePage(i);
+								}}
+								onKeyUp={() => {}}
+							>
+								{" "}
+							</span>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);

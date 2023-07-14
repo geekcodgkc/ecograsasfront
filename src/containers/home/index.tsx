@@ -7,6 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import "./index.scss";
 import Carousel from "../../components/Carousel";
 import ProductCard from "../../components/ProductCard";
+import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.jpg";
 
 const Iframe = () => {
 	return (
@@ -57,18 +58,78 @@ export default function Home() {
 			<section className="w-full farmin-background relative">
 				<SectionDouble LeftChild={Iframe} RightChild={Left} padding="py-24" />
 			</section>
-			<section className="w-full relative">
+			<section className="w-full">
 				<Carousel>
-					<ProductCard number="1" />
-					<ProductCard number="2" />
-					<ProductCard number="3" />
-					<ProductCard number="4" />
-					<ProductCard number="5" />
-					<ProductCard number="6" />
-					<ProductCard number="7" />
-					<ProductCard number="8" />
-					<ProductCard number="9" />
-					<ProductCard number="10" />
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
+					<ProductCard
+						title="Card Title"
+						description="Card description for this card"
+						buttonText="vamos al sitio"
+						actionRoute="/About"
+						img={BackImg}
+					/>
 				</Carousel>
 			</section>
 		</>
