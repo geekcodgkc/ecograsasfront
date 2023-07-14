@@ -8,6 +8,17 @@
     h2 {
         align-self: center;
     }
+    p {
+        max-width: 50%;
+    }
+    a{
+        font-weight: 600;
+        text-decoration: underline;
+        transition-duration: 0.2s;
+    }
+    a:hover {
+        color: #525252;
+    }
 }
 
 #variant-left {
