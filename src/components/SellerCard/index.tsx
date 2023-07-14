@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.scss";
 import { FaArrowRight } from "react-icons/fa6";
+import { FaUserAlt } from "react-icons/fa";
 
 interface SellerProps {
 	phone: string;
@@ -18,14 +19,15 @@ export default function SellerCard({
 	mail = "ventas@ecograsas.com",
 }: SellerProps) {
 	return (
-		<div className="sellerCardContainer flex flex-col align-center py-8 shadow-md">
+		<div className="sellerCardContainer bg-slate-100 flex flex-col align-center py-8 shadow-md">
 			<div className="containerInfo px-16 flex flex-col items-center gap-2">
 				<div className="sellerImgContainer">
 					{img && <img src={img} alt="text alt" />}
+					{!img && <FaUserAlt />}
 				</div>
 				<h3>{name}</h3>
 				<h4>Depatamento de: {deparment}</h4>
-				<p>
+				<p className="font-bold hover:text-stone-500 underline decoration-2">
 					<a href={`tel:${phone}`}>{phone}</a>
 				</p>
 			</div>

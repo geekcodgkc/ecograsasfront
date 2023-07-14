@@ -126,13 +126,18 @@ export default function Home() {
 			<section className="w-full">
 				<InstructionsBanner />
 			</section>
-			<section className="w-full flex flex-wrap justify-center gap-x-8 gap-y-16 py-12">
+			<section className="w-full flex flex-wrap justify-center gap-x-8 gap-y-16 py-12 sellerSectionBackground relative">
 				<h2 className="text-center font-bold text-4xl w-full">
 					Contamos Con un Equipo excelente
 				</h2>
 				<SellerCard name="Julian" phone="+584243251030" />
 				<SellerCard name="Maria" phone="+584243251030" />
 				<SellerCard name="Elena" phone="+584243251030" />
+			</section>
+			<section className="w-full">
+				<h2 className="text-center font-bold text-4xl w-full">
+					Proximos Eventos
+				</h2>
 			</section>
 		</>
 	);

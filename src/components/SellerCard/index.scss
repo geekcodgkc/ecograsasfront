@@ -1,6 +1,9 @@
 .sellerCardContainer {
+    max-width: 95%;
+    border-radius: 8px;
     .containerInfo {
         .sellerImgContainer {
+            z-index: 3;
             min-width: 150px;
             min-height: 150px;
             width: 100%;
@@ -11,6 +14,14 @@
             overflow: hidden;
             background-color: aqua;
             margin-bottom: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg {
+                width: 65%;
+                height: 65%;
+                color: black;
+            }
         }
     }
     hr {
@@ -19,4 +30,8 @@
         width: 100%;
         background-color: black;
     }
+}
+
+.sellerCardContainer *, .sellerCardContainer {
+    z-index: 3;
 }
