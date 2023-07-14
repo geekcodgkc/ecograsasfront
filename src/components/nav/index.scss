@@ -1,0 +1,60 @@
+.register-button{
+    color: white;
+    background: #000;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    border: solid 0.15rem black;
+    transition-duration: 0.15s;
+}
+
+.register-button:hover{
+    color: black;
+    background: white;
+    border-radius: 0.25rem;
+    border: solid 0.15rem black;
+    transition-duration: 0.15s;
+}
+
+.nav-hover:hover {
+    color: #60794d;
+}
+
+.side-nav {
+    display: none;
+}
+
+.sideNavOpen {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .page-links {
+        display: none;
+    }
+    #nav {
+        padding: 16px;
+    }
+    .side-nav {
+        display: flex;
+        position: fixed;
+        top: 0;
+        transition-duration: 0.3s;
+    }
+    .nav-close {
+        right: -50%;
+        transition-duration: 0.3s;
+    }
+    .nav-open {
+        right: 0;
+        transition-duration: 0.3s;
+    }
+    .sideNavOpen {
+        display: flex;
+    }
+}
+
+@media (max-width: 425px) {
+    .nav-close {
+        right: -80%;
+    }
+}
