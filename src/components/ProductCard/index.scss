@@ -9,19 +9,22 @@
 }
 
 .cardContentContainer {
+    position: relative;
     gap: 11px;
     button {
         margin-top: 16px;
     }
-    button:hover {
-        background-color: rgba(0,0,0, 0);
-    }
-    background: linear-gradient(rgba(0,2,2, 0.01), 15%, rgba(0,0,0, 0.6), 90%, rgba(0,2,2, 0.05));
+    background: linear-gradient(rgba(0,2,2, 0.1), 15%, rgba(0,0,0, 0.6), 90%, rgba(0,2,2, 0.05)); 
     color: white;
+    z-index: 3;
 }
 
+/*
+    linear-gradient(rgba(0,2,2, 0.5), 15%, rgba(0,0,0, 0.6), 90%, rgba(0,2,2, 0.05));
+*/
+
 .cardContentContainer * {
-    z-index: 2;
+    z-index: 3;
 }
 
 .backgroundImage {
@@ -33,6 +36,5 @@
     min-width: 100%;
     height: 100%;
     z-index: 1;
-    opacity: .2;
     background-size: cover;
 }

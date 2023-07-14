@@ -14,3 +14,18 @@
     background-repeat: no-repeat;
     opacity: 0.1;
 }
+
+.products-background::before {
+    background-image: url('../../images/hermoso-paisaje-plantas-phragmites-junto-al-mar-pelicano-nadando-al-atardecer-min.jpg');
+    background-position: center;
+    background-size: cover;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    display: block;
+    position: absolute;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: 1;
+}

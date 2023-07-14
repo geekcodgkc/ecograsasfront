@@ -25,22 +25,26 @@
     margin-bottom: 24px;
 }
 
+.dotsContainer{
+    z-index: 3;
+}
+
 .dots-lg {
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 8px;
-    gap: 16px;
+    gap: 8px;
     .pag-dot {
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         background-color: black;
         transition-duration: 500ms;
     }
     .dot-active {
-        width: 36px;
-        border-radius: 6px;
+        width: 64px;
+        border-radius: 4px;
     }
 }
 
@@ -53,17 +57,17 @@
         display: flex;
         justify-content: center;
         padding: 8px;
-        gap: 16px;
+        gap: 8px;
         .pag-dot {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background-color: black;
             transition-duration: 500ms;
         }
         .dot-active {
-            width: 36px;
-            border-radius: 6px;
+            width: 64px;
+            border-radius: 4px;
         }
     }
 } 

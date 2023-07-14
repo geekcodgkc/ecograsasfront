@@ -58,7 +58,10 @@ export default function Home() {
 			<section className="w-full farmin-background relative">
 				<SectionDouble LeftChild={Iframe} RightChild={Left} padding="py-24" />
 			</section>
-			<section className="w-full">
+			<section className="w-full pt-16 products-background relative">
+				<h2 className="text-center font-bold text-2xl">
+					Productos Frescos y de Larga Duraci&oacute;n
+				</h2>
 				<Carousel>
 					<ProductCard
 						title="Manteca Repostera"
