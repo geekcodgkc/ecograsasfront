@@ -77,7 +77,7 @@ export default function CarouselComponent({ children }: CarouselProps) {
 	};
 
 	return (
-		<div className="flex w-full pt-24 flex-wrap" id="carouselComponent">
+		<div className="flex w-full pt-8 flex-wrap" id="carouselComponent">
 			<div
 				className={"relative carouselContainer"}
 				style={{
