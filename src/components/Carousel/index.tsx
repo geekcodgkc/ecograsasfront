@@ -54,8 +54,8 @@ export default function CarouselComponent({ children }: CarouselProps) {
 		if (carouselContainerRef.current) {
 			const width = carouselContainerRef.current.scrollWidth;
 			const contentHeight = carouselContainerRef.current.scrollHeight;
-			console.log(height);
-			const widthContainer = (width / elements) * 3;
+			const divider = window.innerWidth < 1440 ? 2 : 3;
+			const widthContainer = (width / elements) * divider;
 			setMaxWidth(widthContainer);
 			setHeight(contentHeight);
 		}
@@ -77,14 +77,15 @@ export default function CarouselComponent({ children }: CarouselProps) {
 				style={{
 					maxWidth: `${maxWidth}px`,
 					width: `${maxWidth}px`,
-					height: `${height}px`,
 					minHeight: `${height}px`,
 				}}
 				ref={carouselContainerRef}
+				id={"carouselContainer"}
 			>
 				<div
 					style={{ left: `-${offset}px` }}
 					className={"absolute flex gap-8 carouselElement px-8"}
+					id="carouselElement"
 				>
 					{children}
 				</div>
