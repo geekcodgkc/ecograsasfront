@@ -8,6 +8,7 @@ import "./index.scss";
 import Carousel from "../../components/Carousel";
 import ProductCard from "../../components/ProductCard";
 import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.jpg";
+import InstructionsBanner from "../../components/InstructionBanner";
 
 const Iframe = () => {
 	return (
@@ -120,6 +121,9 @@ export default function Home() {
 						img={BackImg}
 					/>
 				</Carousel>
+			</section>
+			<section>
+				<InstructionsBanner />
 			</section>
 		</>
 	);

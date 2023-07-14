@@ -3,7 +3,7 @@
 }
 
 .farmin-background::before {
-    background-image: url('../../images/vista-aerea-plantacion-cocoteros-carretera-min.jpg');
+    background-image: url('../../images/farminBackground.jpg');
     background-position: center;
     background-size: cover;
     width: 100%;
@@ -12,7 +12,7 @@
     display: block;
     position: absolute;
     background-repeat: no-repeat;
-    opacity: 0.1;
+    opacity: 0.4;
 }
 
 .products-background::before {
@@ -26,6 +26,6 @@
     display: block;
     position: absolute;
     background-repeat: no-repeat;
-    opacity: 0.2;
+    opacity: 0.4;
     z-index: 1;
 }
