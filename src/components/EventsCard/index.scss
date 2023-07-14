@@ -1,0 +1,24 @@
+.eventCardContainer {
+    width: 100%;
+    max-width: 350px;
+    font-size: 14px;
+    min-height: 450px;
+    display: flex;
+    align-items: end;
+    border-radius: 8px;
+    overflow: hidden;
+    .backgroundImage{
+        z-index: 1;
+    }
+    .eventCardContentContainer {
+        z-index: 3;
+        color: white;
+        background: linear-gradient(rgba(0,2,2, 0.1), 15%, rgba(0,0,0, 0.6), 90%, rgba(0,2,2, 0.05));    
+        .timeContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            color: white
+        }
+    }
+}

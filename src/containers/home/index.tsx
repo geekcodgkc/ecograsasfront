@@ -10,6 +10,8 @@ import ProductCard from "../../components/ProductCard";
 import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.jpg";
 import InstructionsBanner from "../../components/InstructionBanner";
 import SellerCard from "../../components/SellerCard";
+import EventsCard from "../../components/EventsCard";
+import eventImg from "../../images/eventsImg.webp";
 
 const Iframe = () => {
 	return (
@@ -134,10 +136,31 @@ export default function Home() {
 				<SellerCard name="Maria" phone="+584243251030" />
 				<SellerCard name="Elena" phone="+584243251030" />
 			</section>
-			<section className="w-full">
-				<h2 className="text-center font-bold text-4xl w-full">
+			<section className="mx-auto w-11/12 py-12 justify-center flex flex-wrap gap-x-8 gap-y-16">
+				<h2 className="text-center font-bold text-4xl w-full mb-16">
 					Proximos Eventos
 				</h2>
+				<EventsCard
+					img={eventImg}
+					title="Taller de Reposteria"
+					description="mejores practicas e utilizacion de nuestros productos"
+					date="22/09/2023"
+					hour="9:30 AM"
+				/>
+				<EventsCard
+					img={eventImg}
+					title="Taller de Reposteria"
+					description="mejores practicas e utilizacion de nuestros productos"
+					date="22/09/2023"
+					hour="9:30 AM"
+				/>
+				<EventsCard
+					img={eventImg}
+					title="Taller de Reposteria"
+					description="mejores practicas e utilizacion de nuestros productos"
+					date="22/09/2023"
+					hour="9:30 AM"
+				/>
 			</section>
 		</>
 	);
