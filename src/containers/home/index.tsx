@@ -7,7 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import "./index.scss";
 import Carousel from "../../components/Carousel";
 import ProductCard from "../../components/ProductCard";
-import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.jpg";
+import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.webp";
 import InstructionsBanner from "../../components/InstructionBanner";
 import SellerCard from "../../components/SellerCard";
 import EventsCard from "../../components/EventsCard";
