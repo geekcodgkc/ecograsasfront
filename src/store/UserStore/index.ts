@@ -1,21 +1,45 @@
 import { create } from "zustand";
 import api from "../../utils/api";
-import { error } from "console";
+import handleRegister from "./handleRegister";
 
 interface LoginObject {
 	user: string;
 	password: string;
 }
 
-interface UserStoreInterface {
+export interface zones {
+	_id: string;
+	ZIPCode: string;
+	area: string;
+	State: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+}
+
+export interface RegisterForm {
+	rif: string;
+	name: string;
+	address: string;
+	email: string;
+	zone: string;
+	phone: string;
+	contact: string;
+	password: string;
+}
+
+export interface UserStoreInterface {
 	token: null | string;
 	name: null | string;
 	loading: boolean;
 	cart: [];
 	error: null | string;
-	login: (data: LoginObject, cb: () => Promise<void>) => Promise<void>;
 	isAdmin: boolean;
+	zones: null | zones[];
+	getZones: () => Promise<void>;
+	login: (data: LoginObject, cb: () => Promise<void>) => Promise<void>;
 	logout: () => Promise<void>;
+	register: (data: RegisterForm, cb: () => Promise<void>) => Promise<void>;
 }
 
 export const useUserStore = create<UserStoreInterface>((set) => ({
@@ -25,6 +49,7 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 	cart: [],
 	error: null,
 	isAdmin: false,
+	zones: null,
 	logout: async () => {
 		set((state) => ({ ...state, loading: true }));
 		try {
@@ -63,6 +88,32 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 				loading: false,
 				error: "Usuario o Clave Invalidos",
 			}));
+		}
+	},
+	register: async (data, cb) => {
+		set((state) => ({ ...state, loading: true }));
+		try {
+			const response = await handleRegister(data);
+			console.log(response);
+			set((state) => ({ ...state, loading: false }));
+		} catch (error) {
+			console.log(error);
+			set((state) => ({
+				...state,
+				loading: false,
+				error: JSON.stringify(error),
+			}));
+		}
+	},
+	getZones: async () => {
+		set((state) => ({ ...state, loading: true }));
+		try {
+			const { data } = await api.get("/zones");
+			console.log(data);
+			set((state) => ({ ...state, loading: false, zones: data }));
+		} catch (e) {
+			console.log(e);
+			set((state) => ({ ...state, loading: false }));
 		}
 	},
 }));

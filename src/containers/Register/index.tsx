@@ -1,23 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { navigate, Link } from "gatsby";
 import { useUserStore } from "../../store";
+import "./index.scss";
+import { zones } from "../../store/UserStore";
 
 export default function RegisterContainer() {
 	const [data, setData] = useState({
-		user: "",
+		rif: "",
+		name: "",
+		address: "",
+		email: "",
+		zone: "",
+		phone: "",
+		contact: "",
 		password: "",
 	});
+	const [zone, setZone] = useState("");
+	const [confirm, setConfirm] = useState("");
+	const [show, setShow] = useState(false);
+
 	const store = useUserStore((state) => state);
-	console.log(store);
+
+	useEffect(() => {
+		if (!store.zones) {
+			store.getZones();
+		}
+	}, []);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		store.login(data, () => navigate("/"));
+		store.register(data, () => navigate("/Profile"));
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.name === "zone") {
+			setZone(e.target.value);
+			return;
+		}
 		const current = { ...data, [e.currentTarget.name]: e.currentTarget.value };
 		setData(current);
+	};
+
+	const handleConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setConfirm(e.target.value);
+	};
+
+	const handleOption = (zone: zones, value: string) => {
+		const current = { ...data, zone: zone._id };
+		setData(current);
+		setZone(value);
+		setShow(false);
 	};
 
 	if (store.token) navigate("/");
@@ -47,8 +79,8 @@ export default function RegisterContainer() {
 				<h3 className="font-bold">Rif de la empresa</h3>
 				<input
 					type="text"
-					value={data.user}
-					name="user"
+					value={data.rif}
+					name="rif"
 					id="userInput"
 					onChange={handleInput}
 					placeholder="coloca tu usuario ej.: j-27658945-4"
@@ -60,7 +92,7 @@ export default function RegisterContainer() {
 				<h3 className="font-bold">Nombre de la Empresa</h3>
 				<input
 					type="text"
-					value={data.password}
+					value={data.name}
 					name="name"
 					id="nameInput"
 					onChange={handleInput}
@@ -70,10 +102,23 @@ export default function RegisterContainer() {
 				<label className="mb-4" htmlFor="nameInput">
 					ingresa el nombre de tu empresa
 				</label>
+				<h3 className="font-bold">Correo Electronico</h3>
+				<input
+					type="email"
+					value={data.email}
+					name="email"
+					id="emailInput"
+					onChange={handleInput}
+					placeholder="indica el correo de tu empresa ej: compras@mail.com"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="emailInput">
+					ingresa el correo de tu empresa
+				</label>
 				<h3 className="font-bold">Direccion</h3>
 				<input
 					type="text"
-					value={data.password}
+					value={data.address}
 					name="address"
 					id="addressInput"
 					onChange={handleInput}
@@ -84,23 +129,54 @@ export default function RegisterContainer() {
 					esta direccion sera utilizada para calcular los despachos de los
 					productos
 				</label>
-				<h3 className="font-bold">Zona / Codigo Postal</h3>
-				<input
-					type="text"
-					value={data.password}
-					name="zone"
-					id="zoneInput"
-					onChange={handleInput}
-					placeholder="selecciona tu zona"
-					className="p-4 rounded-lg"
-				/>
-				<label className="mb-4" htmlFor="zoneInput">
-					esta zona nos dara mas informacion para los envios
-				</label>
+				<div className="w-full flex flex-col flex-wrap">
+					<h3 className="font-bold mb-4">Zona / Codigo Postal</h3>
+					<input
+						type="text"
+						name="zone"
+						id="zoneInput"
+						onChange={handleInput}
+						placeholder="selecciona tu zona"
+						className="p-4 rounded-lg"
+						value={zone}
+						onFocus={() => {
+							setShow(true);
+						}}
+						onBlur={() => {
+							setTimeout(() => {
+								setShow(false);
+							}, 100);
+						}}
+					/>
+					{show && (
+						<div className="w-full relative optionsRelative">
+							<div className="optionsContainer bg-slate-100">
+								{store.zones?.map((zone) => {
+									const value = `${zone.area} - codigo postal: ${zone.ZIPCode} - estado: ${zone.State}`;
+									return (
+										<div
+											key={zone._id}
+											className="optionItem p-4 hover:bg-slate-300"
+											onClick={() => {
+												handleOption(zone, value);
+											}}
+											onKeyDown={() => {}}
+										>
+											<h3>{value}</h3>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					)}
+					<label className="my-4" htmlFor="zoneInput">
+						esta zona nos dara mas informacion para los envios
+					</label>
+				</div>
 				<h3 className="font-bold">Telfono de Contacto</h3>
 				<input
-					type="text"
-					value={data.password}
+					type="phone"
+					value={data.phone}
 					name="phone"
 					id="phoneInput"
 					onChange={handleInput}
@@ -123,13 +199,21 @@ export default function RegisterContainer() {
 				<label className="mb-4" htmlFor="passwordInput">
 					crea la clave de tu usuario
 				</label>
-				<h3 className="font-bold">Confirma tu Clave</h3>
+				<h3 className="font-bold">
+					Confirma tu Clave{" "}
+					{data.password !== confirm && (
+						<small className="text-red-600">
+							ambas claves deben de coincidir
+						</small>
+					)}
+				</h3>
 				<input
 					type="password"
-					value={data.password}
+					value={confirm}
 					name="password"
 					id="passwordInput"
-					onChange={handleInput}
+					onChange={handleConfirm}
+					minLength={8}
 					placeholder="ingresa nuevamente tu clave"
 					className="p-4 rounded-lg"
 				/>
