@@ -1,5 +1,149 @@
-import React from "react";
+import React, { useState } from "react";
+import { navigate, Link } from "gatsby";
+import { useUserStore } from "../../store";
 
 export default function RegisterContainer() {
-	return <div>RegisterContainer</div>;
+	const [data, setData] = useState({
+		user: "",
+		password: "",
+	});
+	const store = useUserStore((state) => state);
+	console.log(store);
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		store.login(data, () => navigate("/"));
+	};
+
+	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const current = { ...data, [e.currentTarget.name]: e.currentTarget.value };
+		setData(current);
+	};
+
+	if (store.token) navigate("/");
+
+	return (
+		<div className="flex flex-col justify-center w-full max-w-screen-lg mx-auto min-h-screen items-center pt-8">
+			<p className="my-8">
+				ya tienes una cuenta?{" "}
+				<Link
+					to="/Login"
+					className="text-cyan-700 hover:font-bold duration-100"
+				>
+					inicia sesion aqui
+				</Link>
+			</p>
+			<form
+				onSubmit={handleSubmit}
+				className="flex flex-col gap-4 shadow-lg p-4 w-11/12 max-w-screen-md relative rounded-lg overflow-hidden bg-slate-300"
+			>
+				{store.loading && <div className="loadingScreen" />}
+				<h2 className="mb-6 text-center text-3xl font-bold">
+					Reg&iacute;strate
+				</h2>
+				{store.error && (
+					<h4 className="text-center text-red-600 text-xl">{store.error}</h4>
+				)}
+				<h3 className="font-bold">Rif de la empresa</h3>
+				<input
+					type="text"
+					value={data.user}
+					name="user"
+					id="userInput"
+					onChange={handleInput}
+					placeholder="coloca tu usuario ej.: j-27658945-4"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="userInput">
+					el rif de tu empresa sera utilizado como tu nombre de usuario
+				</label>
+				<h3 className="font-bold">Nombre de la Empresa</h3>
+				<input
+					type="text"
+					value={data.password}
+					name="name"
+					id="nameInput"
+					onChange={handleInput}
+					placeholder="indica el nombre de tu empresa ej: empresa.ca"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="nameInput">
+					ingresa el nombre de tu empresa
+				</label>
+				<h3 className="font-bold">Direccion</h3>
+				<input
+					type="text"
+					value={data.password}
+					name="address"
+					id="addressInput"
+					onChange={handleInput}
+					placeholder="direccion de la empresa"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="addressInput">
+					esta direccion sera utilizada para calcular los despachos de los
+					productos
+				</label>
+				<h3 className="font-bold">Zona / Codigo Postal</h3>
+				<input
+					type="text"
+					value={data.password}
+					name="zone"
+					id="zoneInput"
+					onChange={handleInput}
+					placeholder="selecciona tu zona"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="zoneInput">
+					esta zona nos dara mas informacion para los envios
+				</label>
+				<h3 className="font-bold">Telfono de Contacto</h3>
+				<input
+					type="text"
+					value={data.password}
+					name="phone"
+					id="phoneInput"
+					onChange={handleInput}
+					placeholder="numero de telefono ej: +58 424 0606 737"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="phoneInput">
+					numero de telefono ej: +58 424 0606 737
+				</label>
+				<h3 className="font-bold">Clave</h3>
+				<input
+					type="password"
+					value={data.password}
+					name="password"
+					id="passwordInput"
+					onChange={handleInput}
+					placeholder="ingresa la clave con la que iniciaras sesion"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="passwordInput">
+					crea la clave de tu usuario
+				</label>
+				<h3 className="font-bold">Confirma tu Clave</h3>
+				<input
+					type="password"
+					value={data.password}
+					name="password"
+					id="passwordInput"
+					onChange={handleInput}
+					placeholder="ingresa nuevamente tu clave"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="passwordInput">
+					ingresa nuevamente tu clave para ser verificada
+				</label>
+				<button
+					type="submit"
+					className="action-button-1 mb-8"
+					onClick={handleSubmit}
+				>
+					Registrarse
+				</button>
+			</form>
+		</div>
+	);
 }

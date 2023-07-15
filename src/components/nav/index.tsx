@@ -3,12 +3,16 @@ import { Link, navigate } from "gatsby";
 import "./index.scss";
 import { TiThMenu } from "react-icons/ti";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useUserStore } from "../../store";
+import { BiUserCircle } from "react-icons/bi";
 
 export default function NavBar() {
 	const [open, setOpen] = useState(false);
+	const state = useUserStore((state) => state);
 
 	const sendTo = () => {
-		navigate("/Login");
+		setOpen(false);
+		navigate("/Register");
 	};
 
 	const handleOpen = () => {
@@ -36,13 +40,25 @@ export default function NavBar() {
 					<Link to="/Blog" className="font-medium px-4 duration-150 nav-hover">
 						Blog
 					</Link>
-					<button
-						type="button"
-						className="register-button ml-16"
-						onClick={sendTo}
-					>
-						registrarse
-					</button>
+					{state.token ? (
+						<div
+							className="userButton"
+							onClick={() => {
+								navigate("/Profile");
+							}}
+							onKeyDown={() => {}}
+						>
+							{state.name} <BiUserCircle />
+						</div>
+					) : (
+						<button
+							type="button"
+							className="register-button ml-16"
+							onClick={sendTo}
+						>
+							registrarse
+						</button>
+					)}
 				</div>
 				<button
 					type="button"
@@ -60,9 +76,26 @@ export default function NavBar() {
 						<AiFillCloseCircle className="text-2xl mb-8" />
 					</button>
 					<div className="flex flex-col items-start gap-6 w-full">
-						<button type="button" className="register-button" onClick={sendTo}>
-							registrarse
-						</button>
+						{state.token ? (
+							<div
+								className="userButton"
+								onClick={() => {
+									navigate("/Profile");
+									setOpen(false);
+								}}
+								onKeyDown={() => {}}
+							>
+								{state.name} <BiUserCircle />
+							</div>
+						) : (
+							<button
+								type="button"
+								className="register-button"
+								onClick={sendTo}
+							>
+								registrarse
+							</button>
+						)}
 						<Link
 							onClick={handleOpen}
 							to="/Products"
@@ -84,6 +117,17 @@ export default function NavBar() {
 						>
 							Blog
 						</Link>
+						{state.token && (
+							<button
+								onClick={() => {
+									state.logout();
+								}}
+								type="button"
+								className="register-button"
+							>
+								cerrar sesion
+							</button>
+						)}
 					</div>
 				</aside>
 			</div>

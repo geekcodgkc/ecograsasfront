@@ -5,7 +5,7 @@ import { navigate } from "gatsby";
 
 export default function InstructionsBanner() {
 	const handleClick = () => {
-		navigate("/Login");
+		navigate("/Register");
 	};
 
 	return (

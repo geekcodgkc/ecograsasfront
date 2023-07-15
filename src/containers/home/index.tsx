@@ -27,7 +27,7 @@ const Iframe = () => {
 
 const Left = () => {
 	const sendTo = () => {
-		navigate("/Login");
+		navigate("/Register");
 	};
 
 	return (

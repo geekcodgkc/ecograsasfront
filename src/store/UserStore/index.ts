@@ -15,6 +15,7 @@ interface UserStoreInterface {
 	error: null | string;
 	login: (data: LoginObject, cb: () => Promise<void>) => Promise<void>;
 	isAdmin: boolean;
+	logout: () => Promise<void>;
 }
 
 export const useUserStore = create<UserStoreInterface>((set) => ({
@@ -24,11 +25,23 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 	cart: [],
 	error: null,
 	isAdmin: false,
+	logout: async () => {
+		set((state) => ({ ...state, loading: true }));
+		try {
+			await api.post("/user/logout");
+			set((state) => ({
+				...state,
+				name: null,
+				isAdmin: false,
+				loading: false,
+				error: null,
+				token: null,
+			}));
+		} catch (error) {}
+	},
 	login: async (data, cb) => {
 		set((state) => ({ ...state, loading: true }));
 		try {
-			const response = await api.get("/sellers");
-			console.log(response);
 			const loginResponse = await api.post("/user/login", data);
 			function parseJwt(token: string) {
 				return JSON.parse(atob(token.split(".")[1]));
