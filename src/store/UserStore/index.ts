@@ -117,7 +117,6 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 		set((state) => ({ ...state, loading: true }));
 		try {
 			const { data } = await api.get("/zones");
-			console.log(data);
 			set((state) => ({ ...state, loading: false, zones: data }));
 		} catch (e) {
 			console.log(e);

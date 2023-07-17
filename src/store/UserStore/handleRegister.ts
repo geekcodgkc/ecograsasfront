@@ -4,7 +4,7 @@ import { RegisterForm } from "./index";
 const handleRegister = async (form: RegisterForm) => {
 	console.log(form);
 	try {
-		const { data: res } = await api.post("/clients", form);
+		const { data: res } = await api.post("/clients/register/", form);
 		const { data: token } = await api.post("/user/login", {
 			user: form.rif,
 			password: form.password,
