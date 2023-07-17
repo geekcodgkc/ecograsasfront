@@ -1,5 +1,6 @@
 import React from "react";
+import ProfileContainer from "../containers/Profile";
 
 export default function Profile() {
-	return <div>Profile</div>;
+	return <ProfileContainer />;
 }

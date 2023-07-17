@@ -98,7 +98,6 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 		set((state) => ({ ...state, loading: true }));
 		try {
 			const response = await handleRegister(data);
-			console.log(response);
 			set((state) => ({
 				...state,
 				id: response.res._id,

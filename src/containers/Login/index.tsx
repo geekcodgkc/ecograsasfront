@@ -9,7 +9,6 @@ export default function LoginContainer() {
 		password: "",
 	});
 	const store = useUserStore((state) => state);
-	console.log(store);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();

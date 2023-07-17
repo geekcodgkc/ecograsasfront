@@ -168,7 +168,6 @@ export default function RegisterContainer() {
 						<div className="w-full relative optionsRelative">
 							<div className="optionsContainer bg-slate-100">
 								{zonesArray?.map((zone) => {
-									console.log("zonesArray: ", zonesArray);
 									const value = `${zone.area} - codigo postal: ${zone.ZIPCode} - estado: ${zone.State}`;
 									return (
 										<div
