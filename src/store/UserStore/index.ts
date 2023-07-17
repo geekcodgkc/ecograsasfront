@@ -29,6 +29,7 @@ export interface RegisterForm {
 }
 
 export interface UserStoreInterface {
+	id: null | string;
 	token: null | string;
 	name: null | string;
 	loading: boolean;
@@ -43,6 +44,7 @@ export interface UserStoreInterface {
 }
 
 export const useUserStore = create<UserStoreInterface>((set) => ({
+	id: null,
 	token: null,
 	name: null,
 	loading: false,
@@ -56,6 +58,7 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 			await api.post("/user/logout");
 			set((state) => ({
 				...state,
+				id: null,
 				name: null,
 				isAdmin: false,
 				loading: false,
@@ -74,6 +77,7 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 			const parsed = parseJwt(loginResponse.data.token);
 			set((state) => ({
 				...state,
+				id: parsed.id,
 				name: parsed.email,
 				isAdmin: parsed.isAdmin,
 				loading: false,
@@ -97,6 +101,7 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 			console.log(response);
 			set((state) => ({
 				...state,
+				id: response.res._id,
 				loading: false,
 				name: data.email,
 				isAdmin: false,
