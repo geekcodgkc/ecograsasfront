@@ -95,7 +95,15 @@ export const useUserStore = create<UserStoreInterface>((set) => ({
 		try {
 			const response = await handleRegister(data);
 			console.log(response);
-			set((state) => ({ ...state, loading: false }));
+			set((state) => ({
+				...state,
+				loading: false,
+				name: data.email,
+				isAdmin: false,
+				error: null,
+				token: response.token,
+			}));
+			cb();
 		} catch (error) {
 			console.log(error);
 			set((state) => ({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { navigate, Link } from "gatsby";
 import { useUserStore } from "../../store";
 import "./index.scss";
@@ -18,6 +18,7 @@ export default function RegisterContainer() {
 	const [zone, setZone] = useState("");
 	const [confirm, setConfirm] = useState("");
 	const [show, setShow] = useState(false);
+	const [zonesArray, setZonesArray] = useState<zones[] | null>(null);
 
 	const store = useUserStore((state) => state);
 
@@ -25,7 +26,22 @@ export default function RegisterContainer() {
 		if (!store.zones) {
 			store.getZones();
 		}
-	}, []);
+	}, [store.zones]);
+
+	useMemo(() => {
+		if (store.zones) {
+			const filter = store.zones.filter((zones) => {
+				const zoneData = `${zones.area} - codigo postal: ${zones.ZIPCode} - estado: ${zones.State}`;
+				return zoneData.toLocaleLowerCase().includes(zone.toLocaleLowerCase());
+			});
+
+			setZonesArray(filter);
+		}
+	}, [store.zones, zone]);
+
+	if (store.zones && zonesArray === null) {
+		setZonesArray(store.zones);
+	}
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -33,12 +49,12 @@ export default function RegisterContainer() {
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.name === "zone") {
-			setZone(e.target.value);
-			return;
-		}
 		const current = { ...data, [e.currentTarget.name]: e.currentTarget.value };
 		setData(current);
+	};
+
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setZone(e.target.value);
 	};
 
 	const handleConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +92,7 @@ export default function RegisterContainer() {
 				{store.error && (
 					<h4 className="text-center text-red-600 text-xl">{store.error}</h4>
 				)}
-				<h3 className="font-bold">Rif de la empresa</h3>
+				<h3 className="font-bold">Rif de la empresa, ej: v-43781966-4</h3>
 				<input
 					type="text"
 					value={data.rif}
@@ -135,7 +151,7 @@ export default function RegisterContainer() {
 						type="text"
 						name="zone"
 						id="zoneInput"
-						onChange={handleInput}
+						onChange={handleSearch}
 						placeholder="selecciona tu zona"
 						className="p-4 rounded-lg"
 						value={zone}
@@ -148,10 +164,11 @@ export default function RegisterContainer() {
 							}, 100);
 						}}
 					/>
-					{show && (
+					{show && store.zones && (
 						<div className="w-full relative optionsRelative">
 							<div className="optionsContainer bg-slate-100">
-								{store.zones?.map((zone) => {
+								{zonesArray?.map((zone) => {
+									console.log("zonesArray: ", zonesArray);
 									const value = `${zone.area} - codigo postal: ${zone.ZIPCode} - estado: ${zone.State}`;
 									return (
 										<div
@@ -185,6 +202,20 @@ export default function RegisterContainer() {
 				/>
 				<label className="mb-4" htmlFor="phoneInput">
 					numero de telefono ej: +58 424 0606 737
+				</label>
+				<h3 className="font-bold">Persona de Contacto</h3>
+				<input
+					type="contact"
+					value={data.contact}
+					name="contact"
+					id="contactInput"
+					onChange={handleInput}
+					placeholder="indica el nombre de la persona de contacto"
+					className="p-4 rounded-lg"
+				/>
+				<label className="mb-4" htmlFor="contactInput">
+					el nombre de la persona con la que contactaremos a la hora de
+					planificar las compras y despachos
 				</label>
 				<h3 className="font-bold">Clave</h3>
 				<input
