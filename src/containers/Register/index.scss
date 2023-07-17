@@ -1,0 +1,20 @@
+.optionsRelative {
+    max-height: 64px;
+    .optionsContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        border-radius:0.5rem;
+        padding: 1rem 0.5rem;
+        max-height: 194px;
+        overflow-y: scroll;
+        top: 8px;
+        left: 0;
+        .optionItem {
+            padding: 1rem 0.5rem;
+            border-bottom: solid 1px black;
+            cursor: pointer;
+        }
+    }
+}

@@ -27,7 +27,7 @@ export default function LoginContainer() {
 		<div className="flex justify-center w-full max-w-screen-lg mx-auto h-screen items-center">
 			<form
 				onSubmit={handleSubmit}
-				className="flex flex-col gap-4 shadow-lg p-4 w-full max-w-screen-md relative rounded-lg overflow-hidden"
+				className="flex flex-col gap-4 shadow-lg p-4 w-11/12 max-w-screen-md relative rounded-lg overflow-hidden"
 			>
 				{store.loading && <div className="loadingScreen" />}
 				<h2 className="mb-6 text-center text-3xl font-bold">Inicia Sesion</h2>
@@ -67,7 +67,13 @@ export default function LoginContainer() {
 					Iniciar Sesion
 				</button>
 				<p className="mt-8">
-					no tiener cuenta? <Link to="/Register">registrate aqui</Link>
+					no tiener cuenta?{" "}
+					<Link
+						to="/Register"
+						className="text-cyan-700 hover:font-bold duration-100"
+					>
+						registrate aqui
+					</Link>
 				</p>
 			</form>
 		</div>

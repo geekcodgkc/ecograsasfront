@@ -19,7 +19,7 @@ export default function Hero() {
 			</div>
 			<div className="text-slate-100 flex gap-2 flex flex-wrap steps-container">
 				<span className="p-1 pr-2 border-solid border-slate-100 rounded border bg-black/80">
-					<Link to="/login" className="hover:text-[#60794d]">
+					<Link to="/Register" className="hover:text-[#60794d]">
 						<b>paso 1:</b> reg&iacute;strate
 					</Link>
 				</span>
