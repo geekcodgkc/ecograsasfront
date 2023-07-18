@@ -1,7 +1,21 @@
 # todo
 
-* [] dinamic to the nav
-  * [] loged or not logged status and action
-  * [] button action in nav not added
-  * [] change gatsby Link to html a tag when a outerlink is needed
-* [] gatsby lang html tag
+* [*] dinamic to the nav
+  * [*] loged or not logged status and action
+  * [*] button action in nav not added
+  * [*] change gatsby Link to html a tag when a outerlink is needed
+* [*] gatsby lang html tag
+* [ ] products page
+  * [ ] display sanity products
+  * [ ] addProducts in sanity
+  * [ ] when user loged display products pricing
+  * [ ] add link to a more descriptive page of the product
+  * [ ] create a dinamyc page for every product and an add to car button with qty
+* [ ] profile page
+  * [ ] add options to add more number
+  * [ ] see when is verified, not verified or is an admin
+  * [ ] logout button
+  * [ ] persist data in zustand
+* [ ] blog page
+  * [ ] add blog page with pagination
+  * [ ] add single blog page for every blog

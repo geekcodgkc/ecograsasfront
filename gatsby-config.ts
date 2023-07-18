@@ -1,5 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
-import "dotenv/conifg";
+import "dotenv/config";
 
 const config: GatsbyConfig = {
 	siteMetadata: {
