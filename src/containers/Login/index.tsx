@@ -9,7 +9,6 @@ export default function LoginContainer() {
 		password: "",
 	});
 	const store = useUserStore((state) => state);
-	console.log(store);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -17,7 +16,10 @@ export default function LoginContainer() {
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const current = { ...data, [e.currentTarget.name]: e.currentTarget.value };
+		const current = {
+			...data,
+			[e.currentTarget.name]: e.currentTarget.value.toLocaleLowerCase(),
+		};
 		setData(current);
 	};
 

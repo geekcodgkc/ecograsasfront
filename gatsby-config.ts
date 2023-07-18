@@ -1,8 +1,9 @@
 import type { GatsbyConfig } from "gatsby";
+import "dotenv/conifg";
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		title: `a2connectorfrontend`,
+		title: `ecograsas`,
 		siteUrl: `https://www.yourdomain.tld`,
 		lang: `es`,
 	},
@@ -11,6 +12,15 @@ const config: GatsbyConfig = {
 	// Learn more at: https://gatsby.dev/graphql-typegen
 	graphqlTypegen: true,
 	plugins: [
+		{
+			resolve: "gatsby-source-sanity",
+			options: {
+				projectId: process.env.SANITY_PROJECT_ID,
+				dataset: process.env.SANITY_DATASET,
+				watchMode: true,
+				token: process.env.SANITY_TOKEN,
+			},
+		},
 		"gatsby-plugin-image",
 		"gatsby-plugin-sitemap",
 		{
@@ -39,13 +49,13 @@ const config: GatsbyConfig = {
 			__key: "pages",
 		},
 		{
-			resolve: `gatsby-plugin-typography`,
+			resolve: "gatsby-plugin-typography",
 			options: {
 				pathToConfigModule: "src/utils/typography.ts",
 			},
 		},
 		{
-			resolve: `gatsby-plugin-sass`,
+			resolve: "gatsby-plugin-sass",
 			options: {
 				// Configure SASS to process Tailwind
 				postCssPlugins: [require("tailwindcss")],
