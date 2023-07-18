@@ -92,14 +92,14 @@ export default function RegisterContainer() {
 				{store.error && (
 					<h4 className="text-center text-red-600 text-xl">{store.error}</h4>
 				)}
-				<h3 className="font-bold">Rif de la empresa, ej: v-43781966-4</h3>
+				<h3 className="font-bold">Rif de la empresa, ej: J-43781966-4</h3>
 				<input
 					type="text"
 					value={data.rif}
 					name="rif"
 					id="userInput"
 					onChange={handleInput}
-					placeholder="coloca tu usuario ej.: j-27658945-4"
+					placeholder="coloca tu usuario ej.: J-43781966-4"
 					className="p-4 rounded-lg"
 				/>
 				<label className="mb-4" htmlFor="userInput">
@@ -240,14 +240,14 @@ export default function RegisterContainer() {
 				<input
 					type="password"
 					value={confirm}
-					name="password"
-					id="passwordInput"
+					name="passwordConfirm"
+					id="passwordConfirmInput"
 					onChange={handleConfirm}
 					minLength={8}
 					placeholder="ingresa nuevamente tu clave"
 					className="p-4 rounded-lg"
 				/>
-				<label className="mb-4" htmlFor="passwordInput">
+				<label className="mb-4" htmlFor="passwordConfirmInput">
 					ingresa nuevamente tu clave para ser verificada
 				</label>
 				<button

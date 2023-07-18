@@ -16,7 +16,10 @@ export default function LoginContainer() {
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const current = { ...data, [e.currentTarget.name]: e.currentTarget.value };
+		const current = {
+			...data,
+			[e.currentTarget.name]: e.currentTarget.value.toLocaleLowerCase(),
+		};
 		setData(current);
 	};
 
