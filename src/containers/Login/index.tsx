@@ -54,6 +54,7 @@ export default function LoginContainer() {
 					value={data.password}
 					name="password"
 					id="passwordInput"
+					autoComplete="current-password"
 					onChange={handleInput}
 					placeholder="ingresa la clave que se te proporciono"
 					className="p-4 rounded-lg"

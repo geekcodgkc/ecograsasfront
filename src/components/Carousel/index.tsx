@@ -1,90 +1,43 @@
 import React, { useState, useRef, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./index.scss";
+import useGenDots from "./useGendots";
 
 interface CarouselProps {
 	children: React.ReactElement[];
 }
 
+interface JumpSize {
+	lg: number;
+	md: number;
+}
+
 export default function CarouselComponent({ children }: CarouselProps) {
 	const [step, setStep] = useState(0);
-	const [maxWidth, setMaxWidth] = useState(800);
-	const [height, setHeight] = useState(200);
 	const [offset, setOffset] = useState(0);
 	const elements = children.length;
 	const carouselContainerRef = useRef<HTMLDivElement>(null);
 
-	const isBrowser = () => typeof window !== "undefined";
-
-	const genDots = (): [number[], number[]] => {
-		const dotsNumber: [number[], number[]] = [[], []];
-		[Math.ceil(elements / 3), Math.ceil(elements / 2)].forEach((dot, index) => {
-			for (let i = 0; i < dot; i++) {
-				dotsNumber[index].push(i);
-			}
-		});
-		return dotsNumber;
-	};
-	const [dotsLg, dotsTablet] = genDots();
-
-	const handleResize = () => {
-		const windowSize = isBrowser() && window.innerWidth;
-		setOffset(0);
-		setStep(0);
-
-		if (typeof windowSize === "number") {
-			if (windowSize < 1440) {
-				if (carouselContainerRef.current) {
-					const width = carouselContainerRef.current.scrollWidth;
-					const widthContainer = (width / elements) * 2;
-					setMaxWidth(widthContainer);
-				}
-				return;
-			}
-			if (carouselContainerRef.current) {
-				const width = carouselContainerRef.current.scrollWidth;
-				const widthContainer = (width / elements) * 3;
-				setMaxWidth(widthContainer);
-			}
-		}
+	const jump: JumpSize = {
+		lg: 1321.5,
+		md: 881,
 	};
 
-	isBrowser() &&
-		window.addEventListener("resize", () => {
-			handleResize();
-		});
+	const [dotsLg, dotsTablet] = useGenDots(elements);
 
-	useEffect(() => {
-		if (isBrowser()) {
-			if (carouselContainerRef.current) {
-				const width = carouselContainerRef.current.scrollWidth;
-				const contentHeight = carouselContainerRef.current.scrollHeight;
-				const divider = window.innerWidth < 1440 ? 2 : 3;
-				const widthContainer = (width / elements) * divider;
-				setMaxWidth(widthContainer);
-				setHeight(contentHeight);
-			}
-
-			return () => {
-				window.removeEventListener("resize", handleResize);
-			};
-		}
-	}, [carouselContainerRef]);
-
-	const handlePage = (i: number) => {
+	const handlePage = (i: number, size: string) => {
 		setStep(i);
-		setOffset(maxWidth * i);
+		if (size === "lg") {
+			setOffset(jump[size] * i);
+			return;
+		}
+		setOffset(jump.md * i);
 	};
 
 	return (
 		<div className="flex w-full pt-8 flex-wrap" id="carouselComponent">
 			<div
 				className={"relative carouselContainer"}
-				style={{
-					maxWidth: `${maxWidth}px`,
-					width: `${maxWidth}px`,
-					minHeight: `${height}px`,
-				}}
 				ref={carouselContainerRef}
 				id={"carouselContainer"}
 			>
@@ -104,7 +57,7 @@ export default function CarouselComponent({ children }: CarouselProps) {
 								key={dot}
 								className={`pag-dot ${step === i ? "dot-active" : ""}`}
 								onClick={() => {
-									handlePage(i);
+									handlePage(i, "lg");
 								}}
 								onKeyUp={() => {}}
 							>
@@ -120,7 +73,7 @@ export default function CarouselComponent({ children }: CarouselProps) {
 								key={dot}
 								className={`pag-dot ${step === i ? "dot-active" : ""}`}
 								onClick={() => {
-									handlePage(i);
+									handlePage(i, "md");
 								}}
 								onKeyUp={() => {}}
 							>
