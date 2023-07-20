@@ -6,6 +6,7 @@ const config: GatsbyConfig = {
 		title: `ecograsas`,
 		siteUrl: `https://www.yourdomain.tld`,
 		lang: `es`,
+		description: `ecograsas procesadores de aceite de palma para reposteria y elaboracion de jabon`,
 	},
 	// More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
 	// If you use VSCode you can also use the GraphQL plugin

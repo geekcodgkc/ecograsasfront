@@ -101,6 +101,7 @@ export const useUserStore = create<UserStoreInterface, []>(
 						loading: false,
 						error: null,
 						token: null,
+						userData: null,
 						_id: null,
 					}));
 				} catch (error) {}
@@ -113,7 +114,6 @@ export const useUserStore = create<UserStoreInterface, []>(
 						return JSON.parse(atob(token.split(".")[1]));
 					}
 					const parsed = parseJwt(loginResponse.data.token);
-					console.log("lgoin data:", parsed);
 					set((state) => ({
 						...state,
 						id: parsed.id,
@@ -126,7 +126,6 @@ export const useUserStore = create<UserStoreInterface, []>(
 					}));
 					cb();
 				} catch (e) {
-					console.log(e);
 					set((state) => ({
 						...state,
 						loading: false,
@@ -149,7 +148,6 @@ export const useUserStore = create<UserStoreInterface, []>(
 					}));
 					cb();
 				} catch (error) {
-					console.log(error);
 					set((state) => ({
 						...state,
 						loading: false,
@@ -163,7 +161,6 @@ export const useUserStore = create<UserStoreInterface, []>(
 					const { data } = await api.get("/zones");
 					set((state) => ({ ...state, loading: false, zones: data }));
 				} catch (e) {
-					console.log(e);
 					set((state) => ({ ...state, loading: false }));
 				}
 			},
@@ -171,10 +168,8 @@ export const useUserStore = create<UserStoreInterface, []>(
 				set((state) => ({ ...state, loading: true }));
 				try {
 					const { data } = await api.get(`clients/${id}?populated=true`);
-					console.log("calling", data);
 					set((state) => ({ ...state, loading: false, userData: data }));
 				} catch (error) {
-					console.log(error);
 					set((state) => ({ ...state, loading: false }));
 				}
 			},
