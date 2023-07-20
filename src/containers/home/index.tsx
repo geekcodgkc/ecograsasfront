@@ -7,7 +7,6 @@ import { BsArrowRight } from "react-icons/bs";
 import "./index.scss";
 import Carousel from "../../components/Carousel";
 import ProductCard from "../../components/ProductCard";
-import BackImg from "../../images/planta-hoja-perenne-tropical-exotica-luz-sol.webp";
 import InstructionsBanner from "../../components/InstructionBanner";
 import SellerCard from "../../components/SellerCard";
 import EventsCard from "../../components/EventsCard";
@@ -92,7 +91,7 @@ export default function Home() {
 				/>
 				<SectionDouble LeftChild={Iframe} RightChild={Left} padding="py-24" />
 			</section>
-			<section className="w-full pt-16 products-background relative">
+			<section className="w-full pt-16 products-background relative flex justify-center flex-wrap">
 				<div
 					className="background"
 					style={{ backgroundImage: `url(${products.resize.src})` }}

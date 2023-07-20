@@ -154,6 +154,7 @@ export default function RegisterContainer() {
 						onChange={handleSearch}
 						placeholder="selecciona tu zona"
 						className="p-4 rounded-lg"
+						autoComplete="zona"
 						value={zone}
 						onFocus={() => {
 							setShow(true);
@@ -222,6 +223,7 @@ export default function RegisterContainer() {
 					value={data.password}
 					name="password"
 					id="passwordInput"
+					autoComplete="new-password"
 					onChange={handleInput}
 					placeholder="ingresa la clave con la que iniciaras sesion"
 					className="p-4 rounded-lg"
@@ -242,6 +244,7 @@ export default function RegisterContainer() {
 					value={confirm}
 					name="passwordConfirm"
 					id="passwordConfirmInput"
+					autoComplete="new-password"
 					onChange={handleConfirm}
 					minLength={8}
 					placeholder="ingresa nuevamente tu clave"

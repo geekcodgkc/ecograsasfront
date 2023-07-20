@@ -1,8 +1,9 @@
 .carouselContainer {
-    overflow: hidden;
-    height: max-content;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 400px;
+    max-width: calc(1200px + 6rem);
     margin: 0 auto;
-    display: block;
 }
 
 .carouselElement {
@@ -49,6 +50,11 @@
 }
 
 @media (max-width: 1439px) {
+    .carouselContainer {
+        min-height: 400px;
+        max-width: calc(800px + 4rem);
+        margin: 0 auto;
+    }
     .dots-lg {
         display: none;
     }
@@ -72,7 +78,7 @@
     }
 } 
 
-@media (max-width: 885px) {
+@media (max-width: 1000px) {
     #carouselComponent {
         padding-top: 24px;
         padding-left: 0.5rem;
@@ -82,7 +88,7 @@
         display: none;
     }
     #carouselElement {
-        position: relative;
+        position: initial;
         height: max-content;
         display: flex;
         flex-wrap: wrap;
