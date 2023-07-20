@@ -2,7 +2,7 @@ import React from "react";
 import Hero from "../../components/Hero";
 import SectionDouble from "../../components/SectionDouble";
 import YoutubeEmbed from "../../components/Youtube";
-import { navigate } from "gatsby";
+import { navigate, graphql, useStaticQuery } from "gatsby";
 import { BsArrowRight } from "react-icons/bs";
 import "./index.scss";
 import Carousel from "../../components/Carousel";
@@ -18,7 +18,7 @@ const Iframe = () => {
 		<YoutubeEmbed
 			src="https://www.youtube.com/embed/r_YGlKihHtk"
 			title="YouTube video player"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share fullscreen"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
 			height="100%"
 			width="100%"
 		/>
@@ -55,14 +55,48 @@ const Left = () => {
 	);
 };
 
+interface sanityImageInfo {
+	filename: string;
+	resize: {
+		src: string;
+	};
+}
+
 export default function Home() {
+	const { allSanityImageAsset, sanityImageAsset } =
+		useStaticQuery(queryProductImage);
+
+	const { resize } = sanityImageAsset;
+
+	const farming = allSanityImageAsset.nodes.find(
+		(e: sanityImageInfo) => e.filename === "farminBackground.webp",
+	);
+
+	const products = allSanityImageAsset.nodes.find(
+		(e: sanityImageInfo) =>
+			e.filename ===
+			"hermoso-paisaje-plantas-phragmites-junto-al-mar-pelicano-nadando-al-atardecer-min.webp",
+	);
+
+	const sellers = allSanityImageAsset.nodes.find(
+		(e: sanityImageInfo) => e.filename === "sellerBack.webp",
+	);
+
 	return (
 		<>
 			<Hero />
-			<section className="w-full farmin-background relative">
+			<section className="w-full relative farmin-background">
+				<div
+					className="background"
+					style={{ backgroundImage: `url(${farming.resize.src})` }}
+				/>
 				<SectionDouble LeftChild={Iframe} RightChild={Left} padding="py-24" />
 			</section>
 			<section className="w-full pt-16 products-background relative">
+				<div
+					className="background"
+					style={{ backgroundImage: `url(${products.resize.src})` }}
+				/>
 				<h2 className="text-center font-bold text-2xl">
 					Productos Frescos y de Larga Duraci&oacute;n
 				</h2>
@@ -72,56 +106,56 @@ export default function Home() {
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Margarina Untable"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Aceite RBD de Palma"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Margarina Multiuso Con Sal"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Margarina de Palma"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Margarina de Palma Baja en sal Hojaldre"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Manteca Vegetal Galletera"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 					<ProductCard
 						title="Manteca Vegetal Galletera Tipo Shortering"
 						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
 						buttonText="vamos al sitio"
 						actionRoute="/About"
-						img={BackImg}
+						img={resize.src}
 					/>
 				</Carousel>
 			</section>
@@ -129,6 +163,10 @@ export default function Home() {
 				<InstructionsBanner />
 			</section>
 			<section className="w-full flex flex-wrap justify-center gap-x-8 gap-y-16 py-12 sellerSectionBackground relative">
+				<div
+					className="background"
+					style={{ backgroundImage: `url(${sellers.resize.src})` }}
+				/>
 				<h2 className="text-center font-bold text-4xl w-full">
 					Contamos Con un Equipo excelente
 				</h2>
@@ -165,3 +203,23 @@ export default function Home() {
 		</>
 	);
 }
+
+const queryProductImage = graphql`
+	query images {
+		allSanityImageAsset(filter: {_createdAt: {gte: "2023-07-20"}}) {
+		nodes {
+			resize(aspectRatio: 1.78, fit: COVER, format: WEBP, width: 1280, quality: 60) {
+				src
+			}
+			filename
+		}
+		}
+		sanityImageAsset(
+			filename: {eq: "planta-hoja-perenne-tropical-exotica-luz-sol.webp"}
+		) {
+			resize(aspectRatio: 1, fit: COVER, format: WEBP, width: 300, quality: 20) {
+				src
+			}
+		}
+	}
+`;

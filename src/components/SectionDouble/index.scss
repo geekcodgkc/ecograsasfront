@@ -41,6 +41,7 @@
 @media (max-width: 500px) {
     .section-container {
         flex-direction: column-reverse;
+        padding: 1rem;
     }
 
     .left-child, .right-child {
