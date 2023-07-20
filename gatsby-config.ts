@@ -13,6 +13,7 @@ const config: GatsbyConfig = {
 	// Learn more at: https://gatsby.dev/graphql-typegen
 	graphqlTypegen: true,
 	plugins: [
+		"gatsby-plugin-webpack-bundle-analyser-v2",
 		{
 			resolve: "gatsby-source-sanity",
 			options: {
@@ -47,12 +48,6 @@ const config: GatsbyConfig = {
 				path: "./src/pages/",
 			},
 			__key: "pages",
-		},
-		{
-			resolve: "gatsby-plugin-typography",
-			options: {
-				pathToConfigModule: "src/utils/typography.ts",
-			},
 		},
 		{
 			resolve: "gatsby-plugin-sass",
