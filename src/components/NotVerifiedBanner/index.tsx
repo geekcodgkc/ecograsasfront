@@ -3,7 +3,7 @@ import "./index.scss";
 
 export default function NotVerifiedBanner() {
 	return (
-		<div className="w-full max-w-screen-lg mt-4 h-full flex flex-col justify-center items-center gap-12 padding-8 bg-slate-300 rounded-xl mx-auto shadow-xl">
+		<div className="w-full max-w-screen-lg mt-4 h-full py-8 flex flex-col justify-center items-center gap-12 padding-8 bg-slate-300 rounded-xl mx-auto shadow-xl">
 			<h1 className="font-bold text-4xl">Parece que aun no estas verificado</h1>
 			<p className="max-w-screen-md text-justify helperText">
 				Para poder acceder a tu zona de usuario y realizar compras debes de

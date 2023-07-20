@@ -72,7 +72,7 @@ export default function RegisterContainer() {
 
 	return (
 		<div className="flex flex-col justify-center w-full max-w-screen-lg mx-auto min-h-screen items-center pt-8">
-			<p className="my-8">
+			<p className="my-8 mx-4">
 				ya tienes una cuenta?{" "}
 				<Link
 					to="/Login"
