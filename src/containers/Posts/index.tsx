@@ -42,7 +42,6 @@ export default function PostsContainer({
 	data,
 }: PostsContainerInterface) {
 	const { allSanityBlogs: posts } = data;
-	console.log(pageContext);
 
 	return (
 		<div className="w-11/12 gap-y-4 mx-auto max-w-screen-lg flex flex-wrap justify center pb-12">
