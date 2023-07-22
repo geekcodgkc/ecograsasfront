@@ -13,8 +13,6 @@ exports.createPages = async ({ graphql, actions }) => {
         }
     `);
 
-	console.log("building pages");
-
 	const maxPaginationNumber = 5;
 	const posts = data.allSanityBlogs.nodes;
 	const PagesArray = [];
