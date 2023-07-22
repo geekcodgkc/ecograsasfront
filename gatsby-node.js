@@ -39,10 +39,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	posts.forEach((node) => {
 		actions.createPage({
-			path: `/Posts/${node.slug.current}`,
-			component: path.resolve("./src/containers/Blogpost/index.tsx"),
+			path: `/Posts/${node.Slug.current}`,
+			component: path.resolve("./src/containers/BlogPost/index.tsx"),
 			context: {
-				slug: node.slug.current,
+				slug: node.Slug.current,
 			},
 		});
 	});
