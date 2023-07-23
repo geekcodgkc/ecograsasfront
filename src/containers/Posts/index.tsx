@@ -49,7 +49,7 @@ export default function PostsContainer({
 				Articulos y Blogs de Ecograsas
 			</h1>
 			{posts.nodes.map((data, i) => (
-				<PostCard key={i + 1} data={data} />
+				<PostCard key={i + Math.ceil(Math.random())} data={data} />
 			))}
 			<Pagination
 				currentPage={pageContext.currentPage}
@@ -76,7 +76,7 @@ export const query = graphql`
                 title
                 mainImage {
                     asset {
-                        resize(fit: COVER, aspectRatio: 1, format: WEBP, width: 300, quality: 100) {
+                        resize(fit: COVER, aspectRatio: 1, format: WEBP, width: 350, quality: 100) {
                             src
                         }
                         title

@@ -13,9 +13,11 @@
   * [ ] create a dinamyc page for every product and an add to car button with qty
 * [ ] profile page
   * [ ] add options to add more number
-  * [ ] see when is verified, not verified or is an admin
-  * [ ] logout button
-  * [ ] persist data in zustand
-* [ ] blog page
-  * [ ] add blog page with pagination
-  * [ ] add single blog page for every blog
+  * [*] see when is verified, not verified or is an admin
+  * [*] logout button
+  * [*] persist data in zustand
+* [] blog page
+  * [*] add blog page with pagination
+  * [*] add single blog page for every blog
+  * [*] add meta title and description tag to the sanity studio for every blog post
+  * [*] img tags must have an explicit witdh and heigth
