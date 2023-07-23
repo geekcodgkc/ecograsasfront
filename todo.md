@@ -14,6 +14,8 @@
 * [ ] profile page
   * [ ] add options to add more number
   * [ ] add orders list view
+    * [ ] add loading view
+    * [ ] solve not changing the session storage
   * [*] see when is verified, not verified or is an admin
   * [*] logout button
   * [*] persist data in zustand
