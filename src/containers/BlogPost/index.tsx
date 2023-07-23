@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import "./index.scss";
+import { Helmet } from "react-helmet";
 
 interface Child {
 	text: string;
@@ -25,6 +26,8 @@ interface SanityBlogs {
 		};
 	};
 	blogPost: Childrens[];
+	metaDescription: string;
+	metaTitle: string;
 }
 
 interface BlogPostsInterface {
@@ -36,30 +39,38 @@ interface BlogPostsInterface {
 	};
 }
 
-export default function BlogPostsContainer({
-	pageContext,
-	data,
-}: BlogPostsInterface) {
-	console.log(data);
+export default function BlogPostsContainer({ data }: BlogPostsInterface) {
 	const { sanityBlogs: post } = data;
 
 	return (
 		<div className="BlogPostContainer w-11/12 mx-auto max-w-screen-md center py-12">
+			<Helmet>
+				<title>{`Ecograsas: ${post.metaTitle}`}</title>
+				<meta name="description" content={post.metaDescription} />
+			</Helmet>
 			<h2 className="text-3xl font-bold w-full text-center">{post.title}</h2>
-			<img src={post.mainImage.asset.resize.src} alt={post.title} />
+			<img
+				src={post.mainImage.asset.resize.src}
+				alt={post.title}
+				width="500px"
+				height="500px"
+			/>
 			<div className="w-full mx-auto max-w-screen-sm">
 				{post.blogPost.map((textEl, i) => {
 					if (textEl.style === "normal") {
 						return (
-							<p className="my-8 text-justify">
-								{textEl.children[0].text}
+							<p className="my-8 text-justify" key={i + 1}>
+								{textEl.children.map((text) => `${text.text}`)}
 								<br />
 							</p>
 						);
 					}
 					return (
-						<h3 className="text-2xl my-8 font-bold w-full text-center">
-							{textEl.children[0].text}
+						<h3
+							key={i + 1}
+							className="text-2xl my-8 font-bold w-full text-center"
+						>
+							{textEl.children.map((text) => `${text.text}`)}
 							<br />
 						</h3>
 					);
@@ -82,6 +93,8 @@ export const query = graphql`
 				}
 				style
 			}
+			metaDescription
+			metaTitle
 			title
 			mainImage {
 				asset {
@@ -90,8 +103,8 @@ export const query = graphql`
 					fit: COVER
 					format: WEBP
 					quality: 70
-					width: 400
-					height: 400
+					width: 500
+					height: 500
 					) {
 						src
 					}

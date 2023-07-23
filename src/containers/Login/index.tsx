@@ -45,6 +45,7 @@ export default function LoginContainer() {
 					onChange={handleInput}
 					placeholder="coloca tu usuario ej.: j-27658945-4"
 					className="p-4 rounded-lg"
+					autoComplete="username"
 				/>
 				<label htmlFor="userInput">ingresa usando el rif de tu empresa</label>
 				<hr />
