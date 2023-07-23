@@ -47,10 +47,10 @@ export default function UserData() {
 	const { _id } = useUserStore((state) => state);
 
 	useEffect(() => {
-		if (_id && !store.orders) {
+		if (_id) {
 			store.getOrders(_id);
 		}
-	}, [store.orders]);
+	}, []);
 
 	console.log(store);
 
@@ -60,7 +60,7 @@ export default function UserData() {
 	}
 
 	return (
-		<div className="OrdersContainer w-full p-2 bg-slate-300 rounded-lg">
+		<div className="OrdersContainer w-full p-2 bg-slate-300 rounded-lg shadow-lg">
 			{store.orders?.map((order: orderInterface) => (
 				<div
 					className="OrderCardContainer w-full bg-slate-50 rounded-lg p-2"
