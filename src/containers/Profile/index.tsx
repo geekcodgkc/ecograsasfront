@@ -9,11 +9,12 @@ import "./index.scss";
 import UpdateProfileModal from "../../components/UpdateProfileModal";
 
 export default function ProfileContainer() {
-	const store = useUserStore((state) => state);
+	const isBrowser = typeof window !== "undefined";
+	const store = isBrowser && useUserStore((state) => state);
 	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
-		if (store?.id) {
+		if (isBrowser && store && store?.id) {
 			store.getUserData(store.id);
 		}
 	}, []);
@@ -24,7 +25,7 @@ export default function ProfileContainer() {
 		navigate("/Login");
 	}
 
-	if (store?.loading) return <ProfileSqueleton />;
+	if (isBrowser && store && store?.loading) return <ProfileSqueleton />;
 
 	return (
 		<div className="w-full max-w-screen-xl mx-auto px-2">
@@ -37,7 +38,7 @@ export default function ProfileContainer() {
 			)}
 			<header className="w-full flex flex-wrap justify-between items-center px-2 pt-8 gap-y-2">
 				<h1 className="flex items-center gap-2 text-2xl font-bold">
-					{store.name}{" "}
+					{isBrowser && store && store.name}{" "}
 					<AiFillEdit
 						className="hover:cursor-pointer editButton"
 						onClick={() => {
@@ -48,7 +49,7 @@ export default function ProfileContainer() {
 				<button
 					type="button"
 					onClick={() => {
-						if (store) {
+						if (isBrowser && store) {
 							store?.logout();
 						}
 					}}
@@ -61,40 +62,40 @@ export default function ProfileContainer() {
 						<h3 className="font-bold text-xl">Mi Direccion</h3>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>direccion: </b>
-							{store.userData?.address}
+							{isBrowser && store && store.userData?.address}
 						</p>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>Estado: </b>
-							{store.userData?.zone.State}
+							{isBrowser && store && store.userData?.zone.State}
 						</p>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>Area: </b>
-							{store.userData?.zone.area}
+							{isBrowser && store && store.userData?.zone.area}
 						</p>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>Codigo Postal: </b>
-							{store.userData?.zone.ZIPCode}
+							{isBrowser && store && store.userData?.zone.ZIPCode}
 						</p>
 					</div>
 					<div className="clientSeller">
 						<h3 className="font-bold text-xl">Mi vendedor</h3>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>nombre: </b>
-							{store.userData?.seller.name}
+							{isBrowser && store && store.userData?.seller.name}
 						</p>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>email: </b>
-							{store.userData?.seller.email}
+							{isBrowser && store && store.userData?.seller.email}
 						</p>
 						<p className="w-full flex flex-wrap justify-between">
 							<b>numero de contacto: </b>
-							{store.userData?.seller.phone}
+							{isBrowser && store && store.userData?.seller.phone}
 						</p>
 					</div>
 				</div>
 			</header>
 			<div className="w-full mt-4 min-h-screen pb-8">
-				{store?.userData && !store.userData.verified ? (
+				{isBrowser && store && store?.userData && !store.userData.verified ? (
 					<NotVerifiedBanner />
 				) : (
 					<UserData />
