@@ -1,0 +1,26 @@
+.clientInfoContainer {
+    div {
+        padding: 1rem;
+        flex-basis: 50%;
+        h3 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+    }
+}
+
+.editButton:hover {
+    color: #60794d
+}
+
+@media (max-width: 505px) {
+    .clientInfoContainer {
+        div {
+            flex-basis: 100%;
+        }
+        .clientAddress {
+            border-bottom: 1px solid black;
+        }
+    }
+}
