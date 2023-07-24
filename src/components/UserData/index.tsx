@@ -52,106 +52,133 @@ export default function UserData() {
 		}
 	}, []);
 
-	console.log(store);
+	if (store.error) {
+		return (
+			<div className="OrdersContainer w-error w-full p-8 pb-12 bg-slate-300 rounded-lg shadow-lg">
+				<h1 className="ErrorMessage font-bold text-2xl">
+					Hubo un errror al intentar cargar las ordernes intenta mas tarde
+				</h1>
+				<div className="w-full flex justify-center">
+					<button
+						className="action-button-1"
+						type="button"
+						onKeyDown={() => {}}
+						onClick={() => {
+							if (_id) {
+								store.getOrders(_id);
+							}
+						}}
+					>
+						reintentar
+					</button>
+				</div>
+			</div>
+		);
+	}
 
 	if (store.loading) {
-		console.log("currentState", store);
 		return <h1>Cargando ...</h1>;
 	}
 
 	return (
 		<div className="OrdersContainer w-full p-2 bg-slate-300 rounded-lg shadow-lg">
-			{store.orders?.map((order: orderInterface) => (
-				<div
-					className="OrderCardContainer w-full bg-slate-50 rounded-lg p-2"
-					key={order._id}
-				>
-					<div className="orderInfo">
-						<h4>
-							Numero de orden:{" "}
-							<b>{order.orderNumber.toString().padStart(8, "0")}</b>
-						</h4>
-						<h4>
-							fecha de la order:{" "}
-							<b>{moment(order.createdAt).format("DD-MM-YYYY")}</b>
-						</h4>
-						<h4>
-							fecha de envio:{" "}
-							<b>{moment(order.shippingDate).format("DD-MM-YYYY")}</b>
-						</h4>
-						<h4>
-							direccion de envio: <b>{order.shippingAddress}</b>
-						</h4>
-						<h4>
-							zona:{" "}
-							<b>
-								{`
+			{store.orders && store.getOrders.length === 0 ? (
+				<h2>no tienes ordendes aun</h2>
+			) : (
+				store.orders?.map((order: orderInterface) => (
+					<div
+						className="OrderCardContainer w-full bg-slate-50 rounded-lg p-2"
+						key={order._id}
+					>
+						<div className="orderInfo">
+							<h4>
+								Numero de orden:{" "}
+								<b>{order.orderNumber.toString().padStart(8, "0")}</b>
+							</h4>
+							<h4>
+								fecha de la order:{" "}
+								<b>{moment(order.createdAt).format("DD-MM-YYYY")}</b>
+							</h4>
+							<h4>
+								fecha de envio:{" "}
+								<b>{moment(order.shippingDate).format("DD-MM-YYYY")}</b>
+							</h4>
+							<h4>
+								direccion de envio: <b>{order.shippingAddress}</b>
+							</h4>
+							<h4>
+								zona:{" "}
+								<b>
+									{`
 								${order.client.zone.State} 
 								${order.client.zone.area}, 
 								codigo postal: ${order.client.zone.ZIPCode} 
 							`}
-							</b>
-						</h4>
-						<h4>
-							Base Imponible: <b>{order.orderBase}</b>
-						</h4>
-						<h4>
-							IVA: <b>{order.iva}</b>
-						</h4>
-						<h4>
-							Total: <b>{order.orderTotal}</b>
-						</h4>
-						<h4
-							className={`${
-								order.status === 1
-									? "proccess"
-									: order.status === 2
-									? "send"
-									: "pending"
-							}`}
-						>
-							Estatus de la order:{" "}
-							<b>
-								{order.status === 1
-									? "Procesado"
-									: order.status === 2
-									? "Enviado"
-									: "Pendiente"}
-							</b>
-						</h4>
+								</b>
+							</h4>
+							<h4>
+								Base Imponible: <b>{order.orderBase}</b>
+							</h4>
+							<h4>
+								IVA: <b>{order.iva}</b>
+							</h4>
+							<h4>
+								Total: <b>{order.orderTotal}</b>
+							</h4>
+							<h4
+								className={`${
+									order.status === 1
+										? "proccess"
+										: order.status === 2
+										? "send"
+										: "pending"
+								}`}
+							>
+								Estatus de la order:{" "}
+								<b>
+									{order.status === 1
+										? "Procesado"
+										: order.status === 2
+										? "Enviado"
+										: "Pendiente"}
+								</b>
+							</h4>
+						</div>
+						<div className="orderDetails">
+							<table className="bg-slate-200 p-4">
+								<tr className="headRow">
+									<th>
+										<h3 className="p-2">cantidad</h3>
+									</th>
+									<th>
+										<h3 className="p-2">Nombre</h3>
+									</th>
+									<th>
+										<h3 className="p-2">precio unitario</h3>
+									</th>
+									<th>
+										<h3 className="p-2">total</h3>
+									</th>
+								</tr>
+								{order.products.map(({ product, qty, price, _id }) => {
+									return (
+										<tr key={_id} className="headRow">
+											<td className="p-2 text-center">{qty}</td>
+											<td className="p-2 text-center">{product.name}</td>
+											<td className="p-2 text-center">
+												{Object.values(product.prices)[price - 1]}
+											</td>
+											<td className="p-2 text-center">
+												{Object.values(product.prices)[price - 1] * qty}
+											</td>
+										</tr>
+									);
+								})}
+							</table>
+						</div>
 					</div>
-					<div className="orderDetails">
-						<table className="bg-slate-200 p-4">
-							<tr className="headRow">
-								<th>
-									<h3 className="p-2">cantidad</h3>
-								</th>
-								<th>
-									<h3 className="p-2">Nombre</h3>
-								</th>
-								<th>
-									<h3 className="p-2">precio unitario</h3>
-								</th>
-								<th>
-									<h3 className="p-2">total</h3>
-								</th>
-							</tr>
-							{order.products.map(({ product, qty, price, _id }) => {
-								return (
-									<tr key={_id} className="headRow">
-										<td className="p-2 text-center">{qty}</td>
-										<td className="p-2 text-center">{product.name}</td>
-										<td className="p-2 text-center">
-											{Object.values(product.prices)[price - 1]}
-										</td>
-										<td className="p-2 text-center">{price * qty}</td>
-									</tr>
-								);
-							})}
-						</table>
-					</div>
-				</div>
-			))}
+				))
+			)}
 		</div>
 	);
 }

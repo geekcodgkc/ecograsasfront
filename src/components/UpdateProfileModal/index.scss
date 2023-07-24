@@ -1,0 +1,34 @@
+.ModalContainer {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #0a0a0a80;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    padding-bottom: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .closeButton {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 48px;
+        color: white;
+        z-index: 31;
+        cursor: pointer;
+    }
+    form {
+        border-radius: 0.5rem;
+        max-width: 40%;
+        width: 40%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1rem;
+        input {
+            width: 100%;
+        }
+    }
+}

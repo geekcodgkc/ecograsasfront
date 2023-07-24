@@ -33,6 +33,7 @@ interface Zone {
 	ZIPCode: string;
 	area: string;
 	State: string;
+	_id: string;
 }
 
 interface Seller {
@@ -53,6 +54,12 @@ interface UserData extends Omit<RegisterForm, "zone" | "phone" | "password"> {
 	_id: string;
 }
 
+interface UpdateForm
+	extends Omit<RegisterForm, "rif" | "password" | "phone" | "zone" | "name"> {
+	phone: string;
+	zone: string;
+}
+
 export interface UserStoreInterface {
 	_id: null | string;
 	userData: null | UserData;
@@ -69,6 +76,7 @@ export interface UserStoreInterface {
 	logout: () => Promise<void>;
 	register: (data: RegisterForm, cb: () => Promise<void>) => Promise<void>;
 	getUserData: (id: string) => Promise<void>;
+	updateUserData: (data: UpdateForm, id: string) => Promise<void>;
 }
 
 type MyPersist = (
@@ -172,6 +180,20 @@ export const useUserStore = create<UserStoreInterface, []>(
 				} catch (error) {
 					set((state) => ({ ...state, loading: false }));
 				}
+			},
+			updateUserData: async (data, id) => {
+				set((state) => ({ ...state, loading: true }));
+				const form = { ...data, phone: [data.phone] };
+				try {
+					await api.put(`clients/${id}`, form);
+					const { data } = await api.get(`clients/${id}?populated=true`);
+					set((state) => ({
+						...state,
+						loading: false,
+						userData: data,
+						name: data.email,
+					}));
+				} catch (error) {}
 			},
 		}),
 		{
