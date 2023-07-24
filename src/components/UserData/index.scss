@@ -1,0 +1,122 @@
+.OrdersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-height: 70vh;
+    overflow-y: scroll;
+    .ErrorMessage {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 52px;
+    }
+    .OrderCardContainer {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        .orderInfo {
+            width: 100%;
+            flex-basis: 33%;
+            h4 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.24rem;
+                width: 100%;
+                flex-wrap: wrap;
+                text-align: justify;
+                font-weight: 700;
+                b {
+                    font-weight: 400;
+                }
+            }
+            .process {
+                b {
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.25rem;
+                    font-weight: 700;
+                    background-color: #ca8a04;
+                    color: black
+                }
+            }
+            .pending {
+                b {
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.25rem;
+                    font-weight: 700;
+                    background-color: black;
+                    color: white
+                }
+            }
+            .send {
+                b {
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.25rem;
+                    font-weight: 700;
+                    background-color: #4d7c0f;
+                    color: white
+                }
+            }
+        }
+        .orderDetails {
+            flex: 1;
+            table {
+                border: solid 2px #9ca3af;
+                border-radius: 0.5rem;
+                height: max-content;
+                overflow: hidden;
+                padding: 1rem;
+                width: 100%;
+                .headRow {
+                    th {
+                        border-right: solid 1px black;
+                        border-bottom:solid 1px black
+                    }
+                    th:last-child {
+                        border-right: none;
+                    }
+                    td {
+                        border-right: solid 1px black
+                    }
+                    td:last-child {
+                        border-right: none;
+                    }
+                };
+            }
+        }
+    }
+}
+
+.w-error {
+    overflow-y: hidden;
+}
+
+@media (max-width: 1000px) {
+    .OrdersContainer {
+        .OrderCardContainer {
+            .orderInfo {
+                flex-basis: 100%;
+                margin-bottom: 1.5rem;
+                h4 {
+                    border-bottom: 1px solid black;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 370px) {
+    .orderDetails{
+        table {
+            .headRow {
+                th:last-child, th:last-child * {
+                    display: none;
+                }
+                td:last-child, td:last-child * {
+                    display: none;
+                }
+            }
+        }
+    }
+}

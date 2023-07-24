@@ -1,0 +1,27 @@
+.PaginationContainer {
+    align-items: center;
+    span {
+        background-color: black;
+        width: 36px;
+        height: 36px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        transition-duration: 0.2s;
+        border: solid 2px black;
+    }
+    span:hover {
+        cursor: pointer;
+        background: none;
+        color: black;
+    }
+    
+    span.disabled {
+        cursor: not-allowed;
+        background-color: black;
+        color: white;
+    }
+
+}

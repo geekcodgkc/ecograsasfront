@@ -1,0 +1,21 @@
+.postCardContainer {
+    height: max-content;
+    .Img {
+        overflow: hidden;
+        height: max-content;
+    }
+}
+
+@media (max-width: 620px) {
+    .postCardContainer {
+        .Img {
+            width: 100%;
+            a {
+                width: 100%;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

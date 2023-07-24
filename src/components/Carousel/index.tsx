@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./index.scss";
+import genDots from "./useGendots";
 
 interface CarouselProps {
 	children: React.ReactElement[];
@@ -16,16 +17,7 @@ export default function CarouselComponent({ children }: CarouselProps) {
 
 	const isBrowser = () => typeof window !== "undefined";
 
-	const genDots = (): [number[], number[]] => {
-		const dotsNumber: [number[], number[]] = [[], []];
-		[Math.ceil(elements / 3), Math.ceil(elements / 2)].forEach((dot, index) => {
-			for (let i = 0; i < dot; i++) {
-				dotsNumber[index].push(i);
-			}
-		});
-		return dotsNumber;
-	};
-	const [dotsLg, dotsTablet] = genDots();
+	const [dotsLg, dotsTablet] = genDots(elements);
 
 	const handleResize = () => {
 		const windowSize = isBrowser() && window.innerWidth;
@@ -77,7 +69,7 @@ export default function CarouselComponent({ children }: CarouselProps) {
 	};
 
 	return (
-		<div className="flex w-full pt-8 flex-wrap" id="carouselComponent">
+		<div className="flex w-full pt-24 flex-wrap" id="carouselComponent">
 			<div
 				className={"relative carouselContainer"}
 				style={{

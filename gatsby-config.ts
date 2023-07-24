@@ -6,18 +6,19 @@ const config: GatsbyConfig = {
 		title: `ecograsas`,
 		siteUrl: `https://www.yourdomain.tld`,
 		lang: `es`,
+		description: `ecograsas procesadores de aceite de palma para reposteria y elaboracion de jabon`,
 	},
 	// More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
 	// If you use VSCode you can also use the GraphQL plugin
 	// Learn more at: https://gatsby.dev/graphql-typegen
 	graphqlTypegen: true,
 	plugins: [
+		"gatsby-plugin-webpack-bundle-analyser-v2",
 		{
 			resolve: "gatsby-source-sanity",
 			options: {
 				projectId: process.env.SANITY_PROJECT_ID,
 				dataset: process.env.SANITY_DATASET,
-				watchMode: true,
 				token: process.env.SANITY_TOKEN,
 			},
 		},
@@ -47,12 +48,6 @@ const config: GatsbyConfig = {
 				path: "./src/pages/",
 			},
 			__key: "pages",
-		},
-		{
-			resolve: "gatsby-plugin-typography",
-			options: {
-				pathToConfigModule: "src/utils/typography.ts",
-			},
 		},
 		{
 			resolve: "gatsby-plugin-sass",

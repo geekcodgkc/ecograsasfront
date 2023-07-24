@@ -40,3 +40,10 @@
     z-index: 1;
     background-size: cover;
 }
+
+@media (max-width: 419px) {
+    .cardContainer {
+        width: 100%;
+        min-width: 100%;
+    }
+} 

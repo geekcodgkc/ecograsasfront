@@ -1,14 +1,22 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, graphql, useStaticQuery } from "gatsby";
 import "./index.scss";
 
 export default function Hero() {
+	const { allSanityHero } = useStaticQuery(query);
+	const heroData = allSanityHero.nodes[0];
+
 	return (
-		<header className="hero flex flex-col justify-end p-20 pb-36 gap-4">
+		<header
+			className="hero flex flex-col justify-end p-20 pb-36 gap-4"
+			style={{
+				backgroundImage: `url(${heroData.mainImage.asset.resize.src})`,
+			}}
+		>
 			<div className="text-slate-100 flex flex-col gap-2 titles-container">
-				<h3 className="text-5xl font-bold">la mejor calidad</h3>
-				<h2 className="text-7xl font-bold max-w-screen-lg">
-					Impulsa tus productos con la mejor calidad
+				<h3 className="text-4xl font-bold">{heroData.mainTitle}</h3>
+				<h2 className="text-5xl font-bold max-w-screen-lg">
+					{heroData.secondTitle}
 				</h2>
 				<h3 className="mt-4 bg-black/80 max-w-screen-lg p-2 description-text">
 					Registrate y contacta con nuestro equipo de ventas para optener los
@@ -33,3 +41,23 @@ export default function Hero() {
 		</header>
 	);
 }
+
+export const query = graphql`
+	query Hero {
+		allSanityHero {
+			nodes {
+				mainImage {
+					asset {
+					filename
+					resize(aspectRatio: 1.78, fit: COVER, format: WEBP, width: 1280, quality: 60) {
+						src
+					}
+					url
+					}
+				}
+				mainTitle
+				secondTitle
+			}
+		}
+	}
+`;
