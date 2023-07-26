@@ -22,8 +22,9 @@ export interface CartStoreInterface {
 	loading: boolean;
 	cart: null | { [key: string]: ProductSale };
 	addToCart: (product: ProductSale) => void;
-	removeFromCart: (product: ProductSale) => void;
+	removeFromCart: (id: string) => void;
 	createOrder: (clientId: string, cart: { [key: string]: ProductSale }) => void;
+	decrementFromCart: (id: string) => void;
 }
 
 type MyPersist = (
@@ -38,19 +39,40 @@ export const useCartStore = create<CartStoreInterface, []>(
 			loading: false,
 			addToCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
+				set((state) => ({
+					...state,
+					loading: false,
+					cart: !state.cart
+						? {
+								[product.product.id]: product,
+						  }
+						: {
+								...state.cart,
+								[product.product.id]: product,
+						  },
+				}));
 				set((state) => {
-					const currentState = { ...state };
-					if (!currentState.cart) {
-						currentState.cart = { [product.product.id]: product };
-					} else {
-						currentState.cart[product.product.id] = product;
-					}
-					return currentState;
+					console.log(product, state);
+					return state;
 				});
 			},
 			removeFromCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
-				set((state) => ({ ...state, loading: false }));
+				set((state) => {
+					const current = { ...state };
+					if (current.cart) {
+						delete current.cart[product];
+					}
+					return current;
+				});
+			},
+			decrementFromCart: (id) => {
+				set((state) => ({ ...state, loading: true }));
+				set((state) => {
+					const current = { ...state };
+					if (current.cart?.[id]) current.cart[id].qty -= 1;
+					return current;
+				});
 			},
 			createOrder: (product) => {
 				set((state) => ({ ...state, loading: true }));
@@ -59,7 +81,7 @@ export const useCartStore = create<CartStoreInterface, []>(
 		}),
 		{
 			name: "cartStorage",
-			storage: createJSONStorage(() => localStorage),
+			storage: createJSONStorage(() => sessionStorage),
 		},
 	),
 );

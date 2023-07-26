@@ -44,8 +44,6 @@ interface pageContext {
 export default function Products({ pageContext: context }: pageContext) {
 	const { sanityProducts } = context;
 
-	console.log(sanityProducts);
-
 	return (
 		<>
 			<CartWrapper>

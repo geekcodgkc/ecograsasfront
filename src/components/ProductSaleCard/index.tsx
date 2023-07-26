@@ -1,4 +1,6 @@
 import React from "react";
+import { BsFillTrashFill } from "react-icons/bs";
+import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { Link, navigate } from "gatsby";
 import { useUserStore, useCartStore } from "../../store";
 import "./index.scss";
@@ -60,8 +62,35 @@ export default function ProductCart({ product }: productCartProps) {
 				prices: product.prices,
 			},
 			price: 1,
-			qty: 1,
+			qty: cartStore.cart?.[product.productId.current]
+				? cartStore.cart[product.productId.current].qty + 1
+				: 1,
 		});
+	};
+
+	const handleLessToCart = () => {
+		if (cartStore.cart) {
+			cartStore.cart[product.productId.current].qty > 1
+				? cartStore.decrementFromCart(product.productId.current)
+				: handleRemove();
+		}
+	};
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		cartStore.addToCart({
+			product: {
+				name: product.name,
+				id: product.productId.current,
+				_id: product._id,
+				prices: product.prices,
+			},
+			price: 1,
+			qty: parseInt(e.target.value),
+		});
+	};
+
+	const handleRemove = () => {
+		cartStore.removeFromCart(product.productId.current);
 	};
 
 	return (
@@ -88,7 +117,7 @@ export default function ProductCart({ product }: productCartProps) {
 				<p className="w-10/12 pr-2" id="shortDescription">
 					{product.descriptionsShort}
 				</p>
-				{userStore.token ? (
+				{userStore.token && (
 					<div
 						className="flex flex-wrap gap-y-2 justify-between w-full pr-4 align-center pb-4"
 						id="itemsContainer"
@@ -103,16 +132,45 @@ export default function ProductCart({ product }: productCartProps) {
 								{` ${min}`}$
 							</li>
 						</ul>
-						<button
-							className="action-button-1"
-							type="button"
-							name="add-to-cart-button"
-							onClick={handleAddToCart}
-						>
-							Agregar al Carrito
-						</button>
+						{!cartStore.cart || !cartStore.cart[product.productId.current] ? (
+							<button
+								className="action-button-1"
+								type="button"
+								name="add-to-cart-button"
+								onClick={handleAddToCart}
+							>
+								Agregar al Carrito
+							</button>
+						) : (
+							<div className="orderNumberContainer">
+								<div
+									className="cartButton"
+									onClick={handleLessToCart}
+									onKeyUp={() => {}}
+								>
+									<AiFillMinusCircle />
+								</div>
+								<div className="inputContainer">
+									<input
+										name="cart-qty"
+										type="number"
+										value={cartStore.cart?.[product.productId.current].qty}
+										onChange={handleChange}
+									/>
+								</div>
+								<div
+									className="cartButton"
+									onClick={handleAddToCart}
+									onKeyUp={() => {}}
+								>
+									<AiFillPlusCircle />
+								</div>
+								<BsFillTrashFill onClick={handleRemove} />
+							</div>
+						)}
 					</div>
-				) : (
+				)}
+				{!userStore.token && (
 					<h4>
 						<button
 							type="button"
