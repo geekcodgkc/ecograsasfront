@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.scss";
 import ProductCart from "../../components/ProductSaleCard";
-import { useCartStore } from "../../store/CartStore";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import CartModal from "../../components/CartModal";
+import CartWrapper from "../CartWrapper";
 
 interface Sproducts {
 	Slug: {
@@ -44,37 +42,19 @@ interface pageContext {
 }
 
 export default function Products({ pageContext: context }: pageContext) {
-	const [open, setOpen] = useState<boolean>(false);
 	const { sanityProducts } = context;
-	const cartStore = useCartStore((store) => store);
 
 	console.log(sanityProducts);
 
 	return (
 		<>
-			<div className="w-full max-w-screen-xl mx-auto flex flex-wrap gap-y-4 relative">
-				{sanityProducts.map((e) => (
-					<ProductCart key={e._id} product={e} />
-				))}
-				{cartStore.cart && (
-					<div
-						className="cartButtonAbsolute"
-						onClick={() => {
-							setOpen(true);
-						}}
-						onKeyDown={() => {}}
-					>
-						<AiOutlineShoppingCart />
-					</div>
-				)}
-			</div>
-			{open && (
-				<CartModal
-					handleClose={() => {
-						setOpen(false);
-					}}
-				/>
-			)}
+			<CartWrapper>
+				<div className="w-full pb-8 max-w-screen-xl mx-auto flex flex-wrap gap-y-4 relative">
+					{sanityProducts.map((e) => (
+						<ProductCart key={e._id} product={e} />
+					))}
+				</div>
+			</CartWrapper>
 		</>
 	);
 }

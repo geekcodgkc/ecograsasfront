@@ -65,7 +65,10 @@ export default function ProductCart({ product }: productCartProps) {
 	};
 
 	return (
-		<article className="w-full m-4 flex flex-wrap bg-slate-50 rounded shadow-lg max-w-screen-lg">
+		<article
+			className="w-full m-4 flex flex-wrap bg-slate-50 rounded shadow-lg max-w-screen-lg"
+			id="articleContainer"
+		>
 			<Link to={`/Products/${product.Slug.current}`} className="w-fit h-fit">
 				<img
 					className="img-component hover:opacity-40 duration-150"
@@ -82,9 +85,14 @@ export default function ProductCart({ product }: productCartProps) {
 						{product.productName}
 					</Link>
 				</h2>
-				<p className="w-10/12 pr-2">{product.descriptionsShort}</p>
+				<p className="w-10/12 pr-2" id="shortDescription">
+					{product.descriptionsShort}
+				</p>
 				{userStore.token ? (
-					<div className="flex flex-wrap gap-y-2 justify-between w-full pr-4 align-center pb-4">
+					<div
+						className="flex flex-wrap gap-y-2 justify-between w-full pr-4 align-center pb-4"
+						id="itemsContainer"
+					>
 						<ul className="flex gap-4 mt-4 align-center">
 							<li className="flex align-center gap-2">
 								<b>Desde:</b>

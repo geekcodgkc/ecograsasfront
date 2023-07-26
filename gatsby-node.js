@@ -31,7 +31,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					}
 					productImage {
 						asset {
-							resize(width: 400, height: 400, format: WEBP, quality: 70) {
+							resize(width: 300, height: 300, format: WEBP, quality: 70) {
 								src
 							}
 						}
@@ -88,6 +88,21 @@ exports.createPages = async ({ graphql, actions }) => {
 			component: path.resolve("./src/containers/BlogPost/index.tsx"),
 			context: {
 				slug: node.Slug.current,
+			},
+		});
+	});
+
+	productsData.allSanityProducts.nodes.forEach((node) => {
+		const _id = productsMap[node.productId.current]._id;
+
+		actions.createPage({
+			path: `/Products/${node.Slug.current}`,
+			component: path.resolve(
+				"./src/containers/SingleProductContainer/index.tsx",
+			),
+			context: {
+				slug: node.Slug.current,
+				_id,
 			},
 		});
 	});

@@ -1,0 +1,32 @@
+@media (max-width: 767px) {
+    #articleContainer {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        flex-direction: column;
+        #img-card {
+            width: 400px;
+            height: auto;
+        }
+        div {
+            #shortDescription {
+                width: 100%;
+                text-align: justify;
+            }
+        }
+        #itemsContainer {
+            width: 100%;
+            justify-content: center;
+            ul {
+                width: 100%;
+                margin-bottom: 1rem;
+            }            
+        }
+    }
+}
+
+@media (max-width: 421px) {
+    #articleContainer {
+        max-width: 95%;
+    }
+}
