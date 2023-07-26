@@ -76,6 +76,10 @@ export default function ProfileContainer() {
 							<b>Codigo Postal: </b>
 							{isBrowser && store && store.userData?.zone.ZIPCode}
 						</p>
+						<p className="w-full flex flex-wrap justify-between">
+							<b>Persona de Contacto en Mi Empresa: </b>
+							{isBrowser && store && store.userData?.contact}
+						</p>
 					</div>
 					<div className="clientSeller">
 						<h3 className="font-bold text-xl">Mi vendedor</h3>

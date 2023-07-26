@@ -82,8 +82,10 @@ export default function UserData() {
 
 	return (
 		<div className="OrdersContainer w-full p-2 bg-slate-300 rounded-lg shadow-lg">
-			{store.orders && store.getOrders.length === 0 ? (
-				<h2>no tienes ordendes aun</h2>
+			{store.orders && store.orders.length === 0 ? (
+				<h2 className="w-full text-center font-bold text-2xl my-12">
+					No Tienes ordendes a&uacute;n
+				</h2>
 			) : (
 				store.orders?.map((order: orderInterface) => (
 					<div
