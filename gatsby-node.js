@@ -1,4 +1,13 @@
 const path = require("path");
+const axios = require("axios");
+
+const api = axios.create({
+	baseURL: "https://api.geekcod.com/api-v1/",
+	headers: {
+		Authorization:
+			"Bearer 3egUxGRb1x2ekiHreBshswQpsEL0QsgOtSYcMYiiOoPx7PtU70EYpHdJ6vALOisb",
+	},
+});
 
 exports.createPages = async ({ graphql, actions }) => {
 	const { data } = await graphql(`
@@ -12,6 +21,44 @@ exports.createPages = async ({ graphql, actions }) => {
             }
         }
     `);
+
+	const { data: productsData } = await graphql(`
+		query posts {
+			allSanityProducts {
+				nodes {
+					Slug {
+						current
+					}
+					productImage {
+						asset {
+							resize(width: 300, height: 300, format: WEBP, quality: 70) {
+								src
+							}
+						}
+					}
+					presentation
+					descriptionsShort
+					productId {
+						current
+					}
+					productName
+				}
+			}
+		}
+	`);
+
+	const { data: products } = await api.get("/products");
+	const productsMap = {};
+	const actives = products.filter((product) => product.status === true);
+
+	actives.forEach((product) => {
+		productsMap[`${product.id}`] = product;
+	});
+
+	const productsMaped = productsData.allSanityProducts.nodes.map((p) => ({
+		...p,
+		...productsMap[`${p.productId.current}`],
+	}));
 
 	const maxPaginationNumber = 5;
 	const posts = data.allSanityBlogs.nodes;
@@ -43,5 +90,28 @@ exports.createPages = async ({ graphql, actions }) => {
 				slug: node.Slug.current,
 			},
 		});
+	});
+
+	productsData.allSanityProducts.nodes.forEach((node) => {
+		const _id = productsMap[node.productId.current]._id;
+
+		actions.createPage({
+			path: `/Products/${node.Slug.current}`,
+			component: path.resolve(
+				"./src/containers/SingleProductContainer/index.tsx",
+			),
+			context: {
+				slug: node.Slug.current,
+				_id,
+			},
+		});
+	});
+
+	actions.createPage({
+		path: "/Products",
+		component: path.resolve("./src/containers/Products/index.tsx"),
+		context: {
+			sanityProducts: productsMaped,
+		},
 	});
 };

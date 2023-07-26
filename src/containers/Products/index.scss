@@ -1,0 +1,22 @@
+.cartButtonAbsolute {
+    bottom: 42px;
+    right: 30px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: black;
+    color: white;
+    font-size: 34px;
+    border: solid 2px black;
+    transition-duration: 0.2s;
+}
+
+.cartButtonAbsolute:hover {
+    color: black;
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+}
