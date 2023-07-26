@@ -24,7 +24,7 @@ export interface CartStoreInterface {
 	addToCart: (product: ProductSale) => void;
 	removeFromCart: (id: string) => void;
 	createOrder: (clientId: string, cart: { [key: string]: ProductSale }) => void;
-	decrementFromCart: (id: string) => void;
+	decrementFromCart: (id: string, less: number) => void;
 }
 
 type MyPersist = (
@@ -66,11 +66,14 @@ export const useCartStore = create<CartStoreInterface, []>(
 					return current;
 				});
 			},
-			decrementFromCart: (id) => {
+			decrementFromCart: (id, less) => {
 				set((state) => ({ ...state, loading: true }));
 				set((state) => {
 					const current = { ...state };
-					if (current.cart?.[id]) current.cart[id].qty -= 1;
+					if (current.cart?.[id]) {
+						current.cart[id].qty -= 1;
+						current.cart[id].price -= less;
+					}
 					return current;
 				});
 			},

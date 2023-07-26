@@ -1,6 +1,6 @@
 import React from "react";
 import { BsFillTrashFill } from "react-icons/bs";
-import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { Link, navigate } from "gatsby";
 import { useUserStore, useCartStore } from "../../store";
 import "./index.scss";
@@ -54,6 +54,12 @@ export default function ProductCart({ product }: productCartProps) {
 	});
 
 	const handleAddToCart = () => {
+		const singlePrice = Object.values(product.prices)[
+			userStore.userData?.conditionPrice
+				? userStore.userData?.conditionPrice - 1
+				: 0
+		];
+
 		cartStore.addToCart({
 			product: {
 				name: product.name,
@@ -61,7 +67,9 @@ export default function ProductCart({ product }: productCartProps) {
 				_id: product._id,
 				prices: product.prices,
 			},
-			price: 1,
+			price: cartStore.cart?.[product.productId.current]
+				? cartStore.cart?.[product.productId.current].price + singlePrice
+				: singlePrice,
 			qty: cartStore.cart?.[product.productId.current]
 				? cartStore.cart[product.productId.current].qty + 1
 				: 1,
@@ -69,9 +77,14 @@ export default function ProductCart({ product }: productCartProps) {
 	};
 
 	const handleLessToCart = () => {
+		const singlePrice = Object.values(product.prices)[
+			userStore.userData?.conditionPrice
+				? userStore.userData?.conditionPrice - 1
+				: 0
+		];
 		if (cartStore.cart) {
 			cartStore.cart[product.productId.current].qty > 1
-				? cartStore.decrementFromCart(product.productId.current)
+				? cartStore.decrementFromCart(product.productId.current, singlePrice)
 				: handleRemove();
 		}
 	};
@@ -131,6 +144,10 @@ export default function ProductCart({ product }: productCartProps) {
 								<b>Hasta:</b>
 								{` ${min}`}$
 							</li>
+							<li className="flex align-center gap-2">
+								<b>Presentacion:</b>
+								{` ${product.presentation}`}
+							</li>
 						</ul>
 						{!cartStore.cart || !cartStore.cart[product.productId.current] ? (
 							<button
@@ -148,7 +165,7 @@ export default function ProductCart({ product }: productCartProps) {
 									onClick={handleLessToCart}
 									onKeyUp={() => {}}
 								>
-									<AiFillMinusCircle />
+									<AiOutlineMinusCircle />
 								</div>
 								<div className="inputContainer">
 									<input
@@ -163,7 +180,7 @@ export default function ProductCart({ product }: productCartProps) {
 									onClick={handleAddToCart}
 									onKeyUp={() => {}}
 								>
-									<AiFillPlusCircle />
+									<AiOutlinePlusCircle />
 								</div>
 								<BsFillTrashFill onClick={handleRemove} />
 							</div>
