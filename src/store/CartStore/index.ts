@@ -51,10 +51,6 @@ export const useCartStore = create<CartStoreInterface, []>(
 								[product.product.id]: product,
 						  },
 				}));
-				set((state) => {
-					console.log(product, state);
-					return state;
-				});
 			},
 			removeFromCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
@@ -62,6 +58,9 @@ export const useCartStore = create<CartStoreInterface, []>(
 					const current = { ...state };
 					if (current.cart) {
 						delete current.cart[product];
+					}
+					if (current.cart && Object.keys(current.cart).length < 1) {
+						current.cart = null;
 					}
 					return current;
 				});

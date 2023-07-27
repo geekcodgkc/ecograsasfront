@@ -90,6 +90,14 @@ export default function ProductCart({ product }: productCartProps) {
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const singlePrice = Object.values(product.prices)[
+			userStore.userData?.conditionPrice
+				? userStore.userData?.conditionPrice - 1
+				: 0
+		];
+
+		const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
+
 		cartStore.addToCart({
 			product: {
 				name: product.name,
@@ -97,8 +105,8 @@ export default function ProductCart({ product }: productCartProps) {
 				_id: product._id,
 				prices: product.prices,
 			},
-			price: 1,
-			qty: parseInt(e.target.value),
+			price: value * singlePrice,
+			qty: value,
 		});
 	};
 
@@ -121,12 +129,12 @@ export default function ProductCart({ product }: productCartProps) {
 					id={"img-card"}
 				/>
 			</Link>
-			<div className="flex-1 pl-2 pt-2 h-full flex flex-wrap justify-start">
-				<h2 className="w-full font-bold text-lg mb-4 hover:text-emerald-800">
-					<Link to={`/Products/${product.Slug.current}`}>
+			<div className="flex-1 pl-2 pt-2 h-full flex flex-wrap justify-start w-full">
+				<Link to={`/Products/${product.Slug.current}`}>
+					<h2 className="w-full font-bold text-lg mb-4 hover:text-emerald-800 break-words">
 						{product.productName}
-					</Link>
-				</h2>
+					</h2>
+				</Link>
 				<p className="w-10/12 pr-2" id="shortDescription">
 					{product.descriptionsShort}
 				</p>
@@ -135,7 +143,7 @@ export default function ProductCart({ product }: productCartProps) {
 						className="flex flex-wrap gap-y-2 justify-between w-full pr-4 align-center pb-4"
 						id="itemsContainer"
 					>
-						<ul className="flex gap-4 mt-4 align-center">
+						<ul className="flex gap-4 mt-4 align-center flex-wrap">
 							<li className="flex align-center gap-2">
 								<b>Desde:</b>
 								{` ${max}`}$
