@@ -133,7 +133,6 @@ export const useCartStore = create<CartStoreInterface, []>(
 					cart.forEach((item) => {
 						const singlePrice = Object.values(item.product.prices)[clientPrice];
 						order.orderBase += parseFloat((singlePrice * item.qty).toFixed(2));
-						order.iva = parseFloat((order.orderBase * 0.16).toFixed(2));
 						order.orderTotal = order.iva + order.orderBase;
 						order.products.push({
 							product: item.product._id,

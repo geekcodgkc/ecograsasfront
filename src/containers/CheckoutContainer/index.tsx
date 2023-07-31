@@ -23,89 +23,99 @@ interface ProductSale {
 }
 
 export default function CheckoutContainer() {
+	const isBrowser = typeof window !== "undefined";
 	const cartStore = useCartStore((store) => store);
 	const userStore = useUserStore((store) => store);
 	const [open, setOpen] = useState<boolean>(false);
-	const total =
-		cartStore.cart &&
-		Object.values(cartStore.cart).length > 0 &&
-		Object.values(cartStore.cart)
-			.map((cart) => cart.price)
-			.reduce((acc, curr) => {
-				return acc + curr;
-			});
+	const total = isBrowser
+		? cartStore.cart &&
+		  Object.values(cartStore.cart).length > 0 &&
+		  Object.values(cartStore.cart)
+				.map((cart) => cart.price)
+				.reduce((acc, curr) => {
+					return acc + curr;
+				})
+		: 0;
 
-	if (!userStore.token) {
+	if (isBrowser && !userStore.token) {
 		navigate("/Login");
 	}
 
 	const handleAddToCart = (product: ProductSale) => {
-		const singlePrice = Object.values(product.product.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
+		if (isBrowser) {
+			const singlePrice = Object.values(product.product.prices)[
+				userStore.userData?.conditionPrice
+					? userStore.userData?.conditionPrice - 1
+					: 0
+			];
 
-		cartStore.addToCart({
-			product: {
-				name: product.product.name,
-				id: product.product.id,
-				_id: product.product._id,
-				prices: product.product.prices,
-			},
-			price: cartStore.cart?.[product.product.id]
-				? cartStore.cart?.[product.product.id].price + singlePrice
-				: singlePrice,
-			qty: cartStore.cart?.[product.product.id]
-				? cartStore.cart[product.product.id].qty + 1
-				: 1,
-		});
+			cartStore.addToCart({
+				product: {
+					name: product.product.name,
+					id: product.product.id,
+					_id: product.product._id,
+					prices: product.product.prices,
+				},
+				price: cartStore.cart?.[product.product.id]
+					? cartStore.cart?.[product.product.id].price + singlePrice
+					: singlePrice,
+				qty: cartStore.cart?.[product.product.id]
+					? cartStore.cart[product.product.id].qty + 1
+					: 1,
+			});
+		}
 	};
 
 	const handleLessToCart = (product: ProductSale) => {
-		const singlePrice = Object.values(product.product.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
-		if (cartStore.cart) {
-			cartStore.cart[product.product.id].qty > 1
-				? cartStore.decrementFromCart(product.product.id, singlePrice)
-				: handleRemove(product.product.id);
+		if (isBrowser) {
+			const singlePrice = Object.values(product.product.prices)[
+				userStore.userData?.conditionPrice
+					? userStore.userData?.conditionPrice - 1
+					: 0
+			];
+			if (cartStore.cart) {
+				cartStore.cart[product.product.id].qty > 1
+					? cartStore.decrementFromCart(product.product.id, singlePrice)
+					: handleRemove(product.product.id);
+			}
 		}
 	};
 
 	const handleRemove = (id: string) => {
-		cartStore.removeFromCart(id);
+		if (isBrowser) {
+			cartStore.removeFromCart(id);
+		}
 	};
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		product: ProductSale,
 	) => {
-		const singlePrice = Object.values(product.product.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
+		if (isBrowser) {
+			const singlePrice = Object.values(product.product.prices)[
+				userStore.userData?.conditionPrice
+					? userStore.userData?.conditionPrice - 1
+					: 0
+			];
 
-		const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
+			const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
 
-		cartStore.addToCart({
-			product: {
-				name: product.product.name,
-				id: product.product.id,
-				_id: product.product._id,
-				prices: product.product.prices,
-			},
-			price: value * singlePrice,
-			qty: value,
-		});
+			cartStore.addToCart({
+				product: {
+					name: product.product.name,
+					id: product.product.id,
+					_id: product.product._id,
+					prices: product.product.prices,
+				},
+				price: value * singlePrice,
+				qty: value,
+			});
+		}
 	};
 
 	return (
 		<div className="CheckoutContainer bg-slate-300 relative">
-			{open && (
+			{isBrowser && open && (
 				<ActionModal
 					handleClose={() => {
 						setOpen(false);
@@ -116,7 +126,8 @@ export default function CheckoutContainer() {
 				Tu carrito de compras
 			</h2>
 			<div className="cartContainer">
-				{cartStore.cart &&
+				{isBrowser &&
+					cartStore.cart &&
 					Object.values(cartStore.cart).map((cartItem) => {
 						return (
 							<div
