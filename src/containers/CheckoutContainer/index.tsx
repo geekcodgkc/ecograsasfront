@@ -1,17 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.scss";
 import { useCartStore, useUserStore } from "../../store";
-import {
-	AiOutlinePlusCircle,
-	AiOutlineMinusCircle,
-	AiOutlineCloseCircle,
-} from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import { navigate } from "gatsby";
-
-interface ModalProps {
-	handleClose: () => void;
-}
+import ActionModal from "../../components/ActionModal";
 
 interface ProductSale {
 	product: {
@@ -29,9 +22,10 @@ interface ProductSale {
 	qty: number;
 }
 
-export default function CartModal({ handleClose }: ModalProps) {
+export default function CheckoutContainer() {
 	const cartStore = useCartStore((store) => store);
 	const userStore = useUserStore((store) => store);
+	const [open, setOpen] = useState<boolean>(false);
 	const total =
 		cartStore.cart &&
 		Object.values(cartStore.cart).length > 0 &&
@@ -40,6 +34,10 @@ export default function CartModal({ handleClose }: ModalProps) {
 			.reduce((acc, curr) => {
 				return acc + curr;
 			});
+
+	if (!userStore.token) {
+		navigate("/Login");
+	}
 
 	const handleAddToCart = (product: ProductSale) => {
 		const singlePrice = Object.values(product.product.prices)[
@@ -106,35 +104,36 @@ export default function CartModal({ handleClose }: ModalProps) {
 	};
 
 	return (
-		<div className="modalBackground" onKeyDown={() => {}}>
-			<div className="modalContainer bg-slate-300 relative">
-				<div
-					className="closeButton absolute"
-					onClick={handleClose}
-					onKeyDown={() => {}}
-				>
-					<AiOutlineCloseCircle />
-				</div>
-				<h2 className="font-bold text-3xl mb-8">Tu carrito de compras</h2>
-				<div className="cartContainer">
-					{cartStore.cart &&
-						Object.values(cartStore.cart).map((cartItem) => {
-							return (
-								<div
-									key={cartItem.product.id}
-									className="cartItem bg-slate-50 shadow-md p-2 rounded"
-								>
+		<div className="CheckoutContainer bg-slate-300 relative">
+			{open && (
+				<ActionModal
+					handleClose={() => {
+						setOpen(false);
+					}}
+				/>
+			)}
+			<h2 className="font-bold text-4xl mb-8 text-center">
+				Tu carrito de compras
+			</h2>
+			<div className="cartContainer">
+				{cartStore.cart &&
+					Object.values(cartStore.cart).map((cartItem) => {
+						return (
+							<div
+								key={cartItem.product.id}
+								className="cartItem bg-slate-50 shadow-md p-2 rounded mt-4"
+							>
+								<div className="infoContainer">
 									<h2 className="font-bold text-xl mb-4">
 										{cartItem.product.name}
 									</h2>
 									<div className="orderDescription">
 										<header>
-											<h3 className="font-bold">Cantidad</h3>
 											<h3 className="font-bold">Precion Unitaro</h3>
+											<h3 className="font-bold">Cantidad</h3>
 											<h3 className="font-bold">Total</h3>
 										</header>
 										<footer>
-											<h3>{cartItem.qty}</h3>
 											<h3>
 												{Object.values(cartItem.product.prices)[
 													userStore.userData?.conditionPrice
@@ -143,65 +142,66 @@ export default function CartModal({ handleClose }: ModalProps) {
 												].toFixed(2)}
 												$
 											</h3>
+											<h3>{cartItem.qty}</h3>
 											<h3>{cartItem.price.toFixed(2)}$</h3>
 										</footer>
 									</div>
-									<div className="orderNumberContainer mt-4 justify-end pr-4">
-										<div
-											className="cartButton"
-											onClick={() => {
-												handleLessToCart(cartItem);
-											}}
-											onKeyUp={() => {}}
-										>
-											<AiOutlineMinusCircle />
-										</div>
-										<div className="inputContainer">
-											<input
-												maxLength={4}
-												name="cart-qty"
-												type="number"
-												value={cartStore.cart?.[cartItem.product.id].qty}
-												onChange={(e) => {
-													handleChange(e, cartItem);
-												}}
-											/>
-										</div>
-										<div
-											className="cartButton"
-											onClick={() => {
-												handleAddToCart(cartItem);
-											}}
-											onKeyUp={() => {}}
-										>
-											<AiOutlinePlusCircle />
-										</div>
-										<BsFillTrashFill
-											onClick={() => {
-												handleRemove(cartItem.product.id);
+								</div>
+								<div className="orderNumberContainer mt-4 justify-end pr-4">
+									<div
+										className="cartButton"
+										onClick={() => {
+											handleLessToCart(cartItem);
+										}}
+										onKeyUp={() => {}}
+									>
+										<AiOutlineMinusCircle />
+									</div>
+									<div className="inputContainer">
+										<input
+											maxLength={4}
+											name="cart-qty"
+											type="number"
+											value={cartStore.cart?.[cartItem.product.id].qty}
+											onChange={(e) => {
+												handleChange(e, cartItem);
 											}}
 										/>
 									</div>
+									<div
+										className="cartButton"
+										onClick={() => {
+											handleAddToCart(cartItem);
+										}}
+										onKeyUp={() => {}}
+									>
+										<AiOutlinePlusCircle />
+									</div>
+									<BsFillTrashFill
+										onClick={() => {
+											handleRemove(cartItem.product.id);
+										}}
+									/>
 								</div>
-							);
-						})}
-				</div>
-				<footer className="w-full flex flex-wrap justify-between mt-4 items-center gap-y-2">
-					<h3 className="font-bold text-xl p-2 bg-slate-50 rounded">
-						Total: {(typeof total === "number" && total?.toFixed(2)) || 0}$
-					</h3>
-					<button
-						className="action-button-1"
-						type="button"
-						onClick={() => {
-							navigate("/Checkout");
-						}}
-						onKeyDown={() => {}}
-					>
-						Proceder a la orden
-					</button>
-				</footer>
+							</div>
+						);
+					})}
 			</div>
+			<footer className="w-full flex flex-wrap justify-between mt-4 items-center gap-y-2">
+				<h3 className="font-bold text-xl p-2 bg-slate-50 rounded">
+					Total: {(typeof total === "number" && total?.toFixed(2)) || 0}$
+				</h3>
+				<button
+					className="action-button-1"
+					type="button"
+					onClick={() => {
+						setOpen(true);
+					}}
+					onKeyDown={() => {}}
+				>
+					Crear la Orden
+				</button>
+			</footer>
 		</div>
 	);
 }
