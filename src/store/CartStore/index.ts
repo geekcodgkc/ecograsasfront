@@ -39,6 +39,18 @@ export interface OrderProduct {
 	qty: number;
 }
 
+interface OrderInterface {
+	client: string;
+	products: OrderProduct[];
+	date: Date;
+	shippingAddress: string;
+	shippingDate: Date;
+	orderTotal: number;
+	iva: number;
+	orderBase: number;
+	status: number;
+}
+
 type MyPersist = (
 	config: StateCreator<CartStoreInterface>,
 	options: PersistOptions<CartStoreInterface>,
@@ -103,9 +115,9 @@ export const useCartStore = create<CartStoreInterface, []>(
 					return { ...state, loading: true };
 				});
 				try {
-					const order = {
+					const order: OrderInterface = {
 						client: "",
-						products: <OrderProduct[]>[],
+						products: [],
 						date: new Date(),
 						shippingAddress: "",
 						shippingDate: new Date(),
