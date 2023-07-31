@@ -23,8 +23,32 @@ export interface CartStoreInterface {
 	cart: null | { [key: string]: ProductSale };
 	addToCart: (product: ProductSale) => void;
 	removeFromCart: (id: string) => void;
-	createOrder: (clientId: string, cart: { [key: string]: ProductSale }) => void;
+	createOrder: (
+		clientId: string,
+		shippingAddress: string,
+		shippingDate: Date,
+		clientPrice: number,
+		cb: () => void,
+	) => void;
 	decrementFromCart: (id: string, less: number) => void;
+}
+
+export interface OrderProduct {
+	product: string;
+	price: number;
+	qty: number;
+}
+
+interface OrderInterface {
+	client: string;
+	products: OrderProduct[];
+	date: Date;
+	shippingAddress: string;
+	shippingDate: Date;
+	orderTotal: number;
+	iva: number;
+	orderBase: number;
+	status: number;
 }
 
 type MyPersist = (
@@ -51,10 +75,6 @@ export const useCartStore = create<CartStoreInterface, []>(
 								[product.product.id]: product,
 						  },
 				}));
-				set((state) => {
-					console.log(product, state);
-					return state;
-				});
 			},
 			removeFromCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
@@ -62,6 +82,9 @@ export const useCartStore = create<CartStoreInterface, []>(
 					const current = { ...state };
 					if (current.cart) {
 						delete current.cart[product];
+					}
+					if (current.cart && Object.keys(current.cart).length < 1) {
+						current.cart = null;
 					}
 					return current;
 				});
@@ -77,9 +100,56 @@ export const useCartStore = create<CartStoreInterface, []>(
 					return current;
 				});
 			},
-			createOrder: (product) => {
-				set((state) => ({ ...state, loading: true }));
-				set((state) => ({ ...state, loading: false }));
+			createOrder: async (
+				clientId,
+				shippingAddress,
+				shippingDate,
+				clientPrice,
+				cb,
+			) => {
+				const cart: ProductSale[] = [];
+				set((state) => {
+					if (state.cart) {
+						Object.values(state.cart).forEach((e) => cart.push(e));
+					}
+					return { ...state, loading: true };
+				});
+				try {
+					const order: OrderInterface = {
+						client: "",
+						products: [],
+						date: new Date(),
+						shippingAddress: "",
+						shippingDate: new Date(),
+						orderTotal: 0,
+						iva: 0.0,
+						orderBase: 0,
+						status: 0,
+					};
+					order.client = clientId;
+					order.shippingAddress = shippingAddress;
+					order.shippingDate = shippingDate;
+
+					cart.forEach((item) => {
+						const singlePrice = Object.values(item.product.prices)[clientPrice];
+						order.orderBase += parseFloat((singlePrice * item.qty).toFixed(2));
+						order.orderTotal = order.iva + order.orderBase;
+						order.products.push({
+							product: item.product._id,
+							price: singlePrice,
+							qty: item.qty,
+						});
+					});
+
+					const { data } = await api.post("/orders", order);
+					console.log("res", data);
+				} catch (_e) {
+					set((state) => ({ ...state, loading: false }));
+					return;
+				}
+				set((state) => ({ ...state, loading: false, cart: null }));
+				console.log("currentCart: ", cart);
+				cb();
 			},
 		}),
 		{

@@ -5,6 +5,7 @@ import { TiThMenu } from "react-icons/ti";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useUserStore } from "../../store";
 import { BiUserCircle } from "react-icons/bi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function NavBar() {
 	const [open, setOpen] = useState(false);
@@ -116,6 +117,13 @@ export default function NavBar() {
 							className="font-medium duration-150 nav-hover"
 						>
 							Blog
+						</Link>
+						<Link
+							onClick={handleOpen}
+							to="/Checkout"
+							className="font-medium duration-150 nav-hover flex items-center gap-1"
+						>
+							Carrito <AiOutlineShoppingCart />
 						</Link>
 						{state.token && (
 							<button

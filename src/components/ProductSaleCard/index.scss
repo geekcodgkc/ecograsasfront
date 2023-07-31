@@ -4,6 +4,7 @@
         max-width: 400px;
         margin: 0 auto;
         flex-direction: column;
+        flex-wrap: wrap;
         #img-card {
             width: 400px;
             height: auto;
@@ -12,6 +13,7 @@
             #shortDescription {
                 width: 100%;
                 text-align: justify;
+                max-width: 100%;
             }
         }
         #itemsContainer {
@@ -28,6 +30,7 @@
 @media (max-width: 421px) {
     #articleContainer {
         max-width: 95%;
+        flex-wrap: wrap;
     }
 }
 

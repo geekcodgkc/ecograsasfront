@@ -22,7 +22,7 @@
         border-radius: 0.5rem;
         padding: 1rem;
         width: 80%;
-        height: 80%;
+        min-height: 80%;
         h2 {
             text-align: center;
         }
@@ -34,6 +34,11 @@
                 margin-bottom: 1rem;
                 h2 {
                     text-align: left;
+                }
+                .orderNumberContainer {
+                    .inputContainer {
+                        min-width: 64px;
+                    }
                 }
                 .orderDescription {
                     header,footer {
@@ -59,6 +64,51 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .modalBackground {
+        .modalContainer {
+            width: 95%;
+            padding: 0.25rem;
+            h2 {
+                margin-top: 32px;
+            }
+            .cartContainer {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .modalBackground {
+        .modalContainer {
+            width: 100%;
+            padding: 0.125rem;
+            h2 {
+                margin-top: 32px;
+            }
+            .cartContainer {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .modalBackground {
+        footer {
+            justify-content: center;
+        }
+        .modalContainer {
+            height: auto;
+            min-height: 80vh;
+            padding-bottom: 1rem;
         }
     }
 }

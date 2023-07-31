@@ -7,6 +7,7 @@ import {
 	AiOutlineCloseCircle,
 } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
+import { navigate } from "gatsby";
 
 interface ModalProps {
 	handleClose: () => void;
@@ -33,6 +34,7 @@ export default function CartModal({ handleClose }: ModalProps) {
 	const userStore = useUserStore((store) => store);
 	const total =
 		cartStore.cart &&
+		Object.values(cartStore.cart).length > 0 &&
 		Object.values(cartStore.cart)
 			.map((cart) => cart.price)
 			.reduce((acc, curr) => {
@@ -89,6 +91,8 @@ export default function CartModal({ handleClose }: ModalProps) {
 				: 0
 		];
 
+		const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
+
 		cartStore.addToCart({
 			product: {
 				name: product.product.name,
@@ -96,8 +100,8 @@ export default function CartModal({ handleClose }: ModalProps) {
 				_id: product.product._id,
 				prices: product.product.prices,
 			},
-			price: parseInt(e.target.value) * singlePrice,
-			qty: parseInt(e.target.value),
+			price: value * singlePrice,
+			qty: value,
 		});
 	};
 
@@ -130,6 +134,7 @@ export default function CartModal({ handleClose }: ModalProps) {
 											<h3 className="font-bold">Total</h3>
 										</header>
 										<footer>
+											<h3>{cartItem.qty}</h3>
 											<h3>
 												{Object.values(cartItem.product.prices)[
 													userStore.userData?.conditionPrice
@@ -138,7 +143,6 @@ export default function CartModal({ handleClose }: ModalProps) {
 												].toFixed(2)}
 												$
 											</h3>
-											<h3>{cartItem.qty}</h3>
 											<h3>{cartItem.price.toFixed(2)}$</h3>
 										</footer>
 									</div>
@@ -154,6 +158,7 @@ export default function CartModal({ handleClose }: ModalProps) {
 										</div>
 										<div className="inputContainer">
 											<input
+												maxLength={4}
 												name="cart-qty"
 												type="number"
 												value={cartStore.cart?.[cartItem.product.id].qty}
@@ -181,12 +186,19 @@ export default function CartModal({ handleClose }: ModalProps) {
 							);
 						})}
 				</div>
-				<footer className="w-full flex flex-wrap justify-between mt-4 items-center">
+				<footer className="w-full flex flex-wrap justify-between mt-4 items-center gap-y-2">
 					<h3 className="font-bold text-xl p-2 bg-slate-50 rounded">
-						Total: {total?.toFixed(2)}$
+						Total: {(typeof total === "number" && total?.toFixed(2)) || 0}$
 					</h3>
-					<button className="action-button-1" type="button">
-						Crear la Orden
+					<button
+						className="action-button-1"
+						type="button"
+						onClick={() => {
+							navigate("/Checkout");
+						}}
+						onKeyDown={() => {}}
+					>
+						Proceder a la orden
 					</button>
 				</footer>
 			</div>

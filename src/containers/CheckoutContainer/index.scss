@@ -1,0 +1,21 @@
+.CheckoutContainer {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 1rem;
+    .cartContainer {
+        width: 100%;
+        .orderDescription {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .cartItem {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+        }
+    }
+}
