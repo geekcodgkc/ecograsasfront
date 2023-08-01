@@ -85,18 +85,28 @@ export default function ProfileContainer() {
 						</div>
 						<div className="clientSeller">
 							<h3 className="font-bold text-xl">Mi vendedor</h3>
-							<p className="w-full flex flex-wrap justify-between">
-								<b>nombre: </b>
-								{isBrowser && store && store.userData?.seller.name}
-							</p>
-							<p className="w-full flex flex-wrap justify-between">
-								<b>email: </b>
-								{isBrowser && store && store.userData?.seller.email}
-							</p>
-							<p className="w-full flex flex-wrap justify-between">
-								<b>numero de contacto: </b>
-								{isBrowser && store && store.userData?.seller.phone}
-							</p>
+							{isBrowser && store && store.userData?.seller ? (
+								<>
+									<p className="w-full flex flex-wrap justify-between">
+										<b>nombre: </b>
+										{isBrowser && store && store.userData?.seller.name}
+									</p>
+									<p className="w-full flex flex-wrap justify-between">
+										<b>email: </b>
+										{isBrowser && store && store.userData?.seller.email}
+									</p>
+									<p className="w-full flex flex-wrap justify-between">
+										<b>numero de contacto: </b>
+										{isBrowser && store && store.userData?.seller.phone}
+									</p>
+								</>
+							) : (
+								<div className="flex w-full">
+									<p className="w-full text-xl text-center">
+										aun no tienes un venededor asignado
+									</p>
+								</div>
+							)}
 						</div>
 					</div>
 				</header>
