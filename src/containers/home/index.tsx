@@ -12,6 +12,22 @@ import SellerCard from "../../components/SellerCard";
 import EventsCard from "../../components/EventsCard";
 import eventImg from "../../images/eventsImg.webp";
 
+interface ProductsInterface {
+	descriptionsShort: string;
+	productName: string;
+	Slug: {
+		current: string;
+	};
+	productImage: {
+		asset: {
+			resize: {
+				src: string;
+			};
+		};
+	};
+	_id: string;
+}
+
 const Iframe = () => {
 	return (
 		<YoutubeEmbed
@@ -62,8 +78,10 @@ interface sanityImageInfo {
 }
 
 export default function Home() {
-	const { allSanityImageAsset, sanityImageAsset } =
+	const { allSanityImageAsset, sanityImageAsset, allSanityProducts } =
 		useStaticQuery(queryProductImage);
+
+	console.log(allSanityProducts);
 
 	const { resize } = sanityImageAsset;
 
@@ -100,62 +118,18 @@ export default function Home() {
 					Productos Frescos y de Larga Duraci&oacute;n
 				</h2>
 				<Carousel>
-					<ProductCard
-						title="Manteca Repostera"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Margarina Untable"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Aceite RBD de Palma"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Margarina Multiuso Con Sal"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Margarina de Palma"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Margarina de Palma Baja en sal Hojaldre"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Manteca Vegetal Galletera"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
-					<ProductCard
-						title="Manteca Vegetal Galletera Tipo Shortering"
-						description="con una textura solida a temperatura ambiente y punto de fusion alto y una mayor vida util"
-						buttonText="vamos al sitio"
-						actionRoute="/About"
-						img={resize.src}
-					/>
+					{allSanityProducts.nodes.map((product: ProductsInterface) => {
+						return (
+							<ProductCard
+								key={product._id}
+								title={product.productName}
+								description={product.descriptionsShort}
+								buttonText="Conoce Mas"
+								actionRoute={`/Products/${product.Slug.current}`}
+								img={product.productImage.asset.resize.src}
+							/>
+						);
+					})}
 				</Carousel>
 			</section>
 			<section className="w-full">
@@ -218,6 +192,23 @@ const queryProductImage = graphql`
 		) {
 			resize(aspectRatio: 1, fit: COVER, format: WEBP, width: 300, quality: 20) {
 				src
+			}
+		}
+		allSanityProducts(limit: 10) {
+			nodes {
+				descriptionsShort
+				productName
+				Slug {
+					current
+				}
+				productImage {
+					asset {
+						resize(format: WEBP, height: 400, quality: 70, width: 400) {
+							src
+						}
+					}
+				}
+				_id
 			}
 		}
 	}

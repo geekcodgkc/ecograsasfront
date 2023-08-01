@@ -43,7 +43,7 @@ export default function ActionModal({ handleClose }: ModalProps) {
 					className="w-full mb-8"
 					showIcon
 					selected={date}
-					locale={"es-ve"}
+					locale={"es-es"}
 					onChange={(d: Date) => {
 						setDate(d);
 					}}
