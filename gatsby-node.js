@@ -92,9 +92,7 @@ exports.createPages = async ({ graphql, actions }) => {
 		});
 	});
 
-	productsData.allSanityProducts.nodes.forEach((node) => {
-		const _id = productsMap[node.productId.current]._id;
-
+	productsMaped.forEach((node) => {
 		actions.createPage({
 			path: `/Products/${node.Slug.current}`,
 			component: path.resolve(
@@ -102,7 +100,11 @@ exports.createPages = async ({ graphql, actions }) => {
 			),
 			context: {
 				slug: node.Slug.current,
-				_id,
+				_id: node._id,
+				productData: {
+					prices: node.prices,
+					id: node.id,
+				},
 			},
 		});
 	});

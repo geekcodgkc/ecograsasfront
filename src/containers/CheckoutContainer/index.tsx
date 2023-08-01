@@ -210,11 +210,15 @@ export default function CheckoutContainer() {
 					className="action-button-1"
 					type="button"
 					onClick={() => {
-						setOpen(true);
+						if (isBrowser && cartStore.cart) {
+							setOpen(true);
+						}
 					}}
 					onKeyDown={() => {}}
 				>
-					Crear la Orden
+					{isBrowser && cartStore.cart
+						? "Crear la Orden"
+						: "No tienes nada en el carrito"}
 				</button>
 			</footer>
 		</div>

@@ -34,8 +34,8 @@ export default function ProductCard({
 				}}
 			/>
 			<div className="cardContentContainer p-4 flex flex-col">
-				<h3 className="text-center w-full mb-4 font-bold text-xl">{title}</h3>
-				<p className="font-light">{description}</p>
+				<h3 className="text-center w-full mb-2 font-bold text-lg">{title}</h3>
+				<p className="font-light line-clamp-2">{description}</p>
 				<button
 					type="button"
 					className={"action-button-1"}

@@ -43,7 +43,7 @@ export default function BlogPostsContainer({ data }: BlogPostsInterface) {
 	const { sanityBlogs: post } = data;
 
 	return (
-		<div className="BlogPostContainer w-11/12 mx-auto max-w-screen-md center py-12">
+		<div className="BlogPostContainer w-full mx-auto max-w-screen-lg center py-12 bg-slate-50">
 			<Helmet>
 				<title>{`Ecograsas: ${post.metaTitle}`}</title>
 				<meta name="description" content={post.metaDescription} />
