@@ -41,6 +41,10 @@ export default function CheckoutContainer() {
 		navigate("/Login");
 	}
 
+	if (isBrowser && !userStore.userData?.verified) {
+		navigate("/Profile");
+	}
+
 	const handleAddToCart = (product: ProductSale) => {
 		if (isBrowser) {
 			const singlePrice = Object.values(product.product.prices)[

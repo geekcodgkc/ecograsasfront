@@ -194,11 +194,17 @@ export default function CartModal({ handleClose }: ModalProps) {
 						className="action-button-1"
 						type="button"
 						onClick={() => {
+							if (!userStore.userData?.verified) {
+								navigate("/Profile");
+								return;
+							}
 							navigate("/Checkout");
 						}}
 						onKeyDown={() => {}}
 					>
-						Proceder a la orden
+						{userStore.userData?.verified
+							? "Proceder a la orden"
+							: "necesitas verificacion"}
 					</button>
 				</footer>
 			</div>
