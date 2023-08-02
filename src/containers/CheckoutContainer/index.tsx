@@ -123,6 +123,7 @@ export default function CheckoutContainer() {
 				<ActionModal
 					handleClose={() => {
 						setOpen(false);
+						cartStore.setClose();
 					}}
 				/>
 			)}
