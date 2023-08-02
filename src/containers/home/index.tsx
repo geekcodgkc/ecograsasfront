@@ -11,6 +11,7 @@ import InstructionsBanner from "../../components/InstructionBanner";
 import SellerCard from "../../components/SellerCard";
 import EventsCard from "../../components/EventsCard";
 import eventImg from "../../images/eventsImg.webp";
+import CartWrapper from "../CartWrapper";
 
 interface ProductsInterface {
 	descriptionsShort: string;
@@ -110,7 +111,7 @@ export default function Home() {
 	);
 
 	return (
-		<>
+		<CartWrapper>
 			<Hero />
 			<section className="w-full relative farmin-background">
 				<div
@@ -183,15 +184,8 @@ export default function Home() {
 					date="22/09/2023"
 					hour="9:30 AM"
 				/>
-				<EventsCard
-					img={eventImg}
-					title="Taller de Reposteria"
-					description="mejores practicas e utilizacion de nuestros productos"
-					date="22/09/2023"
-					hour="9:30 AM"
-				/>
 			</section>
-		</>
+		</CartWrapper>
 	);
 }
 

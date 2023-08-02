@@ -20,6 +20,7 @@ interface ProductSale {
 
 export interface CartStoreInterface {
 	loading: boolean;
+	open: boolean;
 	cart: null | { [key: string]: ProductSale };
 	addToCart: (product: ProductSale) => void;
 	removeFromCart: (id: string) => void;
@@ -30,6 +31,7 @@ export interface CartStoreInterface {
 		clientPrice: number,
 		cb: () => void,
 	) => void;
+	setClose: () => void
 	decrementFromCart: (id: string, less: number) => void;
 }
 
@@ -59,8 +61,12 @@ type MyPersist = (
 export const useCartStore = create<CartStoreInterface, []>(
 	(persist as MyPersist)(
 		(set): CartStoreInterface => ({
+			open: false,
 			cart: null,
 			loading: false,
+			setClose: () => {
+				set((state) => ({...state, open: false}))
+			},
 			addToCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
 				set((state) => ({
@@ -74,6 +80,7 @@ export const useCartStore = create<CartStoreInterface, []>(
 								...state.cart,
 								[product.product.id]: product,
 						  },
+					open: true
 				}));
 			},
 			removeFromCart: (product) => {

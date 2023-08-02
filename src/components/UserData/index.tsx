@@ -123,13 +123,13 @@ export default function UserData() {
 									</b>
 								</h4>
 								<h4>
-									Base Imponible: <b>{order.orderBase}</b>
+									Base Imponible: <b>{order.orderBase.toFixed(2)}</b>
 								</h4>
 								<h4>
-									IVA: <b>{order.iva}</b>
+									IVA: <b>{order.iva.toFixed(2)}</b>
 								</h4>
 								<h4>
-									Total: <b>{order.orderTotal}</b>
+									Total: <b>{order.orderTotal.toFixed(2)}</b>
 								</h4>
 								<h4
 									className={`${
@@ -188,8 +188,8 @@ export default function UserData() {
 												<td className="p-2 text-center">
 													{productItem.product.name}
 												</td>
-												<td className="p-2 text-center">{price}</td>
-												<td className="p-2 text-center">{price * qty}</td>
+												<td className="p-2 text-center">{price.toFixed(2)}</td>
+												<td className="p-2 text-center">{(price * qty).toFixed(2)}</td>
 											</tr>
 										);
 									})}
