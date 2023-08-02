@@ -8,7 +8,7 @@ interface SellerProps {
 	name: string;
 	img?: string;
 	deparment?: string;
-	mail?: string;
+	email?: string;
 }
 
 export default function SellerCard({
@@ -16,7 +16,7 @@ export default function SellerCard({
 	name,
 	phone,
 	deparment = "Ventas",
-	mail = "ventas@ecograsas.com",
+	email = "ventas@ecograsas.com",
 }: SellerProps) {
 	return (
 		<div className="sellerCardContainer bg-slate-100 flex flex-col align-center py-8 shadow-md">
@@ -33,7 +33,7 @@ export default function SellerCard({
 			</div>
 			<hr />
 			<div className="containerInfo px-16 pt-4">
-				<a href={`mailto:${mail}`} className="action-button-1">
+				<a href={`mailto:${email}`} className="action-button-1">
 					envia un correo a {name} <FaArrowRight />
 				</a>
 			</div>
