@@ -1,0 +1,114 @@
+.modalBackground {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 30;
+    .closeButton {
+        right: 20px;
+        top: 20px;
+        font-size: 32px;
+        cursor: pointer;
+    }
+    .closeButton:hover {
+        color: #60794d
+    }
+    .modalContainer {
+        border-radius: 0.5rem;
+        padding: 1rem;
+        width: 80%;
+        min-height: 80%;
+        h2 {
+            text-align: center;
+        }
+        .cartContainer {
+            max-height: 80%;
+            padding-right: 0.5rem;
+            overflow-y: scroll;            
+            .cartItem {
+                margin-bottom: 1rem;
+                h2 {
+                    text-align: left;
+                }
+                .orderNumberContainer {
+                    .inputContainer {
+                        min-width: 64px;
+                    }
+                }
+                .orderDescription {
+                    header,footer {
+                        width: 100%;
+                        display: flex;
+                        h3 {
+                            flex-basis: 33%;
+                            text-align: center;
+                            border: solid 2px black;
+                            padding: 0.25rem;
+                        }
+                        h3:last-child {
+                            border-left: none;
+                        }
+                        h3:first-child {
+                            border-right: none;
+                        }
+                    }
+                    footer {
+                        h3 {
+                            border-top: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .modalBackground {
+        .modalContainer {
+            width: 95%;
+            padding: 0.25rem;
+            h2 {
+                margin-top: 32px;
+            }
+            .cartContainer {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .modalBackground {
+        .modalContainer {
+            width: 100%;
+            padding: 0.125rem;
+            h2 {
+                margin-top: 32px;
+            }
+            .cartContainer {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .modalBackground {
+        footer {
+            justify-content: center;
+        }
+        .modalContainer {
+            height: auto;
+            min-height: 80vh;
+            padding-bottom: 1rem;
+        }
+    }
+}

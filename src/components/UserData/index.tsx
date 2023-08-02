@@ -52,6 +52,8 @@ export default function UserData() {
 		}
 	}, []);
 
+	console.log(store);
+
 	if (store.error) {
 		return (
 			<div className="OrdersContainer w-error w-full p-8 pb-12 bg-slate-300 rounded-lg shadow-lg">
@@ -82,102 +84,120 @@ export default function UserData() {
 
 	return (
 		<div className="OrdersContainer w-full p-2 bg-slate-300 rounded-lg shadow-lg">
-			{store.orders && store.getOrders.length === 0 ? (
-				<h2>no tienes ordendes aun</h2>
+			{store.orders && store.orders.length === 0 ? (
+				<h2 className="w-full text-center font-bold text-2xl my-12">
+					No Tienes ordendes a&uacute;n
+				</h2>
 			) : (
-				store.orders?.map((order: orderInterface) => (
-					<div
-						className="OrderCardContainer w-full bg-slate-50 rounded-lg p-2"
-						key={order._id}
-					>
-						<div className="orderInfo">
-							<h4>
-								Numero de orden:{" "}
-								<b>{order.orderNumber.toString().padStart(8, "0")}</b>
-							</h4>
-							<h4>
-								fecha de la order:{" "}
-								<b>{moment(order.createdAt).format("DD-MM-YYYY")}</b>
-							</h4>
-							<h4>
-								fecha de envio:{" "}
-								<b>{moment(order.shippingDate).format("DD-MM-YYYY")}</b>
-							</h4>
-							<h4>
-								direccion de envio: <b>{order.shippingAddress}</b>
-							</h4>
-							<h4>
-								zona:{" "}
-								<b>
-									{`
+				store.orders?.map((order: orderInterface) => {
+					console.log("zz", order.products[0]);
+					return (
+						<div
+							className="OrderCardContainer w-full bg-slate-50 rounded-lg p-2"
+							key={order._id}
+						>
+							<div className="orderInfo">
+								<h4>
+									Numero de orden:{" "}
+									<b>{order.orderNumber.toString().padStart(8, "0")}</b>
+								</h4>
+								<h4>
+									fecha de la order:{" "}
+									<b>{moment(order.createdAt).format("DD-MM-YYYY")}</b>
+								</h4>
+								<h4>
+									fecha de envio:{" "}
+									<b>{moment(order.shippingDate).format("DD-MM-YYYY")}</b>
+								</h4>
+								<h4>
+									direccion de envio: <b>{order.shippingAddress}</b>
+								</h4>
+								<h4>
+									zona:{" "}
+									<b>
+										{`
 								${order.client.zone.State} 
 								${order.client.zone.area}, 
 								codigo postal: ${order.client.zone.ZIPCode} 
 							`}
-								</b>
-							</h4>
-							<h4>
-								Base Imponible: <b>{order.orderBase}</b>
-							</h4>
-							<h4>
-								IVA: <b>{order.iva}</b>
-							</h4>
-							<h4>
-								Total: <b>{order.orderTotal}</b>
-							</h4>
-							<h4
-								className={`${
-									order.status === 1
-										? "proccess"
-										: order.status === 2
-										? "send"
-										: "pending"
-								}`}
-							>
-								Estatus de la order:{" "}
-								<b>
-									{order.status === 1
-										? "Procesado"
-										: order.status === 2
-										? "Enviado"
-										: "Pendiente"}
-								</b>
-							</h4>
+									</b>
+								</h4>
+								<h4>
+									Base Imponible: <b>{order.orderBase}</b>
+								</h4>
+								<h4>
+									IVA: <b>{order.iva}</b>
+								</h4>
+								<h4>
+									Total: <b>{order.orderTotal}</b>
+								</h4>
+								<h4
+									className={`${
+										order.status === 1
+											? "proccess"
+											: order.status === 2
+											? "send"
+											: "pending"
+									}`}
+								>
+									Estatus de la order:{" "}
+									<b>
+										{order.status === 1
+											? "Procesado"
+											: order.status === 2
+											? "Enviado"
+											: "Pendiente"}
+									</b>
+								</h4>
+							</div>
+							<div className="orderDetails">
+								<table className="bg-slate-200 p-4">
+									<tr className="headRow">
+										<th>
+											<h3 className="p-2">cantidad</h3>
+										</th>
+										<th>
+											<h3 className="p-2">Nombre</h3>
+										</th>
+										<th>
+											<h3 className="p-2">precio unitario</h3>
+										</th>
+										<th>
+											<h3 className="p-2">total</h3>
+										</th>
+									</tr>
+									{order.products.map((productItem) => {
+										const { qty, price, _id } = productItem;
+
+										if (!productItem.product) {
+											return (
+												<tr key={_id} className="headRow">
+													<td className="p-2 text-center">{qty}</td>
+													<td className="p-2 text-center">
+														nombre no disponible
+													</td>
+													<td className="p-2 text-center">{price}</td>
+													<td className="p-2 text-center">{price * qty}</td>
+												</tr>
+											);
+										}
+
+										return (
+											<tr key={_id} className="headRow">
+												<td className="p-2 text-center">{qty}</td>
+												<td className="p-2 text-center">
+													{productItem.product.name}
+												</td>
+												<td className="p-2 text-center">{price}</td>
+												<td className="p-2 text-center">{price * qty}</td>
+											</tr>
+										);
+									})}
+								</table>
+							</div>
 						</div>
-						<div className="orderDetails">
-							<table className="bg-slate-200 p-4">
-								<tr className="headRow">
-									<th>
-										<h3 className="p-2">cantidad</h3>
-									</th>
-									<th>
-										<h3 className="p-2">Nombre</h3>
-									</th>
-									<th>
-										<h3 className="p-2">precio unitario</h3>
-									</th>
-									<th>
-										<h3 className="p-2">total</h3>
-									</th>
-								</tr>
-								{order.products.map(({ product, qty, price, _id }) => {
-									return (
-										<tr key={_id} className="headRow">
-											<td className="p-2 text-center">{qty}</td>
-											<td className="p-2 text-center">{product.name}</td>
-											<td className="p-2 text-center">
-												{Object.values(product.prices)[price - 1]}
-											</td>
-											<td className="p-2 text-center">
-												{Object.values(product.prices)[price - 1] * qty}
-											</td>
-										</tr>
-									);
-								})}
-							</table>
-						</div>
-					</div>
-				))
+					);
+				})
 			)}
 		</div>
 	);

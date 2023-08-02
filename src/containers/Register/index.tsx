@@ -49,7 +49,13 @@ export default function RegisterContainer() {
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const current = { ...data, [e.currentTarget.name]: e.currentTarget.value };
+		const current = {
+			...data,
+			[e.currentTarget.name]:
+				e.target.name !== "rif"
+					? e.currentTarget.value
+					: e.currentTarget.value.toLocaleUpperCase(),
+		};
 		setData(current);
 	};
 

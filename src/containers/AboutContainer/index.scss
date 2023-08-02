@@ -1,0 +1,23 @@
+.aboutContainer {
+    p {
+        text-align: justify;
+        margin-bottom: 2rem;
+    }
+    ul {
+        list-style:outside;
+        li {
+            margin-left: 2rem;
+            max-width: 75%;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .aboutContainer {
+        ul {        
+            li {
+                max-width: 100%;
+            }
+        }
+    }
+}

@@ -28,3 +28,6 @@
   * [*] add single blog page for every blog
   * [*] add meta title and description tag to the sanity studio for every blog post
   * [*] img tags must have an explicit witdh and heigth
+* [ ] add meta tags (title, description)
+  * [ ] all products Page
+  * [ ] products

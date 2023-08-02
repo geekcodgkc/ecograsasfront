@@ -12,13 +12,17 @@ export default function LoginContainer() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		console.log(data);
 		store.login(data, () => navigate("/Profile"));
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const current = {
 			...data,
-			[e.currentTarget.name]: e.currentTarget.value.toLocaleLowerCase(),
+			[e.currentTarget.name]:
+				e.target.name !== "user"
+					? e.currentTarget.value
+					: e.currentTarget.value.toUpperCase(),
 		};
 		setData(current);
 	};
