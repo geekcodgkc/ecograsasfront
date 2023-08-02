@@ -28,6 +28,20 @@ interface ProductsInterface {
 	_id: string;
 }
 
+interface SellersInterface {
+	_id: string;
+	phone: string;
+	name: string;
+	email: string;
+	profileImage: {
+		asset: {
+			resize: {
+				src: string;
+			};
+		};
+	};
+}
+
 const Iframe = () => {
 	return (
 		<YoutubeEmbed
@@ -78,12 +92,8 @@ interface sanityImageInfo {
 }
 
 export default function Home() {
-	const { allSanityImageAsset, sanityImageAsset, allSanityProducts } =
+	const { allSanityImageAsset, allSanityProducts, allSanitySellers } =
 		useStaticQuery(queryProductImage);
-
-	console.log(allSanityProducts);
-
-	const { resize } = sanityImageAsset;
 
 	const farming = allSanityImageAsset.nodes.find(
 		(e: sanityImageInfo) => e.filename === "farminBackground.webp",
@@ -143,9 +153,17 @@ export default function Home() {
 				<h2 className="text-center font-bold text-4xl w-full">
 					Contamos Con un Equipo excelente
 				</h2>
-				<SellerCard name="Julian" phone="+584243251030" />
-				<SellerCard name="Maria" phone="+584243251030" />
-				<SellerCard name="Elena" phone="+584243251030" />
+				{allSanitySellers.nodes.map((seller: SellersInterface) => {
+					return (
+						<SellerCard
+							key={seller._id}
+							name={seller.name}
+							phone={seller.phone}
+							email={seller.email}
+							img={seller.profileImage.asset.resize.src}
+						/>
+					);
+				})}
 			</section>
 			<section className="mx-auto w-11/12 py-12 justify-center flex flex-wrap gap-x-8 gap-y-16">
 				<h2 className="text-center font-bold text-4xl w-full mb-16">
@@ -180,18 +198,11 @@ export default function Home() {
 const queryProductImage = graphql`
 	query images {
 		allSanityImageAsset(filter: {_createdAt: {gte: "2023-07-20"}}) {
-		nodes {
-			resize(aspectRatio: 1.78, fit: COVER, format: WEBP, width: 1280, quality: 60) {
-				src
-			}
-			filename
-		}
-		}
-		sanityImageAsset(
-			filename: {eq: "planta-hoja-perenne-tropical-exotica-luz-sol.webp"}
-		) {
-			resize(aspectRatio: 1, fit: COVER, format: WEBP, width: 300, quality: 20) {
-				src
+			nodes {
+				resize(aspectRatio: 1.78, fit: COVER, format: WEBP, width: 1280, quality: 60) {
+					src
+				}
+				filename
 			}
 		}
 		allSanityProducts(limit: 10) {
@@ -209,6 +220,21 @@ const queryProductImage = graphql`
 					}
 				}
 				_id
+			}
+		}
+		allSanitySellers {
+			nodes {
+				_id
+				phone
+				name
+				email
+				profileImage {
+					asset {
+						resize(cropFocus: CENTER, format: WEBP, width: 200, height: 200, quality: 50) {
+							src
+						}
+					}
+				}
 			}
 		}
 	}
