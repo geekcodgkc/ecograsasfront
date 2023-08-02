@@ -85,14 +85,6 @@ export default function Footer() {
 						<li>
 							<Link
 								className="hover:text-slate-100 font-medium duration-100"
-								to="/Contact"
-							>
-								contactos
-							</Link>
-						</li>
-						<li>
-							<Link
-								className="hover:text-slate-100 font-medium duration-100"
 								to="/Blog"
 							>
 								post

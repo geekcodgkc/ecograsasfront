@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import CartModal from "../../components/CartModal";
-import { useCartStore } from "../../store";
+import { useCartStore, useUserStore } from "../../store";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { navigate } from "gatsby";
 import "./index.scss";
 
 export default function CartWrapper({ children }: React.PropsWithChildren) {
 	const cartStore = useCartStore((store) => store);
+	const userStore = useUserStore((store) => store)
 	const [open, setOpen] = useState<boolean>(false);
 
 	return (
@@ -30,7 +31,7 @@ export default function CartWrapper({ children }: React.PropsWithChildren) {
 					<AiOutlineShoppingCart />
 				</div>
 			)}
-			<div
+			{userStore.token && <div
 					className="cartButtonAbsoluteII"
 					onClick={() => {
 						navigate('/Products')
@@ -38,7 +39,7 @@ export default function CartWrapper({ children }: React.PropsWithChildren) {
 					onKeyDown={() => {}}
 			>
 				Haz tu pedido
-			</div>
+			</div>}
 		</>
 	);
 }

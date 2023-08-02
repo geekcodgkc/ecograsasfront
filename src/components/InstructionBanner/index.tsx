@@ -26,8 +26,8 @@ export default function InstructionsBanner() {
 			<p>
 				Si tiene alguna pregunta o desea realizar un pedido, comun&iacute;quese
 				con nosotros a{" "}
-				<a href="mailto:ecograsas@test.example">ecograsas@test.example</a> o{" "}
-				<a href="tel:+584262567789">0426-2567789</a>. ¡Esperamos con
+				<a href="mailto:ventas@ecograsas.com">ventas@ecograsas.com</a> o{" "}
+				<a href="tel:+584123273530">0412-3273530</a>. ¡Esperamos con
 				inter&eacute;s escuchar de usted!
 			</p>
 			<button
@@ -36,7 +36,7 @@ export default function InstructionsBanner() {
 				id="variant-left"
 				onClick={handleClick}
 			>
-				incia con nosotros <FaArrowRight />
+				inicia con nosotros <FaArrowRight />
 			</button>
 		</article>
 	);
