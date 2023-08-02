@@ -1,3 +1,7 @@
+#nav {
+    background-color: #ada400;
+}
+
 .register-button{
     color: white;
     background: #000;
@@ -9,14 +13,14 @@
 
 .register-button:hover{
     color: black;
-    background: white;
+    background: rgba(0,0,0,0);
     border-radius: 0.25rem;
     border: solid 0.15rem black;
     transition-duration: 0.15s;
 }
 
 .nav-hover:hover {
-    color: #60794d;
+    color: black;
 }
 
 .side-nav {

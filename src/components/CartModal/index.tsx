@@ -110,7 +110,10 @@ export default function CartModal({ handleClose }: ModalProps) {
 			<div className="modalContainer bg-slate-300 relative">
 				<div
 					className="closeButton absolute"
-					onClick={handleClose}
+					onClick={() => {
+						cartStore.setClose()
+						handleClose()
+					}}
 					onKeyDown={() => {}}
 				>
 					<AiOutlineCloseCircle />
@@ -118,7 +121,7 @@ export default function CartModal({ handleClose }: ModalProps) {
 				<h2 className="font-bold text-3xl mb-8">Tu carrito de compras</h2>
 				<div className="cartContainer">
 					{cartStore.cart &&
-						Object.values(cartStore.cart).map((cartItem) => {
+						Object.values(cartStore.cart).reverse().map((cartItem) => {
 							return (
 								<div
 									key={cartItem.product.id}

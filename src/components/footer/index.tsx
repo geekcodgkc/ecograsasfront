@@ -7,7 +7,7 @@ import "./index.scss";
 
 export default function Footer() {
 	return (
-		<footer className="min-w-full bg-lime-500 pt-10 flex flex-wrap justify-around">
+		<footer id='footer' className="min-w-full bg-lime-500 pt-10 flex flex-wrap justify-around">
 			<div className="ml-6 socials-container">
 				<h2 className="font-bold text-3xl mb-4">
 					Impulsando los mejores
@@ -19,7 +19,7 @@ export default function Footer() {
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						href="https://instagram.com"
+						href="https://instagram.com/ecograsas"
 					>
 						<AiFillInstagram className="" />
 					</a>
@@ -27,7 +27,7 @@ export default function Footer() {
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						href="https://facebook.com"
+						href="https://facebook.com/procesadoraecograsasve"
 					>
 						<BsFacebook />
 					</a>
@@ -35,17 +35,9 @@ export default function Footer() {
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
-						href="mailto:test@test.net"
+						href="mailto:ventas@ecograsas.com"
 					>
 						<GrMail />
-					</a>
-					<a
-						target="_blank"
-						rel="noreferrer"
-						className="duration-100 hover:text-slate-100"
-						href="https://youtube.com"
-					>
-						<BsYoutube />
 					</a>
 				</div>
 			</div>

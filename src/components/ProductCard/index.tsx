@@ -31,6 +31,7 @@ export default function ProductCard({
 				className="backgroundImage"
 				style={{
 					backgroundImage: `url(${img})`,
+					backgroundPosition: 'center'
 				}}
 			/>
 			<div className="cardContentContainer p-4 flex flex-col">

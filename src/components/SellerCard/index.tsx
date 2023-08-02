@@ -34,7 +34,7 @@ export default function SellerCard({
 			<hr />
 			<div className="containerInfo px-16 pt-4">
 				<a href={`mailto:${email}`} className="action-button-1">
-					envia un correo a {name} <FaArrowRight />
+					envia un correo a {name.split(' ')[0]} <FaArrowRight />
 				</a>
 			</div>
 		</div>

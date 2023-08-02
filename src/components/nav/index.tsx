@@ -36,7 +36,7 @@ export default function NavBar() {
 						Productos
 					</Link>
 					<Link to="/About" className="font-medium px-4 duration-150 nav-hover">
-						About
+						nosotros
 					</Link>
 					<Link to="/Blog" className="font-medium px-4 duration-150 nav-hover">
 						Blog
@@ -57,7 +57,7 @@ export default function NavBar() {
 							className="register-button ml-16"
 							onClick={sendTo}
 						>
-							registrarse
+							Registrarse
 						</button>
 					)}
 				</div>
@@ -109,7 +109,7 @@ export default function NavBar() {
 							to="/About"
 							className="font-medium duration-150 nav-hover"
 						>
-							About
+							Nosotros
 						</Link>
 						<Link
 							onClick={handleOpen}
