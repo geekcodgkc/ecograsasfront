@@ -20,3 +20,55 @@
     background-color: rgba(0,0,0,0);
     cursor: pointer;
 }
+
+.selectorContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    height: max-content;
+    gap: 0.5rem;
+    .selector {
+        position: relative;
+        background-color: white;
+        border: solid 2px black;
+        border-radius: 0.25rem;
+        padding: 0.25rem 1rem 0.25rem 0.25rem;
+        .currentSelectorStatus {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-width: 140px;
+            .arrowUpside {
+                rotate: -180deg;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+            .ArrowDown {
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+        }
+        .optionsContainer {
+            position: absolute;
+            left: 0;
+            top: 36px;
+            z-index: 10;
+            width: 100%;
+            border-radius: 0.25rem;
+            border: solid 2px black;
+            .optionContainer {
+                width: 100%;
+                padding: 0.25rem;
+                background-color: white;
+                transition-duration: 0.1s;
+                cursor: pointer;
+            }
+            .optionContainer:hover {
+                background-color: rgb(207, 207, 207);
+            }
+        }
+    }
+}

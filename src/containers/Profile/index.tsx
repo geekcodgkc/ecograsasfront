@@ -20,8 +20,6 @@ export default function ProfileContainer() {
 		}
 	}, []);
 
-	console.log(store);
-
 	if (store && store.token === null) {
 		navigate("/Login");
 	}

@@ -12,7 +12,6 @@ export default function LoginContainer() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(data);
 		store.login(data, () => navigate("/Profile"));
 	};
 

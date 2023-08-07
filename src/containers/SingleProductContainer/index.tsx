@@ -57,8 +57,6 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 
 	const userStore = useUserStore((store) => store);
 	const cartStore = useCartStore((store) => store);
-
-	console.log(pageContext);
 	const { sanityProducts: product } = data;
 
 	const min = Object.values(pageContext.productData.prices).reduce(

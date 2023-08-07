@@ -135,7 +135,7 @@ export default function ProductCart({ product }: productCartProps) {
 						{product.productName}
 					</h2>
 				</Link>
-				<p className="w-10/12 pr-2" id="shortDescription">
+				<p className="w-10/12 pr-2 line-clamp-3" id="shortDescription">
 					{product.descriptionsShort}
 				</p>
 				{userStore.token && (
