@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { PageProps, HeadFC } from "gatsby";
 import Home from "../containers/home";
+import { Helmet } from "react-helmet";
 
 const IndexPage: React.FC<PageProps> = () => {
 	return <Home />;
@@ -15,5 +16,8 @@ export const Head: HeadFC = () => (
 			name="description"
 			content="ecograsas procesadores de aceite de palma para reposteria y elaboracion de jabon"
 		/>
+		<Helmet>
+			<title>{"EcoGrasas"}</title>
+		</Helmet>
 	</>
 );
