@@ -125,7 +125,15 @@ export default function AboutContainer() {
 				tiene como objetivo marcar la diferencia en la industria del aceite y la
 				grasa y contribuir a un futuro más sostenible para todos.
 			</p>
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2336.874822382744!2d-68.29831042136009!3d9.922352801640253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8082fd255aaaa9%3A0x6a8f7ff645964de3!2sProcesadora%20Ecograsa%2C%20C.A.!5e0!3m2!1ses!2sve!4v1691004482791!5m2!1ses!2sve" width="100%" height="450" style={{border:0}} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+			<iframe
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2336.874822382744!2d-68.29831042136009!3d9.922352801640253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8082fd255aaaa9%3A0x6a8f7ff645964de3!2sProcesadora%20Ecograsa%2C%20C.A.!5e0!3m2!1ses!2sve!4v1691004482791!5m2!1ses!2sve"
+				width="100%"
+				height="450"
+				style={{ border: 0 }}
+				allowFullScreen
+				loading="lazy"
+				referrerPolicy="no-referrer-when-downgrade"
+			/>
 		</div>
 	);
 }

@@ -3,6 +3,7 @@ import "./index.scss";
 import { graphql } from "gatsby";
 import PostCard from "../../components/PostCard";
 import Pagination from "../../components/PaginationComponent";
+import { Helmet } from "react-helmet";
 
 interface Child {
 	text: string;
@@ -45,6 +46,15 @@ export default function PostsContainer({
 
 	return (
 		<div className="w-11/12 gap-y-4 mx-auto max-w-screen-lg flex flex-wrap justify center pb-12">
+			<Helmet>
+				<title>{"ecograsas - Blogs y Articulos"}</title>
+				<meta
+					content={
+						"Articulos de Procesadora Ecograsas es una empresa venezolana especializada en el procesamiento y comercialización de productos de aceite y grasa. Comprometidos con la sostenibilidad y la responsabilidad ambiental, buscamos ofrecer productos de alta calidad mientras minimizamos nuestro impacto ecológico. Nuestra misión es ser líderes en la provisión de productos de aceite y grasa, priorizando la sostenibilidad ambiental. Visualizamos un futuro en el que las prácticas sostenibles y los productos de alta calidad vayan de la mano, contribuyendo a un futuro más verde y sostenible."
+					}
+					name="description"
+				/>
+			</Helmet>
 			<h1 className="w-full text-4xl mt-4 font-bold">
 				Articulos y Blogs de Ecograsas
 			</h1>
