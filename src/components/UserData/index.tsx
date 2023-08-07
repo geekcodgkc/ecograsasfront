@@ -52,8 +52,6 @@ export default function UserData() {
 		}
 	}, []);
 
-	console.log(store);
-
 	if (store.error) {
 		return (
 			<div className="OrdersContainer w-error w-full p-8 pb-12 bg-slate-300 rounded-lg shadow-lg">
@@ -90,7 +88,6 @@ export default function UserData() {
 				</h2>
 			) : (
 				store.orders?.map((order: orderInterface) => {
-					console.log("zz", order.products[0]);
 					return (
 						<div
 							className="OrderCardContainer w-full bg-slate-50 rounded-lg p-2"
@@ -189,7 +186,9 @@ export default function UserData() {
 													{productItem.product.name}
 												</td>
 												<td className="p-2 text-center">{price.toFixed(2)}</td>
-												<td className="p-2 text-center">{(price * qty).toFixed(2)}</td>
+												<td className="p-2 text-center">
+													{(price * qty).toFixed(2)}
+												</td>
 											</tr>
 										);
 									})}

@@ -31,7 +31,7 @@ export interface CartStoreInterface {
 		clientPrice: number,
 		cb: () => void,
 	) => void;
-	setClose: () => void
+	setClose: () => void;
 	decrementFromCart: (id: string, less: number) => void;
 }
 
@@ -65,7 +65,7 @@ export const useCartStore = create<CartStoreInterface, []>(
 			cart: null,
 			loading: false,
 			setClose: () => {
-				set((state) => ({...state, open: false}))
+				set((state) => ({ ...state, open: false }));
 			},
 			addToCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
@@ -80,7 +80,7 @@ export const useCartStore = create<CartStoreInterface, []>(
 								...state.cart,
 								[product.product.id]: product,
 						  },
-					open: true
+					open: true,
 				}));
 			},
 			removeFromCart: (product) => {
@@ -149,15 +149,12 @@ export const useCartStore = create<CartStoreInterface, []>(
 							qty: item.qty,
 						});
 					});
-
-					const { data } = await api.post("/orders", order);
-					console.log("res", data);
+					await api.post("/orders", order);
 				} catch (_e) {
 					set((state) => ({ ...state, loading: false }));
 					return;
 				}
 				set((state) => ({ ...state, loading: false, cart: null }));
-				console.log("currentCart: ", cart);
 				cb();
 			},
 		}),
