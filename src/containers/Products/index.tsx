@@ -32,6 +32,7 @@ interface Sproducts {
 	name: string;
 	status: boolean;
 	_id: string;
+	department: string;
 }
 
 interface Context {
@@ -42,15 +43,7 @@ interface pageContext {
 	pageContext: Context;
 }
 
-const options = [
-	"Todos",
-	"Aceites",
-	"Oleinas",
-	"Mantecas",
-	"Margarinas",
-	"Jabones",
-	"RBD",
-];
+const options = ["TODOS", "PALMA", "MANTECA", "MARGARINA", "JABON"];
 
 export default function Products({ pageContext: context }: pageContext) {
 	const { sanityProducts } = context;
@@ -58,12 +51,11 @@ export default function Products({ pageContext: context }: pageContext) {
 	const [products, setProducts] = useState(sanityProducts);
 	const [open, setOpen] = useState<boolean>(false);
 
+	console.log(sanityProducts);
+
 	const filter = (number: number) => {
 		const filter = sanityProducts.filter((p) => {
-			if (number === 6) {
-				return p.id.includes(`PT${number - 1}`);
-			}
-			return p.id.includes(`PT0${number}`);
+			return p.department.includes(`${options[number]}`);
 		});
 		setProducts(filter);
 	};
@@ -88,18 +80,16 @@ export default function Products({ pageContext: context }: pageContext) {
 								onKeyDown={() => {}}
 							>
 								{current === 1
-									? "Aceites"
+									? "PALMA"
 									: current === 2
-									? "Oleinas"
+									? "MANTECA"
 									: current === 3
 									? "Manteca"
 									: current === 4
-									? "Margarina"
+									? "MARGARINA"
 									: current === 5
-									? "Jabones"
-									: current === 6
-									? "RBD"
-									: "todos"}{" "}
+									? "JABON"
+									: "TODOS"}{" "}
 								<BiDownArrowAlt
 									className={`${open ? "arrowUpside" : "ArrowDown"}`}
 								/>
