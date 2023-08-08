@@ -49,7 +49,7 @@ export const query = graphql`
 				mainImage {
 					asset {
 					filename
-					resize(aspectRatio: 1.78, fit: COVER, format: WEBP, width: 1280, quality: 60) {
+					resize(aspectRatio: 1.78, fit: COVER, format: WEBP, width: 1280, quality: 80) {
 						src
 					}
 					url
