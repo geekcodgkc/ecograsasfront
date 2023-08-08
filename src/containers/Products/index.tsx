@@ -1,4 +1,6 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useUserStore } from "../../store";
+import { useStaticQuery, graphql, navigate } from "gatsby";
 import "./index.scss";
 import { BiDownArrowAlt } from "react-icons/bi";
 import ProductCart from "../../components/ProductSaleCard";
@@ -43,15 +45,27 @@ interface pageContext {
 	pageContext: Context;
 }
 
+interface SanityImages {
+	mainImage: {
+		asset: {
+			filename: string;
+			resize: {
+				src: string;
+			};
+		};
+	};
+}
+
 const options = ["TODOS", "PALMA", "MANTECA", "MARGARINA", "JABON"];
 
 export default function Products({ pageContext: context }: pageContext) {
+	const isBrowser = () => typeof window !== "undefined";
+	const { allSanityImageAssets } = useStaticQuery(imageQuery);
+	const store = useUserStore((store) => store);
 	const { sanityProducts } = context;
 	const [current, setCurrent] = useState<number>(0);
 	const [products, setProducts] = useState(sanityProducts);
 	const [open, setOpen] = useState<boolean>(false);
-
-	console.log(sanityProducts);
 
 	const filter = (number: number) => {
 		const filter = sanityProducts.filter((p) => {
@@ -64,6 +78,51 @@ export default function Products({ pageContext: context }: pageContext) {
 		filter(current);
 		return;
 	}, [current]);
+
+	if (isBrowser() && !store.token) {
+		return (
+			<div className="w-full py-8 max-w-screen-xl mx-auto min-h-screen">
+				{options.map((name, i) => {
+					if (name === "TODOS") return;
+					const filterImg = (name: string) => {
+						return allSanityImageAssets.nodes.filter((n: SanityImages) => {
+							return n.mainImage.asset.filename === name;
+						});
+					};
+
+					const imgBackgound =
+						i === 1
+							? filterImg(
+									"vista-superior-pescado-patatas-fritas-seleccion-salsas-cubiertos.jpg",
+							  )[0]
+							: i === 2
+							? filterImg("helado-dulce-chocolate.jpg")[0]
+							: i === 3
+							? filterImg("varios-pasteles-estantes-supermercados-venta.jpg")[0]
+							: filterImg("JABONES.jpg")[0];
+
+					return (
+						<article
+							key={name}
+							className="w-full text-white mb-8 rounded articleBg"
+							style={{
+								backgroundImage: `url("${imgBackgound.mainImage.asset.resize.src}")`,
+								backgroundPosition: "center",
+							}}
+							onClick={() => {
+								navigate(`/Products/Categorias/${name.toLocaleLowerCase()}`);
+							}}
+							onKeyDown={() => {}}
+						>
+							<div className="articleContainerCategories p-12">
+								<h3 className="font-bold text-5xl rounded">{name}</h3>
+							</div>
+						</article>
+					);
+				})}
+			</div>
+		);
+	}
 
 	return (
 		<>
@@ -124,3 +183,20 @@ export default function Products({ pageContext: context }: pageContext) {
 		</>
 	);
 }
+
+export const imageQuery = graphql`
+	query imgs {
+	allSanityImageAssets {
+			nodes {
+				mainImage {
+					asset {
+						filename
+						resize(format: WEBP, height: 600, quality: 70, width: 1024) {
+							src
+						}
+					}
+				}
+			}
+		}
+	}
+`;

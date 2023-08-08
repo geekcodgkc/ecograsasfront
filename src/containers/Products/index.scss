@@ -72,3 +72,24 @@
         }
     }
 }
+
+.articleBg {
+    min-height: 300px;
+    height: 300px;
+    cursor: pointer;
+    .articleContainerCategories {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        h3 {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 0.5rem;
+        }
+    }
+    .articleContainerCategories:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}

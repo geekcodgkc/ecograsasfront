@@ -116,4 +116,24 @@ exports.createPages = async ({ graphql, actions }) => {
 			sanityProducts: productsMaped,
 		},
 	});
+
+	const ProductCategories = {};
+
+	productsMaped.forEach((p) => {
+		if (!ProductCategories[p.department]) {
+			ProductCategories[p.department] = [p];
+			return;
+		}
+		ProductCategories[p.department].push(p);
+	});
+
+	Object.keys(ProductCategories).forEach((Categorie) => {
+		actions.createPage({
+			path: `/Products/Categorias/${Categorie.toLocaleLowerCase()}`,
+			component: path.resolve("./src/containers/ProductsCategories/index.tsx"),
+			context: {
+				sanityProducts: ProductCategories[Categorie],
+			},
+		});
+	});
 };
