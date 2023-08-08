@@ -63,7 +63,9 @@ export default function Products() {
 									onKeyDown={() => {}}
 								>
 									<div className="articleContainerCategories p-12">
-										<h3 className="font-bold text-5xl rounded">{name}</h3>
+										<h3 className="font-bold text-5xl rounded break-words">
+											{name}
+										</h3>
 									</div>
 								</article>
 							);

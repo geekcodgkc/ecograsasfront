@@ -88,7 +88,8 @@ export const useCartStore = create<CartStoreInterface, []>(
 
 				set((state) => {
 					const newState = { ...state, loading: false };
-					if (state.cart && newState.cart) {
+					if (state.cart) {
+						console.log("ss");
 						const count = Object.values(state.cart)
 							.map((c) => c.qty)
 							.reduce((acc, curr) => acc + curr);
@@ -98,14 +99,14 @@ export const useCartStore = create<CartStoreInterface, []>(
 								newState.cart[entry[0]] = {
 									...entry[1],
 									price:
-										count > 10
+										count + 1 > 10
 											? parseFloat(
 													(
 														entry[1].qty *
 														Object.values(entry[1].product.prices)[1]
 													).toFixed(2),
 											  )
-											: count > 100
+											: count + 1 > 100
 											? parseFloat(
 													(
 														entry[1].qty *
@@ -119,6 +120,7 @@ export const useCartStore = create<CartStoreInterface, []>(
 													).toFixed(2),
 											  ),
 								};
+								console.log(count, newState.cart[entry[0]]);
 							}
 						});
 					} else {
@@ -152,14 +154,14 @@ export const useCartStore = create<CartStoreInterface, []>(
 								newState.cart[entry[0]] = {
 									...entry[1],
 									price:
-										count > 10
+										count + 1 > 10
 											? parseFloat(
 													(
 														entry[1].qty *
 														Object.values(entry[1].product.prices)[1]
 													).toFixed(2),
 											  )
-											: count > 100
+											: count + 1 > 100
 											? parseFloat(
 													(
 														entry[1].qty *
@@ -204,14 +206,14 @@ export const useCartStore = create<CartStoreInterface, []>(
 								newState.cart[entry[0]] = {
 									...entry[1],
 									price:
-										count >= 10
+										count + 1 >= 10
 											? parseFloat(
 													(
 														entry[1].qty *
 														Object.values(entry[1].product.prices)[1]
 													).toFixed(2),
 											  )
-											: count >= 100
+											: count + 1 >= 100
 											? parseFloat(
 													(
 														entry[1].qty *
