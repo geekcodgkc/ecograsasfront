@@ -1,34 +1,12 @@
 import React from "react";
 import "./index.scss";
 import { useCartStore, useUserStore } from "../../store";
-import {
-	AiOutlinePlusCircle,
-	AiOutlineMinusCircle,
-	AiOutlineCloseCircle,
-} from "react-icons/ai";
-import { BsFillTrashFill } from "react-icons/bs";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { navigate } from "gatsby";
 import CartButtons from "../CartButtons";
 
 interface ModalProps {
 	handleClose: () => void;
-}
-
-interface ProductSale {
-	product: {
-		name: string;
-		id: string;
-		_id: string;
-		prices: {
-			p1: number;
-			p2: number;
-			p3: number;
-			p4: number;
-		};
-	};
-	price: number;
-	qty: number;
-	img: string;
 }
 
 export default function CartModal({ handleClose }: ModalProps) {
@@ -65,15 +43,24 @@ export default function CartModal({ handleClose }: ModalProps) {
 								return (
 									<div
 										key={cartItem.product.id}
-										className="cartItem bg-slate-50 shadow-md p-2 rounded"
+										className="cartItem bg-slate-50 shadow-md p-1 rounded flex w-full justify-around items-center flex-wrap gap-y-2"
 									>
-										<h2 className="font-bold text-xl mb-4">
-											{cartItem.product.name}
-										</h2>
+										<div className="flex gap-2 items-center">
+											<img
+												src={cartItem.img}
+												alt="productName"
+												width={80}
+												height={80}
+												className="rounded"
+											/>
+											<p className="font-medium max-w-xs">
+												{cartItem.product.name}
+											</p>
+										</div>
 										<div className="orderDescription">
 											<header>
 												<h3 className="font-bold">Cantidad</h3>
-												<h3 className="font-bold">Precion Unitaro</h3>
+												<h3 className="font-bold">Precio Unitaro</h3>
 												<h3 className="font-bold">Total</h3>
 											</header>
 											<footer>
