@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./index.scss";
 import { useCartStore, useUserStore } from "../../store";
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
-import { BsFillTrashFill } from "react-icons/bs";
 import { navigate } from "gatsby";
 import ActionModal from "../../components/ActionModal";
+import CartButtons from "../../components/CartButtons";
 
 interface ProductSale {
 	product: {
@@ -45,80 +44,6 @@ export default function CheckoutContainer() {
 	if (isBrowser && !userStore.userData?.verified) {
 		navigate("/Profile");
 	}
-
-	const handleAddToCart = (product: ProductSale) => {
-		if (isBrowser) {
-			const singlePrice = Object.values(product.product.prices)[
-				userStore.userData?.conditionPrice
-					? userStore.userData?.conditionPrice - 1
-					: 0
-			];
-
-			cartStore.addToCart({
-				product: {
-					name: product.product.name,
-					id: product.product.id,
-					_id: product.product._id,
-					prices: product.product.prices,
-				},
-				price: cartStore.cart?.[product.product.id]
-					? cartStore.cart?.[product.product.id].price + singlePrice
-					: singlePrice,
-				qty: cartStore.cart?.[product.product.id]
-					? cartStore.cart[product.product.id].qty + 1
-					: 1,
-				img: product.img,
-			});
-		}
-	};
-
-	const handleLessToCart = (product: ProductSale) => {
-		if (isBrowser) {
-			const singlePrice = Object.values(product.product.prices)[
-				userStore.userData?.conditionPrice
-					? userStore.userData?.conditionPrice - 1
-					: 0
-			];
-			if (cartStore.cart) {
-				cartStore.cart[product.product.id].qty > 1
-					? cartStore.decrementFromCart(product.product.id, singlePrice)
-					: handleRemove(product.product.id);
-			}
-		}
-	};
-
-	const handleRemove = (id: string) => {
-		if (isBrowser) {
-			cartStore.removeFromCart(id);
-		}
-	};
-
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement>,
-		product: ProductSale,
-	) => {
-		if (isBrowser) {
-			const singlePrice = Object.values(product.product.prices)[
-				userStore.userData?.conditionPrice
-					? userStore.userData?.conditionPrice - 1
-					: 0
-			];
-
-			const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
-
-			cartStore.addToCart({
-				product: {
-					name: product.product.name,
-					id: product.product.id,
-					_id: product.product._id,
-					prices: product.product.prices,
-				},
-				price: value * singlePrice,
-				qty: value,
-				img: product.img,
-			});
-		}
-	};
 
 	return (
 		<div className="CheckoutContainer bg-slate-300 relative">
@@ -161,11 +86,11 @@ export default function CheckoutContainer() {
 										</header>
 										<footer>
 											<h3>
-												{Object.values(cartItem.product.prices)[
-													userStore.userData?.conditionPrice
-														? userStore.userData.conditionPrice - 1
-														: 1
-												].toFixed(2)}
+												{cartStore.productsCount >= 10
+													? Object.values(cartItem.product.prices)[1]
+													: cartStore.productsCount >= 100
+													? Object.values(cartItem.product.prices)[0]
+													: Object.values(cartItem.product.prices)[2]}
 												$
 											</h3>
 											<h3>{cartItem.qty}</h3>
@@ -173,42 +98,28 @@ export default function CheckoutContainer() {
 										</footer>
 									</div>
 								</div>
-								<div className="orderNumberContainer mt-4 justify-end pr-4">
-									<div
-										className="cartButton"
-										onClick={() => {
-											handleLessToCart(cartItem);
-										}}
-										onKeyUp={() => {}}
-									>
-										<AiOutlineMinusCircle />
-									</div>
-									<div className="inputContainer">
-										<input
-											maxLength={4}
-											name="cart-qty"
-											type="number"
-											value={cartStore.cart?.[cartItem.product.id].qty}
-											onChange={(e) => {
-												handleChange(e, cartItem);
-											}}
-										/>
-									</div>
-									<div
-										className="cartButton"
-										onClick={() => {
-											handleAddToCart(cartItem);
-										}}
-										onKeyUp={() => {}}
-									>
-										<AiOutlinePlusCircle />
-									</div>
-									<BsFillTrashFill
-										onClick={() => {
-											handleRemove(cartItem.product.id);
-										}}
-									/>
-								</div>
+								<CartButtons
+									product={{
+										Slug: {
+											current: cartItem.product.name,
+										},
+										productImage: {
+											asset: {
+												resize: {
+													src: cartItem.img,
+												},
+											},
+										},
+										productId: {
+											current: cartItem.product.id,
+										},
+										productName: cartItem.product.name,
+										prices: cartItem.product.prices,
+										_id: cartItem.product._id,
+										name: cartItem.product.name,
+										status: true,
+									}}
+								/>
 							</div>
 						);
 					})}

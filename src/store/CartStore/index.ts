@@ -21,6 +21,7 @@ interface ProductSale {
 
 export interface CartStoreInterface {
 	loading: boolean;
+	productsCount: number;
 	open: boolean;
 	cart: null | { [key: string]: ProductSale };
 	addToCart: (product: ProductSale) => void;
@@ -65,14 +66,15 @@ export const useCartStore = create<CartStoreInterface, []>(
 			open: false,
 			cart: null,
 			loading: false,
+			productsCount: 0,
 			setClose: () => {
 				set((state) => ({ ...state, open: false }));
 			},
 			addToCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
+
 				set((state) => ({
 					...state,
-					loading: false,
 					cart: !state.cart
 						? {
 								[product.product.id]: product,
@@ -83,6 +85,48 @@ export const useCartStore = create<CartStoreInterface, []>(
 						  },
 					open: true,
 				}));
+
+				set((state) => {
+					const newState = { ...state, loading: false };
+					if (state.cart && newState.cart) {
+						const count = Object.values(state.cart)
+							.map((c) => c.qty)
+							.reduce((acc, curr) => acc + curr);
+						newState.productsCount = count;
+						Object.entries(state.cart).forEach((entry) => {
+							if (newState.cart) {
+								newState.cart[entry[0]] = {
+									...entry[1],
+									price:
+										count > 10
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[1]
+													).toFixed(2),
+											  )
+											: count > 100
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[0]
+													).toFixed(2),
+											  )
+											: parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[2]
+													).toFixed(2),
+											  ),
+								};
+							}
+						});
+					} else {
+						newState.productsCount = 0;
+					}
+
+					return newState;
+				});
 			},
 			removeFromCart: (product) => {
 				set((state) => ({ ...state, loading: true }));
@@ -96,6 +140,47 @@ export const useCartStore = create<CartStoreInterface, []>(
 					}
 					return current;
 				});
+				set((state) => {
+					const newState = { ...state, loading: false };
+					if (state.cart) {
+						const count = Object.values(state.cart)
+							.map((c) => c.qty)
+							.reduce((acc, curr) => acc + curr);
+						newState.productsCount = count;
+						Object.entries(state.cart).forEach((entry) => {
+							if (newState.cart) {
+								newState.cart[entry[0]] = {
+									...entry[1],
+									price:
+										count > 10
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[1]
+													).toFixed(2),
+											  )
+											: count > 100
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[0]
+													).toFixed(2),
+											  )
+											: parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[2]
+													).toFixed(2),
+											  ),
+								};
+							}
+						});
+					} else {
+						newState.productsCount = 0;
+					}
+
+					return newState;
+				});
 			},
 			decrementFromCart: (id, less) => {
 				set((state) => ({ ...state, loading: true }));
@@ -106,6 +191,47 @@ export const useCartStore = create<CartStoreInterface, []>(
 						current.cart[id].price -= less;
 					}
 					return current;
+				});
+				set((state) => {
+					const newState = { ...state, loading: false };
+					if (state.cart) {
+						const count = Object.values(state.cart)
+							.map((c) => c.qty)
+							.reduce((acc, curr) => acc + curr);
+						newState.productsCount = count;
+						Object.entries(state.cart).forEach((entry) => {
+							if (newState.cart) {
+								newState.cart[entry[0]] = {
+									...entry[1],
+									price:
+										count >= 10
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[1]
+													).toFixed(2),
+											  )
+											: count >= 100
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[0]
+													).toFixed(2),
+											  )
+											: parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[2]
+													).toFixed(2),
+											  ),
+								};
+							}
+						});
+					} else {
+						newState.productsCount = 0;
+					}
+
+					return newState;
 				});
 			},
 			createOrder: async (

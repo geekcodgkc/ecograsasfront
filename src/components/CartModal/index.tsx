@@ -79,11 +79,11 @@ export default function CartModal({ handleClose }: ModalProps) {
 											<footer>
 												<h3>{cartItem.qty}</h3>
 												<h3>
-													{Object.values(cartItem.product.prices)[
-														userStore.userData?.conditionPrice
-															? userStore.userData.conditionPrice - 1
-															: 1
-													].toFixed(2)}
+													{cartStore.productsCount >= 10
+														? Object.values(cartItem.product.prices)[1]
+														: cartStore.productsCount >= 100
+														? Object.values(cartItem.product.prices)[0]
+														: Object.values(cartItem.product.prices)[2]}
 													$
 												</h3>
 												<h3>{cartItem.price.toFixed(2)}$</h3>

@@ -19,10 +19,10 @@ export default function Hero() {
 					{heroData.secondTitle}
 				</h2>
 				<h3 className="mt-4 bg-black/80 max-w-screen-lg p-2 description-text">
-					Registrate y contacta con nuestro equipo de ventas para optener los
-					mejores precios y productos derivados de las grasas animales y aceites
-					de palma, observa nuestros post y blogs con estudios, sugerencias y
-					demas ...
+					Reg&iacute;strate y contacta con nuestro equipo de ventas para obtener
+					los mejores precios y productos derivados de las grasas animales y
+					aceites de palma, observa nuestros post y blogs con estudios,
+					sugerencias y d&eacute;mas ...
 				</h3>
 			</div>
 			<div className="text-slate-100 flex gap-2 flex flex-wrap steps-container">
