@@ -1,9 +1,8 @@
 import React from "react";
-import { BsFillTrashFill } from "react-icons/bs";
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { Link, navigate } from "gatsby";
 import { useUserStore, useCartStore } from "../../store";
 import "./index.scss";
+import CartButtons from "../CartButtons";
 
 interface ProductCartInterface {
 	Slug: {
@@ -73,45 +72,8 @@ export default function ProductCart({ product }: productCartProps) {
 			qty: cartStore.cart?.[product.productId.current]
 				? cartStore.cart[product.productId.current].qty + 1
 				: 1,
+			img: product.productImage.asset.resize.src,
 		});
-	};
-
-	const handleLessToCart = () => {
-		const singlePrice = Object.values(product.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
-		if (cartStore.cart) {
-			cartStore.cart[product.productId.current].qty > 1
-				? cartStore.decrementFromCart(product.productId.current, singlePrice)
-				: handleRemove();
-		}
-	};
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const singlePrice = Object.values(product.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
-
-		const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
-
-		cartStore.addToCart({
-			product: {
-				name: product.name,
-				id: product.productId.current,
-				_id: product._id,
-				prices: product.prices,
-			},
-			price: value * singlePrice,
-			qty: value,
-		});
-	};
-
-	const handleRemove = () => {
-		cartStore.removeFromCart(product.productId.current);
 	};
 
 	return (
@@ -167,31 +129,7 @@ export default function ProductCart({ product }: productCartProps) {
 								Agregar al Carrito
 							</button>
 						) : (
-							<div className="orderNumberContainer">
-								<div
-									className="cartButton"
-									onClick={handleLessToCart}
-									onKeyUp={() => {}}
-								>
-									<AiOutlineMinusCircle />
-								</div>
-								<div className="inputContainer">
-									<input
-										name="cart-qty"
-										type="number"
-										value={cartStore.cart?.[product.productId.current].qty}
-										onChange={handleChange}
-									/>
-								</div>
-								<div
-									className="cartButton"
-									onClick={handleAddToCart}
-									onKeyUp={() => {}}
-								>
-									<AiOutlinePlusCircle />
-								</div>
-								<BsFillTrashFill onClick={handleRemove} />
-							</div>
+							<CartButtons product={product} />
 						)}
 					</div>
 				)}
