@@ -73,6 +73,7 @@ export default function ProductCart({ product }: productCartProps) {
 			qty: cartStore.cart?.[product.productId.current]
 				? cartStore.cart[product.productId.current].qty + 1
 				: 1,
+			img: product.productImage.asset.resize.src,
 		});
 	};
 
@@ -107,6 +108,7 @@ export default function ProductCart({ product }: productCartProps) {
 			},
 			price: value * singlePrice,
 			qty: value,
+			img: product.productImage.asset.resize.src,
 		});
 	};
 

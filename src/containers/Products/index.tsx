@@ -108,6 +108,7 @@ export default function Products({ pageContext: context }: pageContext) {
 							style={{
 								backgroundImage: `url("${imgBackgound.mainImage.asset.resize.src}")`,
 								backgroundPosition: "center",
+								backgroundSize: "cover",
 							}}
 							onClick={() => {
 								navigate(`/Products/Categorias/${name.toLocaleLowerCase()}`);

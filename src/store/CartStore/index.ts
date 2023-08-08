@@ -16,6 +16,7 @@ interface ProductSale {
 	};
 	price: number;
 	qty: number;
+	img: string;
 }
 
 export interface CartStoreInterface {

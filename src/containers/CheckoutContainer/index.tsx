@@ -20,6 +20,7 @@ interface ProductSale {
 	};
 	price: number;
 	qty: number;
+	img: string;
 }
 
 export default function CheckoutContainer() {
@@ -66,6 +67,7 @@ export default function CheckoutContainer() {
 				qty: cartStore.cart?.[product.product.id]
 					? cartStore.cart[product.product.id].qty + 1
 					: 1,
+				img: product.img,
 			});
 		}
 	};
@@ -113,6 +115,7 @@ export default function CheckoutContainer() {
 				},
 				price: value * singlePrice,
 				qty: value,
+				img: product.img,
 			});
 		}
 	};
@@ -144,6 +147,13 @@ export default function CheckoutContainer() {
 										{cartItem.product.name}
 									</h2>
 									<div className="orderDescription">
+										<img
+											src={cartItem.img}
+											alt={"cart img"}
+											width={84}
+											height={84}
+											className="rounded"
+										/>
 										<header>
 											<h3 className="font-bold">Precion Unitaro</h3>
 											<h3 className="font-bold">Cantidad</h3>
@@ -214,12 +224,13 @@ export default function CheckoutContainer() {
 						if (isBrowser && cartStore.cart) {
 							setOpen(true);
 						}
+						navigate("/Products");
 					}}
 					onKeyDown={() => {}}
 				>
 					{isBrowser && cartStore.cart
 						? "Crear la Orden"
-						: "No tienes nada en el carrito"}
+						: "No tienes nada en el carrito regresa a la lista"}
 				</button>
 			</footer>
 		</div>
