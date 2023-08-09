@@ -120,12 +120,6 @@ export default function UserData() {
 									</b>
 								</h4>
 								<h4>
-									Base Imponible: <b>{order.orderBase.toFixed(2)}</b>
-								</h4>
-								<h4>
-									IVA: <b>{order.iva.toFixed(2)}</b>
-								</h4>
-								<h4>
 									Total: <b>{order.orderTotal.toFixed(2)}</b>
 								</h4>
 								<h4
