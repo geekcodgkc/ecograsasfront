@@ -99,18 +99,18 @@ export const useCartStore = create<CartStoreInterface, []>(
 								newState.cart[entry[0]] = {
 									...entry[1],
 									price:
-										count + 1 > 10
-											? parseFloat(
-													(
-														entry[1].qty *
-														Object.values(entry[1].product.prices)[1]
-													).toFixed(2),
-											  )
-											: count + 1 > 100
+										count + 1 > 100
 											? parseFloat(
 													(
 														entry[1].qty *
 														Object.values(entry[1].product.prices)[0]
+													).toFixed(2),
+											  )
+											: count + 1 > 10
+											? parseFloat(
+													(
+														entry[1].qty *
+														Object.values(entry[1].product.prices)[1]
 													).toFixed(2),
 											  )
 											: parseFloat(
