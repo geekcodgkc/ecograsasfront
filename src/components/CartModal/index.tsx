@@ -66,10 +66,10 @@ export default function CartModal({ handleClose }: ModalProps) {
 											<footer>
 												<h3>{cartItem.qty}</h3>
 												<h3>
-													{cartStore.productsCount >= 10
-														? Object.values(cartItem.product.prices)[1]
-														: cartStore.productsCount >= 100
+													{cartStore.productsCount >= 100
 														? Object.values(cartItem.product.prices)[0]
+														: cartStore.productsCount >= 10
+														? Object.values(cartItem.product.prices)[1]
 														: Object.values(cartItem.product.prices)[2]}
 													$
 												</h3>

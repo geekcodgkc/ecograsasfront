@@ -86,10 +86,10 @@ export default function CheckoutContainer() {
 										</header>
 										<footer>
 											<h3>
-												{cartStore.productsCount >= 10
-													? Object.values(cartItem.product.prices)[1]
-													: cartStore.productsCount >= 100
+												{cartStore.productsCount >= 100
 													? Object.values(cartItem.product.prices)[0]
+													: cartStore.productsCount >= 10
+													? Object.values(cartItem.product.prices)[1]
 													: Object.values(cartItem.product.prices)[2]}
 												$
 											</h3>
@@ -134,8 +134,9 @@ export default function CheckoutContainer() {
 					onClick={() => {
 						if (isBrowser && cartStore.cart) {
 							setOpen(true);
+						} else {
+							navigate("/Products");
 						}
-						navigate("/Products");
 					}}
 					onKeyDown={() => {}}
 				>

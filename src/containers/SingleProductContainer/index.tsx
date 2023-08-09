@@ -95,6 +95,9 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 			qty: cartStore.cart?.[product.productId.current]
 				? cartStore.cart[product.productId.current].qty + 1
 				: 1,
+			img:
+				cartStore.cart?.[product.productId.current].img ||
+				data.sanityProducts.productImage.asset.resize.src,
 		});
 	};
 
@@ -129,6 +132,9 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 			},
 			price: parseFloat((value * singlePrice).toFixed(2)),
 			qty: value,
+			img:
+				cartStore.cart?.[product.productId.current].img ||
+				data.sanityProducts.productImage.asset.resize.src,
 		});
 	};
 
