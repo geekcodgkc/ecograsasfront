@@ -65,6 +65,7 @@ export default function NavBar() {
 					type="button"
 					className="text-2xl sideNavOpen"
 					onClick={handleOpen}
+					aria-label="boton de menu"
 				>
 					<TiThMenu />
 				</button>

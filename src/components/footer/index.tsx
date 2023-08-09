@@ -16,6 +16,7 @@ export default function Footer() {
 				<h3 className="font-bold text-1xl mb-4">contactanos en ...</h3>
 				<div className="flex flex-row socialsIcons gap-3 items-center text-3xl">
 					<a
+						aria-label="enlace para instagram de ecograsas"
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
@@ -24,6 +25,7 @@ export default function Footer() {
 						<AiFillInstagram className="" />
 					</a>
 					<a
+						aria-label='link a red social de facebook'
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
@@ -32,12 +34,13 @@ export default function Footer() {
 						<BsFacebook />
 					</a>
 					<a
+						aria-label='link de gmail'
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
 						href="mailto:ventas@ecograsas.com"
 					>
-						<GrMail />
+						<GrMail/>
 					</a>
 				</div>
 			</div>
