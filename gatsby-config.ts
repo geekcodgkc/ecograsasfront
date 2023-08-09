@@ -18,7 +18,7 @@ const config: GatsbyConfig = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-			  siteUrl: `https://www.example.com`,
+			  siteUrl: `https://www.ecograsas.com`,
 			},
 		},
 		{

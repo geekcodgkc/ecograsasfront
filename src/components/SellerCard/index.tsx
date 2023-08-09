@@ -23,7 +23,7 @@ export default function SellerCard({
 			<div className="sellerCardContainer bg-slate-100 flex flex-col align-center py-8 shadow-md">
 			<div className="containerInfo px-16 flex flex-col items-center gap-2">
 				<div className="sellerImgContainer">
-					{img && <img src={img} alt="text alt" width={150} height={150}/>}
+					{img && <img src={img} loading="lazy" alt="text alt" width={150} height={150}/>}
 					{!img && <FaUserAlt />}
 				</div>
 				<h3>{name}</h3>
