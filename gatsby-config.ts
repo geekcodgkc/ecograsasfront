@@ -14,6 +14,13 @@ const config: GatsbyConfig = {
 	graphqlTypegen: true,
 	plugins: [
 		"gatsby-plugin-webpack-bundle-analyser-v2",
+		"gatsby-plugin-sitemap",
+		{
+			resolve: `gatsby-plugin-canonical-urls`,
+			options: {
+			  siteUrl: `https://www.example.com`,
+			},
+		},
 		{
 			resolve: "gatsby-source-sanity",
 			options: {
