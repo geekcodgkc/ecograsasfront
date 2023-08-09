@@ -45,7 +45,7 @@ export default function CartModal({ handleClose }: ModalProps) {
 										key={cartItem.product.id}
 										className="cartItem bg-slate-50 shadow-md p-1 rounded flex w-full justify-around items-center flex-wrap gap-y-2"
 									>
-										<div className="flex gap-2 items-center">
+										<div className="productIMG flex gap-2 items-center">
 											<img
 												src={cartItem.img}
 												alt="productName"

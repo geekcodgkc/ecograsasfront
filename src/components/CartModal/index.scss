@@ -32,8 +32,8 @@
             overflow-y: scroll;            
             .cartItem {
                 margin-bottom: 1rem;
-                h2 {
-                    text-align: left;
+                .productIMG {
+                    flex-basis: 50%;
                 }
                 .orderNumberContainer {
                     .inputContainer {
