@@ -3,6 +3,12 @@
     min-height: 100vh;
     background-size: cover;
     background-position: center;
+    .titles-container {
+        .description-text {
+            background-color: #ada400;
+            font-weight: 600;
+        }
+    }
 }
 
 @media (max-width: 480px) {

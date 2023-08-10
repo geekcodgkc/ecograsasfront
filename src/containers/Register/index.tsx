@@ -168,7 +168,7 @@ export default function RegisterContainer() {
 						onBlur={() => {
 							setTimeout(() => {
 								setShow(false);
-							}, 100);
+							}, 300);
 						}}
 					/>
 					{show && store.zones && (
