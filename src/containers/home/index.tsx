@@ -43,6 +43,23 @@ interface SellersInterface {
 	};
 }
 
+interface Receipt {
+	id: string;
+	title: string;
+	metaDescription: string;
+	mainImage: {
+		asset: {
+			_createdAt: string;
+			resize: {
+				src: string;
+			};
+		};
+	};
+	Slug: {
+		current: string;
+	};
+}
+
 const Iframe = () => {
 	return (
 		<YoutubeEmbed
@@ -93,8 +110,12 @@ interface sanityImageInfo {
 }
 
 export default function Home() {
-	const { allSanityImageAsset, allSanityProducts, allSanitySellers } =
-		useStaticQuery(queryProductImage);
+	const {
+		allSanityImageAsset,
+		allSanityProducts,
+		allSanitySellers,
+		allSanityBlogs,
+	} = useStaticQuery(queryProductImage);
 
 	const farming = allSanityImageAsset.nodes.find(
 		(e: sanityImageInfo) => e.filename === "farminBackground.webp",
@@ -168,22 +189,20 @@ export default function Home() {
 			</section>
 			<section className="mx-auto w-11/12 py-12 justify-center flex flex-wrap gap-x-8 gap-y-16">
 				<h2 className="text-center font-bold text-4xl w-full mb-16">
-					Prox&iacute;mos Eventos
+					Nuestras Recetas
 				</h2>
-				<EventsCard
-					img={eventImg}
-					title="Taller de Reposteria"
-					description="mejores practicas e utilizacion de nuestros productos"
-					date="22/09/2023"
-					hour="9:30 AM"
-				/>
-				<EventsCard
-					img={eventImg}
-					title="Taller de Reposteria"
-					description="mejores practicas e utilizacion de nuestros productos"
-					date="22/09/2023"
-					hour="9:30 AM"
-				/>
+				{allSanityBlogs.nodes.map((receipt: Receipt) => {
+					return (
+						<EventsCard
+							key={receipt.id}
+							title={receipt.title}
+							description={receipt.metaDescription}
+							img={receipt.mainImage.asset.resize.src}
+							date={receipt.mainImage.asset._createdAt}
+							Slug={receipt.Slug.current}
+						/>
+					);
+				})}
 			</section>
 		</CartWrapper>
 	);
@@ -229,6 +248,24 @@ const queryProductImage = graphql`
 						}
 					}
 				}
+			}
+		}
+		allSanityBlogs(limit: 2) {
+			nodes {
+				Slug {
+					current
+				}
+				mainImage {
+					asset {
+						resize(height: 450, width: 350, quality: 60, format: WEBP) {
+							src
+						}
+						_createdAt(formatString: "D-MM-YYYY")
+					}
+				}
+				title
+				id
+				metaDescription
 			}
 		}
 	}

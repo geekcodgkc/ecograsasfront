@@ -7,7 +7,7 @@ import "./index.scss";
 
 export default function CartWrapper({ children }: React.PropsWithChildren) {
 	const cartStore = useCartStore((store) => store);
-	const userStore = useUserStore((store) => store)
+	const userStore = useUserStore((store) => store);
 	const [open, setOpen] = useState<boolean>(false);
 
 	return (
@@ -20,7 +20,7 @@ export default function CartWrapper({ children }: React.PropsWithChildren) {
 					}}
 				/>
 			)}
-			{cartStore.cart && (
+			{cartStore.cart && userStore.token && (
 				<div
 					className="cartButtonAbsolute"
 					onClick={() => {
@@ -31,15 +31,17 @@ export default function CartWrapper({ children }: React.PropsWithChildren) {
 					<AiOutlineShoppingCart />
 				</div>
 			)}
-			{userStore.token && <div
+			{userStore.token && (
+				<div
 					className="cartButtonAbsoluteII"
 					onClick={() => {
-						navigate('/Products')
+						navigate("/Products");
 					}}
 					onKeyDown={() => {}}
-			>
-				Haz tu pedido
-			</div>}
+				>
+					Haz tu pedido
+				</div>
+			)}
 		</>
 	);
 }

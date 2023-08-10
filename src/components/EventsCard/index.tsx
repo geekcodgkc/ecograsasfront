@@ -1,12 +1,13 @@
 import React from "react";
 import "./index.scss";
+import { navigate } from "gatsby";
 
 interface EventsPropsInterface {
 	date: string;
-	hour: string;
 	description: string;
 	title: string;
 	img?: string;
+	Slug: string;
 }
 
 export default function EventsCard({
@@ -14,10 +15,16 @@ export default function EventsCard({
 	description,
 	img,
 	date,
-	hour,
+	Slug,
 }: EventsPropsInterface) {
 	return (
-		<article className="eventCardContainer shadow-lg relative">
+		<article
+			className="eventCardContainer shadow-lg relative"
+			onClick={() => {
+				navigate(`/Posts/${Slug}`);
+			}}
+			onKeyDown={() => {}}
+		>
 			<div
 				className="backgroundImage"
 				style={{
@@ -27,7 +34,6 @@ export default function EventsCard({
 			<div className="eventCardContentContainer p-4 flex flex-col">
 				<div className="timeContainer mb-2">
 					<p>{date}</p>
-					<p>{hour}</p>
 				</div>
 				<h3 className="font-bold mb-2 text-lg">{title}</h3>
 				<p>{description}</p>

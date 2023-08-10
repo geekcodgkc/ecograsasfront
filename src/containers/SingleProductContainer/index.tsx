@@ -1,12 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
-import { BsFillTrashFill } from "react-icons/bs";
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import CartWrapper from "../CartWrapper";
 import "./index.scss";
 import { useCartStore, useUserStore } from "../../store";
 import { navigate } from "gatsby";
+import CartButtons from "../../components/CartButtons";
 
 interface text {
 	text: string;
@@ -59,6 +58,8 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 	const cartStore = useCartStore((store) => store);
 	const { sanityProducts: product } = data;
 
+	console.log(pageContext);
+
 	const min = Object.values(pageContext.productData.prices).reduce(
 		(acc, curr) => {
 			return getMin(acc, curr === 0 ? acc : curr);
@@ -101,49 +102,12 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 		});
 	};
 
-	const handleLessToCart = () => {
-		const singlePrice = Object.values(pageContext.productData.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
-		if (cartStore.cart) {
-			cartStore.cart[product.productId.current].qty > 1
-				? cartStore.decrementFromCart(product.productId.current, singlePrice)
-				: handleRemove();
-		}
-	};
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const singlePrice = Object.values(pageContext.productData.prices)[
-			userStore.userData?.conditionPrice
-				? userStore.userData?.conditionPrice - 1
-				: 0
-		];
-
-		const value = parseInt(e.target.value) ? parseInt(e.target.value) : 0;
-
-		cartStore.addToCart({
-			product: {
-				name: product.productName,
-				id: product.productId.current,
-				_id: pageContext._id,
-				prices: pageContext.productData.prices,
-			},
-			price: parseFloat((value * singlePrice).toFixed(2)),
-			qty: value,
-			img:
-				cartStore.cart?.[product.productId.current].img ||
-				data.sanityProducts.productImage.asset.resize.src,
-		});
-	};
-
-	const handleRemove = () => {
-		cartStore.removeFromCart(product.productId.current);
-	};
-
 	return (
 		<CartWrapper>
+			<Helmet>
+				<title>ecograsas {product.productName}</title>
+				<meta name="description" content={product.descriptionsShort} />
+			</Helmet>
 			<div
 				className="w-full p-8 max-w-screen-xl mx-auto bg-slate-50"
 				id="singleProductCon"
@@ -182,6 +146,12 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 										<b>Presentacion:</b>
 										{` ${product.presentation}`}
 									</li>
+									{cartStore.cart?.[product.productId.current] && (
+										<li>
+											<b>total</b>:{" "}
+											{cartStore.cart[product.productId.current].price}$
+										</li>
+									)}
 								</ul>
 								{!cartStore.cart ||
 								!cartStore.cart[product.productId.current] ? (
@@ -196,41 +166,29 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 										</button>
 									</div>
 								) : (
-									<>
-										<div className="orderNumberContainer w-9/12 justify-center dataButton">
-											<div
-												className="cartButton"
-												onClick={handleLessToCart}
-												onKeyUp={() => {}}
-											>
-												<AiOutlineMinusCircle />
-											</div>
-											<div className="inputContainer">
-												<input
-													name="cart-qty"
-													type="number"
-													value={
-														cartStore.cart?.[product.productId.current].qty
-													}
-													onChange={handleChange}
-												/>
-											</div>
-											<div
-												className="cartButton"
-												onClick={handleAddToCart}
-												onKeyUp={() => {}}
-											>
-												<AiOutlinePlusCircle />
-											</div>
-											<BsFillTrashFill onClick={handleRemove} />
-										</div>
-										<div className="flex w-9/12 justify-center gap-2 dataButton">
-											<h4 className="font-bold">Sub-Total: </h4>{" "}
-											{cartStore?.cart[product.productId.current].price.toFixed(
-												2,
-											)}
-										</div>
-									</>
+									<CartButtons
+										product={{
+											Slug: {
+												current: pageContext.slug,
+											},
+											productImage: {
+												asset: {
+													resize: {
+														src: data.sanityProducts.productImage.asset.resize
+															.src,
+													},
+												},
+											},
+											productId: {
+												current: product.productId.current,
+											},
+											productName: product.productName,
+											prices: pageContext.productData.prices,
+											_id: pageContext._id,
+											name: product.productName,
+											status: true,
+										}}
+									/>
 								)}
 							</div>
 						)}
