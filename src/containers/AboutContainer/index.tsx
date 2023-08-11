@@ -18,8 +18,8 @@ export default function AboutContainer() {
 				Sobre Procesadora Ecograsas
 			</h2>
 			<p>
-				Procesadora Ecograsas es una empresa venezolana ubicada en Portuguesa.
-				Con un fuerte compromiso con la sostenibilidad y la responsabilidad
+				Procesadora Ecograsas es una empresa venezolana ubicada en Cojedes. Con
+				un fuerte compromiso con la sostenibilidad y la responsabilidad
 				ambiental, la empresa se especializa en el procesamiento y
 				comercialización de productos de aceite y grasa. Procesadora Ecograsas
 				busca brindar a sus clientes productos de alta calidad mientras minimiza
@@ -129,6 +129,7 @@ export default function AboutContainer() {
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2336.874822382744!2d-68.29831042136009!3d9.922352801640253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8082fd255aaaa9%3A0x6a8f7ff645964de3!2sProcesadora%20Ecograsa%2C%20C.A.!5e0!3m2!1ses!2sve!4v1691004482791!5m2!1ses!2sve"
 				width="100%"
 				height="450"
+				title="map"
 				style={{ border: 0 }}
 				allowFullScreen
 				loading="lazy"
