@@ -10,7 +10,6 @@ import ProductCard from "../../components/ProductCard";
 import InstructionsBanner from "../../components/InstructionBanner";
 import SellerCard from "../../components/SellerCard";
 import EventsCard from "../../components/EventsCard";
-import eventImg from "../../images/eventsImg.webp";
 import CartWrapper from "../CartWrapper";
 
 interface ProductsInterface {
@@ -123,12 +122,13 @@ export default function Home() {
 
 	const products = allSanityImageAsset.nodes.find(
 		(e: sanityImageInfo) =>
-			e.filename ===
-			"hermoso-paisaje-plantas-phragmites-junto-al-mar-pelicano-nadando-al-atardecer-min.webp",
+			e.filename === "assorted-fruits-pastry_23-2147869464.jpg",
 	);
 
 	const sellers = allSanityImageAsset.nodes.find(
-		(e: sanityImageInfo) => e.filename === "sellerBack.webp",
+		(e: sanityImageInfo) =>
+			e.filename ===
+			"vista-superior-galleta-chispas-chocolate-fondo-naranja.jpg",
 	);
 
 	return (
