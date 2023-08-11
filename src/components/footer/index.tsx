@@ -7,7 +7,10 @@ import "./index.scss";
 
 export default function Footer() {
 	return (
-		<footer id='footer' className="min-w-full bg-lime-500 pt-10 flex flex-wrap justify-around">
+		<footer
+			id="footer"
+			className="min-w-full bg-lime-500 pt-10 flex flex-wrap justify-around"
+		>
 			<div className="ml-6 socials-container">
 				<h2 className="font-bold text-3xl mb-4">
 					Impulsando los mejores
@@ -25,7 +28,7 @@ export default function Footer() {
 						<AiFillInstagram className="" />
 					</a>
 					<a
-						aria-label='link a red social de facebook'
+						aria-label="link a red social de facebook"
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
@@ -34,13 +37,13 @@ export default function Footer() {
 						<BsFacebook />
 					</a>
 					<a
-						aria-label='link de gmail'
+						aria-label="link de gmail"
 						target="_blank"
 						rel="noreferrer"
 						className="duration-100 hover:text-slate-100"
 						href="mailto:ventas@ecograsas.com"
 					>
-						<GrMail/>
+						<GrMail />
 					</a>
 				</div>
 			</div>
@@ -59,17 +62,9 @@ export default function Footer() {
 						<li>
 							<Link
 								className="hover:text-slate-100 font-medium duration-100"
-								to="/Contact"
+								to="/Policies"
 							>
-								equipo de ventas
-							</Link>
-						</li>
-						<li>
-							<Link
-								className="hover:text-slate-100 font-medium duration-100"
-								to="/Privacy"
-							>
-								politicas de privacidad
+								politicas de venta
 							</Link>
 						</li>
 					</ul>
