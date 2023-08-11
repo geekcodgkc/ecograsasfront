@@ -89,7 +89,6 @@ export const useCartStore = create<CartStoreInterface, []>(
 				set((state) => {
 					const newState = { ...state, loading: false };
 					if (state.cart) {
-						console.log("ss");
 						const count = Object.values(state.cart)
 							.map((c) => c.qty)
 							.reduce((acc, curr) => acc + curr);
@@ -120,7 +119,6 @@ export const useCartStore = create<CartStoreInterface, []>(
 													).toFixed(2),
 											  ),
 								};
-								console.log(count, newState.cart[entry[0]]);
 							}
 						});
 					} else {
