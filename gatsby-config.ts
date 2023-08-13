@@ -4,7 +4,7 @@ import "dotenv/config";
 const config: GatsbyConfig = {
 	siteMetadata: {
 		title: "ecograsas",
-		siteUrl: "https://www.yourdomain.tld",
+		siteUrl: "https://www.ecograsas.com",
 		lang: "es",
 		description:
 			"ecograsas procesadores de aceite de palma para reposteria y elaboracion de jabon",
