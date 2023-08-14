@@ -78,7 +78,7 @@ export default function PostsContainer({
 
 export const query = graphql`
     query posts($limit: Int, $skip: Int) {
-        allSanityBlogs(limit: $limit, skip: $skip) {
+        allSanityBlogs(limit: $limit, skip: $skip, sort: {_createdAt: DESC}) {
             nodes {
                 Slug {
                     current
