@@ -50,7 +50,6 @@ export default function PostCard({ data }: PostCardInterface) {
 								{childrens.children.map((child, i) => (
 									<span key={i + 1}>
 										{child.text}
-										<br />
 									</span>
 								))}
 							</React.Fragment>
