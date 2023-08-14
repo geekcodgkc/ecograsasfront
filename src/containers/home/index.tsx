@@ -116,9 +116,9 @@ export default function Home() {
 		allSanityBlogs,
 	} = useStaticQuery(queryProductImage);
 
-	const farming = allSanityImageAsset.nodes.find(
+	/*const farming = allSanityImageAsset.nodes.find(
 		(e: sanityImageInfo) => e.filename === "farminBackground.webp",
-	);
+	);*/
 
 	const products = allSanityImageAsset.nodes.find(
 		(e: sanityImageInfo) =>
@@ -134,13 +134,13 @@ export default function Home() {
 	return (
 		<CartWrapper>
 			<Hero />
-			<section className="w-full relative farmin-background">
+			{/*<section className="w-full relative farmin-background">
 				<div
 					className="background"
 					style={{ backgroundImage: `url(${farming.resize.src})` }}
 				/>
 				<SectionDouble LeftChild={Iframe} RightChild={Left} padding="py-24" />
-			</section>
+			</section>*/}
 			<section className="w-full pt-16 products-background relative flex justify-center flex-wrap">
 				<div
 					className="background"
