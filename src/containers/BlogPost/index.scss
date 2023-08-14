@@ -10,3 +10,12 @@
         margin-top: 2rem;
     }
 }
+
+.blogLink {
+    text-decoration: underline 2px;
+    transition-duration: 0.2s;
+}
+
+.blogLink:hover {
+    color: #ada400
+}
