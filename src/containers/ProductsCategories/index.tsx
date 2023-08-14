@@ -1,6 +1,7 @@
 import React from "react";
 import CartWrapper from "../CartWrapper";
 import ProductCart from "../../components/ProductSaleCard";
+import { Helmet } from "react-helmet";
 
 interface Sproducts {
 	Slug: {
@@ -47,6 +48,15 @@ export default function ProductCategories({
 	return (
 		<>
 			<CartWrapper>
+			<Helmet>
+				<title>{`ecograsas - ${context.sanityProducts[0].department}`}</title>
+				<meta
+					content={
+						`categorria de ${context.sanityProducts[0].department.toLocaleLowerCase()} echos por procesadora ecograsas, productores de los mejores productos derivados del aceite de palma`
+					}
+					name="description"
+				/>
+			</Helmet>
 				<div className="w-full pb-8 max-w-screen-xl mx-auto min-h-screen flex flex-wrap gap-y-4 relative items-start">
 					{context.sanityProducts.map((e) => (
 						<ProductCart key={e._id} product={e} />
