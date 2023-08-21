@@ -100,7 +100,7 @@ export default function ProductCart({ product }: productCartProps) {
 				<p className="w-10/12 pr-2 line-clamp-3" id="shortDescription">
 					{product.descriptionsShort}
 				</p>
-				{userStore.token && (
+				{userStore.token && userStore.userData?.verified && (
 					<div
 						className="flex flex-wrap gap-y-2 justify-between w-full pr-4 align-center pb-4"
 						id="itemsContainer"
@@ -134,7 +134,7 @@ export default function ProductCart({ product }: productCartProps) {
 					</div>
 				)}
 				{!userStore.token && (
-					<h4>
+					<>
 						<button
 							type="button"
 							className="action-button-1 self-end"
@@ -144,7 +144,20 @@ export default function ProductCart({ product }: productCartProps) {
 						>
 							Inicia Sesi&oacute;n Para ver los precios
 						</button>
-					</h4>
+					</>
+				)}
+				{userStore.token && !userStore.userData?.verified && (
+					<>
+						<button
+							type="button"
+							className="action-button-1 self-end"
+							onClick={() => {
+								navigate("/Profile");
+							}}
+						>
+							Obten la verificacion para ver los precios
+						</button>
+					</>
 				)}
 			</div>
 		</article>
