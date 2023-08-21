@@ -250,7 +250,7 @@ const queryProductImage = graphql`
 				}
 			}
 		}
-		allSanityBlogs(limit: 2) {
+		allSanityBlogs(limit: 2, sort: {_createdAt: DESC}) {
 			nodes {
 				Slug {
 					current
