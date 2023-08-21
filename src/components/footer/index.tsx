@@ -85,7 +85,7 @@ export default function Footer() {
 								className="hover:text-slate-100 font-medium duration-100"
 								to="/Blog"
 							>
-								post
+								Recetas y Post
 							</Link>
 						</li>
 					</ul>
