@@ -16,7 +16,7 @@ export default function Hero() {
 				backgroundImage: `url(${heroData.mainImage.asset.resize.src})`,
 			}}
 		>
-			<div className="text-slate-100 flex flex-col gap-2 titles-container">
+			<div className="flex flex-col gap-2 titles-container">
 				<h3 className="text-4xl font-bold">{heroData.mainTitle}</h3>
 				<h2 className="text-5xl font-bold max-w-screen-lg">
 					{heroData.secondTitle}
