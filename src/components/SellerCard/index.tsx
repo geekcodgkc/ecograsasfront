@@ -35,7 +35,7 @@ export default function SellerCard({
 						{!img && <FaUserAlt />}
 					</div>
 					<h3>{name}</h3>
-					<h4>Depatamento de: {deparment}</h4>
+					<h4>Departamento de: {deparment}</h4>
 					<p className="font-bold hover:text-stone-500 underline decoration-2">
 						<a
 							href={`https://wa.me/${phone}`}
