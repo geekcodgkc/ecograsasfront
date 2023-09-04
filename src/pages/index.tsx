@@ -14,7 +14,7 @@ export const Head: HeadFC = () => (
 		<title>EcoGrasas</title>
 		<meta
 			name="description"
-			content="ecograsas procesadores de aceite de palma para reposteria y elaboracion de jabon"
+			content="ecograsas procesadores de aceite de palma para reposteria y elaboracion de jabon, ubicada en tinaquillo cojedes"
 		/>
 		<Helmet>
 			<title>{"EcoGrasas"}</title>
