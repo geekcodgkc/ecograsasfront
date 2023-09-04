@@ -81,7 +81,10 @@ export default function ProductCart({ product }: productCartProps) {
 			className="w-full m-4 flex flex-wrap bg-slate-50 rounded shadow-lg max-w-screen-lg"
 			id="articleContainer"
 		>
-			<Link to={`/Products/${product.Slug.current}`} className="w-fit h-fit">
+			<Link
+				to={`/products/${product.Slug.current.toLocaleLowerCase()}`}
+				className="w-fit h-fit"
+			>
 				<img
 					className="img-component hover:opacity-40 duration-150"
 					src={product.productImage.asset.resize.src}
@@ -92,7 +95,7 @@ export default function ProductCart({ product }: productCartProps) {
 				/>
 			</Link>
 			<div className="flex-1 pl-2 pt-2 h-full flex flex-wrap justify-start w-full">
-				<Link to={`/Products/${product.Slug.current}`}>
+				<Link to={`/products/${product.Slug.current.toLocaleLowerCase()}`}>
 					<h2 className="w-full font-bold text-lg mb-4 hover:text-emerald-800 break-words">
 						{product.productName}
 					</h2>
@@ -139,7 +142,7 @@ export default function ProductCart({ product }: productCartProps) {
 							type="button"
 							className="action-button-1 self-end"
 							onClick={() => {
-								navigate("/Login");
+								navigate("/login");
 							}}
 						>
 							Inicia Sesi&oacute;n Para ver los precios
@@ -152,7 +155,7 @@ export default function ProductCart({ product }: productCartProps) {
 							type="button"
 							className="action-button-1 self-end"
 							onClick={() => {
-								navigate("/Profile");
+								navigate("/profile");
 							}}
 						>
 							Obten la verificacion para ver los precios

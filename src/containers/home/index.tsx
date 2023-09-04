@@ -73,7 +73,7 @@ const Iframe = () => {
 
 const Left = () => {
 	const sendTo = () => {
-		navigate("/Register");
+		navigate("/register");
 	};
 
 	return (
@@ -157,7 +157,7 @@ export default function Home() {
 								title={product.productName}
 								description={product.descriptionsShort}
 								buttonText="Conoce Mas"
-								actionRoute={`/Products/${product.Slug.current}`}
+								actionRoute={`/products/${product.Slug.current.toLocaleLowerCase()}`}
 								img={product.productImage.asset.resize.src}
 							/>
 						);

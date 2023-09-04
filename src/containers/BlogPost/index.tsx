@@ -6,19 +6,19 @@ import { Helmet } from "react-helmet";
 interface Child {
 	text: string;
 	_type: string;
-	marks: string[]
+	marks: string[];
 }
 
 interface MarkDef {
-	href: string
-	_key: string
-	_type: string
+	href: string;
+	_key: string;
+	_type: string;
 }
 
 interface Childrens {
 	children: Child[];
 	style: string;
-	markDefs: [] | MarkDef[]
+	markDefs: [] | MarkDef[];
 }
 
 interface SanityBlogs {
@@ -49,7 +49,7 @@ interface BlogPostsInterface {
 
 export default function BlogPostsContainer({ data }: BlogPostsInterface) {
 	const { sanityBlogs: post } = data;
-	const postData = post._rawBlogPost
+	const postData = post._rawBlogPost;
 
 	return (
 		<div className="BlogPostContainer w-full mx-auto max-w-screen-lg center py-12 bg-slate-50">
@@ -70,13 +70,21 @@ export default function BlogPostsContainer({ data }: BlogPostsInterface) {
 						return (
 							<p className="my-8 text-justify" key={i + 1}>
 								{textEl.children.map((text) => {
-									const link = textEl.markDefs.filter(m => m._key === text.marks[0])
+									const link = textEl.markDefs.filter(
+										(m) => m._key === text.marks[0],
+									);
 									if (text.marks.length > 0 && link.length > 0) {
-										return <a href={link[0].href} className="blogLink" key={text.marks[0]} >
-											{text.text}
-										</a>
+										return (
+											<a
+												href={link[0].href}
+												className="blogLink"
+												key={text.marks[0]}
+											>
+												{text.text}
+											</a>
+										);
 									}
-									return `${text.text}`
+									return `${text.text}`;
 								})}
 								<br />
 							</p>
@@ -88,14 +96,22 @@ export default function BlogPostsContainer({ data }: BlogPostsInterface) {
 							className="text-2xl my-8 font-bold w-full text-center"
 						>
 							{textEl.children.map((text) => {
-									const link = textEl.markDefs.filter(m => m._key === text.marks[0])
-									if (text.marks.length > 0 && link.length > 0) {
-										return <a href={link[0].href} className="blogLink" key={text.marks[0]}>
+								const link = textEl.markDefs.filter(
+									(m) => m._key === text.marks[0],
+								);
+								if (text.marks.length > 0 && link.length > 0) {
+									return (
+										<a
+											href={link[0].href}
+											className="blogLink"
+											key={text.marks[0]}
+										>
 											{text.text}
 										</a>
-									}
-									return `${text.text}`
-								})}
+									);
+								}
+								return `${text.text}`;
+							})}
 							<br />
 						</h3>
 					);

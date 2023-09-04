@@ -71,7 +71,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	PagesArray.forEach((_node, i) => {
 		actions.createPage({
-			path: i === 0 ? "/Blog/" : `/Blog/${i + 1}`,
+			path: i === 0 ? "/blog/" : `/Blog/${i + 1}`,
 			component: path.resolve("./src/containers/Posts/index.tsx"),
 			context: {
 				limit: maxPaginationNumber,
@@ -84,7 +84,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	posts.forEach((node) => {
 		actions.createPage({
-			path: `/Posts/${node.Slug.current}`,
+			path: `/posts/${node.Slug.current.toLocaleLowerCase()}`,
 			component: path.resolve("./src/containers/BlogPost/index.tsx"),
 			context: {
 				slug: node.Slug.current,
@@ -94,7 +94,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	productsMaped.forEach((node) => {
 		actions.createPage({
-			path: `/Products/${node.Slug.current}`,
+			path: `/products/${node.Slug.current.toLocaleLowerCase()}`,
 			component: path.resolve(
 				"./src/containers/SingleProductContainer/index.tsx",
 			),
@@ -110,7 +110,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	});
 
 	actions.createPage({
-		path: "/Products",
+		path: "/products",
 		component: path.resolve("./src/containers/Products/index.tsx"),
 		context: {
 			sanityProducts: productsMaped,
@@ -129,7 +129,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	Object.keys(ProductCategories).forEach((Categorie) => {
 		actions.createPage({
-			path: `/Products/Categorias/${Categorie.toLocaleLowerCase()}`,
+			path: `/products/categorias/${Categorie.toLocaleLowerCase()}`,
 			component: path.resolve("./src/containers/ProductsCategories/index.tsx"),
 			context: {
 				sanityProducts: ProductCategories[Categorie],
