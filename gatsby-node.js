@@ -71,7 +71,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	PagesArray.forEach((_node, i) => {
 		actions.createPage({
-			path: i === 0 ? "/blog/" : `/Blog/${i + 1}`,
+			path: i === 0 ? "/blog/" : `/blog/${i + 1}`,
 			component: path.resolve("./src/containers/Posts/index.tsx"),
 			context: {
 				limit: maxPaginationNumber,
