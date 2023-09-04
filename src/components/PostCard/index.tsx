@@ -33,12 +33,12 @@ export default function PostCard({ data }: PostCardInterface) {
 	return (
 		<article className="shadow-xl postCardContainer w-full flex flex-wrap gap-2 rounded-lg p-4 bg-slate-300">
 			<div className="Img max-w-content rounded-lg">
-				<Link to={`/Posts/${data.Slug.current}`}>
+				<Link to={`/posts/${data.Slug.current}`}>
 					<img alt={data.title} src={data.mainImage.asset.resize.src} />
 				</Link>
 			</div>
 			<div className="description flex-1 flex flex-wrap gap-4 flex-col">
-				<Link to={`/Posts/${data.Slug.current}`}>
+				<Link to={`/posts/${data.Slug.current}`}>
 					<h3 className="font-bold text-2xl break-words hover:text-slate-50 duration-150">
 						{data.title}
 					</h3>
@@ -48,9 +48,7 @@ export default function PostCard({ data }: PostCardInterface) {
 						return (
 							<React.Fragment key={i + 10}>
 								{childrens.children.map((child, i) => (
-									<span key={i + 1}>
-										{child.text}
-									</span>
+									<span key={i + 1}>{child.text}</span>
 								))}
 							</React.Fragment>
 						);

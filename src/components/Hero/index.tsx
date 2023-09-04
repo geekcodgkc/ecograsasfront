@@ -32,7 +32,7 @@ export default function Hero() {
 				{isBrowser() && !useStore.token && (
 					<>
 						<span className="p-1 pr-2 border-solid border-slate-100 rounded border bg-black/80">
-							<Link to="/Register" className="hover:text-[#60794d]">
+							<Link to="/register" className="hover:text-[#60794d]">
 								<b>paso 1:</b> reg&iacute;strate
 							</Link>
 						</span>

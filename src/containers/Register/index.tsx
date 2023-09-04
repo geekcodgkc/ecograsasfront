@@ -45,7 +45,7 @@ export default function RegisterContainer() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		store.register(data, () => navigate("/Profile"));
+		store.register(data, () => navigate("/profile"));
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,7 @@ export default function RegisterContainer() {
 			<p className="my-8 mx-4">
 				ya tienes una cuenta?{" "}
 				<Link
-					to="/Login"
+					to="/login"
 					className="text-cyan-700 hover:font-bold duration-100"
 				>
 					inicia sesion aqui

@@ -21,7 +21,7 @@ export default function ProfileContainer() {
 	}, []);
 
 	if (store && store.token === null) {
-		navigate("/Login");
+		navigate("/login");
 	}
 
 	if (isBrowser && store && store?.loading) return <ProfileSqueleton />;

@@ -17,7 +17,7 @@ export default function ActionModal({ handleClose }: ModalProps) {
 
 	const handlePaymen = () => {
 		const cb = () => {
-			navigate("/Profile");
+			navigate("/profile");
 		};
 		if (userStore.userData && userStore._id) {
 			cartStore.createOrder(

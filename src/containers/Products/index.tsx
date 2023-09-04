@@ -24,15 +24,15 @@ export default function Products() {
 	return (
 		<>
 			<CartWrapper>
-			<Helmet>
-				<title>{"ecograsas - Productos"}</title>
-				<meta
-					content={
-						"todos los productos de procesadora ecograsas, derivados del aceite de palma perfectos para la resposteria, panaderia y heladeria."
-					}
-					name="description"
-				/>
-			</Helmet>
+				<Helmet>
+					<title>{"ecograsas - Productos"}</title>
+					<meta
+						content={
+							"todos los productos de procesadora ecograsas, derivados del aceite de palma perfectos para la resposteria, panaderia y heladeria."
+						}
+						name="description"
+					/>
+				</Helmet>
 				{isBrowser() && (
 					<div className="w-full py-8 max-w-screen-xl mx-auto min-h-screen">
 						{options.map((name, i) => {
@@ -67,7 +67,7 @@ export default function Products() {
 									}}
 									onClick={() => {
 										navigate(
-											`/Products/Categorias/${name.toLocaleLowerCase()}`,
+											`/products/categorias/${name.toLocaleLowerCase()}`,
 										);
 									}}
 									onKeyDown={() => {}}

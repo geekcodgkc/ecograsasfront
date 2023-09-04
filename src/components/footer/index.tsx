@@ -54,7 +54,7 @@ export default function Footer() {
 						<li>
 							<Link
 								className="hover:text-slate-100 font-medium duration-100"
-								to="/About"
+								to="/about"
 							>
 								sobre nosotros
 							</Link>
@@ -62,7 +62,7 @@ export default function Footer() {
 						<li>
 							<Link
 								className="hover:text-slate-100 font-medium duration-100"
-								to="/Policies"
+								to="/policies"
 							>
 								politicas de venta
 							</Link>
@@ -75,7 +75,7 @@ export default function Footer() {
 						<li>
 							<Link
 								className="hover:text-slate-100 font-medium duration-100"
-								to="/Login"
+								to="/login"
 							>
 								incia sesion / registrarse
 							</Link>
@@ -83,7 +83,7 @@ export default function Footer() {
 						<li>
 							<Link
 								className="hover:text-slate-100 font-medium duration-100"
-								to="/Blog"
+								to="/blog"
 							>
 								Recetas y Post
 							</Link>
