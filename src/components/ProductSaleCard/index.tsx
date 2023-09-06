@@ -95,7 +95,7 @@ export default function ProductCart({ product }: productCartProps) {
 				/>
 			</Link>
 			<div className="flex-1 pl-2 pt-2 h-full flex flex-wrap justify-start w-full">
-				<Link to={`/products/${product.Slug.current.toLocaleLowerCase()}`}>
+				<Link to={`/Products/${product.Slug.current.toLocaleLowerCase()}`}>
 					<h2 className="w-full font-bold text-lg mb-4 hover:text-emerald-800 break-words">
 						{product.productName}
 					</h2>
@@ -142,7 +142,7 @@ export default function ProductCart({ product }: productCartProps) {
 							type="button"
 							className="action-button-1 self-end"
 							onClick={() => {
-								navigate("/login");
+								navigate("/Login");
 							}}
 						>
 							Inicia Sesi&oacute;n Para ver los precios
@@ -155,7 +155,7 @@ export default function ProductCart({ product }: productCartProps) {
 							type="button"
 							className="action-button-1 self-end"
 							onClick={() => {
-								navigate("/profile");
+								navigate("/Profile");
 							}}
 						>
 							Obten la verificacion para ver los precios

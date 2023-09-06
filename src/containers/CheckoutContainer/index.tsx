@@ -38,11 +38,11 @@ export default function CheckoutContainer() {
 		: 0;
 
 	if (isBrowser && !userStore.token) {
-		navigate("/login");
+		navigate("/Login");
 	}
 
 	if (isBrowser && !userStore.userData?.verified) {
-		navigate("/profile");
+		navigate("/Profile");
 	}
 
 	return (
@@ -135,7 +135,7 @@ export default function CheckoutContainer() {
 						if (isBrowser && cartStore.cart) {
 							setOpen(true);
 						} else {
-							navigate("/products");
+							navigate("/Products");
 						}
 					}}
 					onKeyDown={() => {}}

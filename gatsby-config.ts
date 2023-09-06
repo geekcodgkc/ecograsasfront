@@ -17,6 +17,12 @@ const config: GatsbyConfig = {
 		"gatsby-plugin-webpack-bundle-analyser-v2",
 		"gatsby-plugin-sitemap",
 		{
+			resolve: "gatsby-plugin-netlify",
+			options: {
+				generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
+			},
+		},
+		{
 			resolve: "gatsby-plugin-canonical-urls",
 			options: {
 				siteUrl: "https://www.ecograsas.com",

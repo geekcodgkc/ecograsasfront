@@ -21,7 +21,7 @@ export default function EventsCard({
 		<article
 			className="eventCardContainer shadow-lg relative"
 			onClick={() => {
-				navigate(`/posts/${Slug.toLocaleLowerCase()}`);
+				navigate(`/Posts/${Slug.toLocaleLowerCase()}`);
 			}}
 			onKeyDown={() => {}}
 		>

@@ -12,7 +12,7 @@ export default function LoginContainer() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		store.login(data, () => navigate("/profile"));
+		store.login(data, () => navigate("/Profile"));
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ export default function LoginContainer() {
 		setData(current);
 	};
 
-	if (store.token) navigate("/profile");
+	if (store.token) navigate("/Profile");
 
 	return (
 		<div className="flex justify-center w-full max-w-screen-lg mx-auto min-h-screen items-center mt-4">
@@ -76,7 +76,7 @@ export default function LoginContainer() {
 				<p className="mt-8">
 					no tienes cuenta?{" "}
 					<Link
-						to="/register"
+						to="/Register"
 						className="text-cyan-700 hover:font-bold duration-100"
 					>
 						registrate aqui

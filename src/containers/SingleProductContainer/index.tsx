@@ -196,7 +196,7 @@ export default function SingleProduct({ data, pageContext }: pageContext) {
 									type="button"
 									className="action-button-1 self-end"
 									onClick={() => {
-										navigate("/login");
+										navigate("/Login");
 									}}
 								>
 									Inicia Sesi&oacute;n Para ver los precios
