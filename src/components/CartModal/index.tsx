@@ -111,10 +111,10 @@ export default function CartModal({ handleClose }: ModalProps) {
 						type="button"
 						onClick={() => {
 							if (!userStore.userData?.verified) {
-								navigate("/profile");
+								navigate("/Profile");
 								return;
 							}
-							navigate("/checkout");
+							navigate("/Checkout");
 						}}
 						onKeyDown={() => {}}
 					>

@@ -35,7 +35,7 @@ export default function CartWrapper({ children }: React.PropsWithChildren) {
 				<div
 					className="cartButtonAbsoluteII"
 					onClick={() => {
-						navigate("/products");
+						navigate("/Products");
 					}}
 					onKeyDown={() => {}}
 				>

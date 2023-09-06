@@ -13,7 +13,7 @@ export default function NavBar() {
 
 	const sendTo = () => {
 		setOpen(false);
-		navigate("/register");
+		navigate("/Register");
 	};
 
 	const handleOpen = () => {
@@ -30,22 +30,22 @@ export default function NavBar() {
 				</div>
 				<div className="items-center flex gap-x-4 tracking-widest page-links">
 					<Link
-						to="/products"
+						to="/Products"
 						className="font-medium px-4 duration-150 nav-hover"
 					>
 						Productos
 					</Link>
-					<Link to="/about" className="font-medium px-4 duration-150 nav-hover">
+					<Link to="/About" className="font-medium px-4 duration-150 nav-hover">
 						nosotros
 					</Link>
-					<Link to="/blog" className="font-medium px-4 duration-150 nav-hover">
+					<Link to="/Blog" className="font-medium px-4 duration-150 nav-hover">
 						Blog
 					</Link>
 					{state.token ? (
 						<div
 							className="userButton"
 							onClick={() => {
-								navigate("/profile");
+								navigate("/Profile");
 							}}
 							onKeyDown={() => {}}
 						>
@@ -82,7 +82,7 @@ export default function NavBar() {
 							<div
 								className="userButton"
 								onClick={() => {
-									navigate("/profile");
+									navigate("/Profile");
 									setOpen(false);
 								}}
 								onKeyDown={() => {}}
@@ -100,28 +100,28 @@ export default function NavBar() {
 						)}
 						<Link
 							onClick={handleOpen}
-							to="/products"
+							to="/Products"
 							className="font-medium duration-150 nav-hover"
 						>
 							Productos
 						</Link>
 						<Link
 							onClick={handleOpen}
-							to="/about"
+							to="/About"
 							className="font-medium duration-150 nav-hover"
 						>
 							Nosotros
 						</Link>
 						<Link
 							onClick={handleOpen}
-							to="/blog"
+							to="/Blog"
 							className="font-medium duration-150 nav-hover"
 						>
 							Blog
 						</Link>
 						<Link
 							onClick={handleOpen}
-							to="/checkout"
+							to="/Checkout"
 							className="font-medium duration-150 nav-hover flex items-center gap-1"
 						>
 							Carrito <AiOutlineShoppingCart />

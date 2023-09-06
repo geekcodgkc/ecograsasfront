@@ -67,7 +67,7 @@ export default function Products() {
 									}}
 									onClick={() => {
 										navigate(
-											`/products/categorias/${name.toLocaleLowerCase()}`,
+											`/Products/categorias/${name.toLocaleLowerCase()}`,
 										);
 									}}
 									onKeyDown={() => {}}
