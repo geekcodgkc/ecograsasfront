@@ -66,15 +66,15 @@ export default function ProfileContainer() {
 							</p>
 							<p className="w-full flex flex-wrap justify-between">
 								<b>Estado: </b>
-								{isBrowser && store && store.userData?.zone.State}
+								{isBrowser && store && store.userData?.zone?.State}
 							</p>
 							<p className="w-full flex flex-wrap justify-between">
 								<b>Area: </b>
-								{isBrowser && store && store.userData?.zone.area}
+								{isBrowser && store && store.userData?.zone?.area}
 							</p>
 							<p className="w-full flex flex-wrap justify-between">
 								<b>Codigo Postal: </b>
-								{isBrowser && store && store.userData?.zone.ZIPCode}
+								{isBrowser && store && store.userData?.zone?.ZIPCode}
 							</p>
 							<p className="w-full flex flex-wrap justify-between">
 								<b>Persona de Contacto en Mi Empresa: </b>

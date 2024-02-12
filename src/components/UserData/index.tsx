@@ -96,7 +96,11 @@ export default function UserData() {
 							<div className="orderInfo">
 								<h4>
 									Numero de orden:{" "}
-									<b>{order.orderNumber.toString().padStart(8, "0")}</b>
+									<b>
+										{order.orderNumber
+											? order.orderNumber.toString().padStart(8, "0")
+											: "No Disponible"}
+									</b>
 								</h4>
 								<h4>
 									fecha de la order:{" "}

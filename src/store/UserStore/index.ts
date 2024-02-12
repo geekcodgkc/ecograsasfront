@@ -86,7 +86,7 @@ type MyPersist = (
 
 export const useUserStore = create<UserStoreInterface, []>(
 	(persist as MyPersist)(
-		(set): UserStoreInterface => ({
+		(set, get): UserStoreInterface => ({
 			_id: null,
 			userData: null,
 			id: null,
@@ -174,9 +174,17 @@ export const useUserStore = create<UserStoreInterface, []>(
 			},
 			getUserData: async (id) => {
 				set((state) => ({ ...state, loading: true }));
+				const userType = get().isAdmin;
 				try {
-					const { data } = await api.get(`clients/${id}?populated=true`);
-					set((state) => ({ ...state, loading: false, userData: data }));
+					const { data } = await api.get(
+						`${userType ? "sellers" : "clients"}/${id}?populated=true`,
+					);
+					if (userType) data.verified = true;
+					set((state) => ({
+						...state,
+						loading: false,
+						userData: { ...state.userData, ...data },
+					}));
 				} catch (error) {
 					set((state) => ({ ...state, loading: false }));
 				}

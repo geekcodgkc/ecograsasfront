@@ -31,3 +31,16 @@
 * [*] add meta tags (title, description)
   * [*] all products Page
   * [*] products
+* [ ] change the uri of the ./utils/api.ts
+* [ ] trabajar en la pagina de Dashboard
+  * [ ] agregar configurador de descuentos
+  * [ ] agregar configurador de rangos de precios por kilos
+  * [ ] agregar configurador de las vistas para clientes unilevel
+* [ ] trabajar en la vista de ordenes
+  * [ ] mostrar los rangos de precios segun los kilos
+  * [ ] calcular el precio segun los kilos de los clientes y el que se suma por la orden actual
+  * [ ] agregar tipos de descuentos en la totalizacion del producto
+  * [ ] logica para descuentos segun si es al total de la orden o
+    producto individual
+  * [ ] mostar unicamente los productos configurados para los clientes unilevel
+  
