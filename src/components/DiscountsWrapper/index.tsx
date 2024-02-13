@@ -2,6 +2,7 @@ import React from "react";
 //import "./index.scss";
 import { useConfigStore } from "../../store/ConfigStore";
 import DiscountsContainer from "./Discount";
+import DiscountsInput from "./DiscountsInputs";
 
 export default function DiscountsWrapper() {
 	const { Discounts } = useConfigStore((store) => store);
@@ -30,6 +31,7 @@ export default function DiscountsWrapper() {
 					<h3>no hay descuentos configurados</h3>
 				)}
 			</table>
+			<DiscountsInput />
 		</div>
 	);
 }
