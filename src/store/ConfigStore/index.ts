@@ -21,6 +21,7 @@ export interface ConfigStoreInterface {
 	PriceScales: null | PricesScalesInterface[];
 	Discounts: null | DiscountsInterface[];
 	loading: boolean;
+	_id: null | string;
 	getConfig: () => Promise<void>;
 	updateConfig: (data: ConfigUpdateForm) => Promise<void>;
 }
@@ -36,6 +37,7 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 			PriceScales: null,
 			Discounts: null,
 			loading: false,
+			_id: null,
 			getConfig: async () => {
 				try {
 					set((state) => ({ ...state, loading: true }));
@@ -45,6 +47,7 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 						loading: false,
 						Discounts: data.Discounts,
 						PriceScales: data.PriceScales,
+						_id: data._id,
 					}));
 				} catch (error) {
 					set((state) => ({ ...state, loading: false }));
