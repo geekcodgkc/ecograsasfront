@@ -111,6 +111,9 @@ export default function DiscountsInput() {
 								percent,
 								global: isGlobal,
 							});
+							setPercent(0);
+							setIsGlobal(false);
+							setNameValue("");
 							setOpen(false);
 						}}
 						onKeyUp={() => {}}

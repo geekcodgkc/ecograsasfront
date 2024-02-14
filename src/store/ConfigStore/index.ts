@@ -25,6 +25,8 @@ export interface ConfigStoreInterface {
 	getConfig: () => Promise<void>;
 	updateConfig: (data: ConfigUpdateForm) => Promise<void>;
 	addDiscounts: (data: DiscountsInterface) => Promise<void>;
+	changeOrder: (currIndex: number, nextIndex: number) => Promise<void>;
+	remove: (index: number) => Promise<void>;
 }
 
 type MyPersist = (
@@ -65,7 +67,6 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 				try {
 					set((state) => ({ ...state, loading: true }));
 					const currentDiscounts = get().Discounts;
-					console.log(currentDiscounts);
 					const discounts = currentDiscounts
 						? [...currentDiscounts, data]
 						: [data];
@@ -78,6 +79,53 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 						loading: false,
 						Discounts: newData.Discounts,
 					}));
+				} catch (error) {
+					set((state) => ({ ...state, loading: false }));
+				}
+			},
+			changeOrder: async (currIndex, nextIndex) => {
+				try {
+					set((state) => ({ ...state, loading: true }));
+					const Discounts = get().Discounts;
+					if (Discounts) {
+						const dis = Discounts[currIndex];
+						console.log(dis);
+						const newDiscounts = [
+							...Discounts.slice(0, currIndex),
+							...Discounts.slice(currIndex + 1, Discounts.length),
+						];
+						newDiscounts.splice(nextIndex, 0, dis);
+						await api.put(`/config/${get()._id}`, {
+							Discounts: newDiscounts,
+						});
+						set((state) => ({
+							...state,
+							loading: false,
+							Discounts: [...newDiscounts],
+						}));
+					}
+				} catch (error) {
+					set((state) => ({ ...state, loading: false }));
+				}
+			},
+			remove: async (index) => {
+				try {
+					set((state) => ({ ...state, loading: true }));
+					const Discounts = get().Discounts;
+					if (Discounts) {
+						const newDiscounts = [
+							...Discounts.slice(0, index),
+							...Discounts.slice(index + 1, Discounts.length),
+						];
+						await api.put(`/config/${get()._id}`, {
+							Discounts: newDiscounts,
+						});
+						set((state) => ({
+							...state,
+							loading: false,
+							Discounts: [...newDiscounts],
+						}));
+					}
 				} catch (error) {
 					set((state) => ({ ...state, loading: false }));
 				}

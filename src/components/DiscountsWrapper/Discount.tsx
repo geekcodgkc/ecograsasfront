@@ -1,5 +1,5 @@
 import React from "react";
-import { DiscountsInterface } from "../../store/ConfigStore";
+import { DiscountsInterface, useConfigStore } from "../../store/ConfigStore";
 import { CiTrash } from "react-icons/ci";
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "react-icons/fa";
 
@@ -12,6 +12,27 @@ interface DiscountProps {
 }
 
 export default function DiscountsContainer({ data }: DiscountProps) {
+	const { changeOrder, Discounts, remove } = useConfigStore((state) => state);
+
+	const handleUp = () => {
+		if (data.index !== 0) {
+			const nextIndex = data.index - 1;
+			changeOrder(data.index, nextIndex);
+		}
+	};
+
+	const handleDown = () => {
+		const maxIndex = Discounts ? Discounts.length : 0;
+		const nextIndex = data.index + 1;
+		if (nextIndex !== maxIndex && nextIndex < maxIndex) {
+			changeOrder(data.index, nextIndex);
+		}
+	};
+
+	const handleRemove = () => {
+		remove(data.index);
+	};
+
 	return (
 		<tr>
 			<td className="font-bold text-lg border border-slate-300 p-1">
@@ -23,9 +44,18 @@ export default function DiscountsContainer({ data }: DiscountProps) {
 			<td className="border border-slate-300 p-1 font-bold text-center">{`${data.percent}%`}</td>
 			<td className="border border-slate-300 p-1">
 				<div className="w-full flex justify-between text-2xl">
-					<FaArrowAltCircleUp className="duration-100 cursor-pointer hover:text-sky-500" />
-					<FaArrowAltCircleDown className="duration-100 cursor-pointer hover:text-teal-400" />
-					<CiTrash className="duration-100 cursor-pointer hover:text-red-500" />
+					<FaArrowAltCircleUp
+						className="duration-100 cursor-pointer hover:text-sky-500"
+						onClick={handleUp}
+					/>
+					<FaArrowAltCircleDown
+						className="duration-100 cursor-pointer hover:text-teal-400"
+						onClick={handleDown}
+					/>
+					<CiTrash
+						className="duration-100 cursor-pointer hover:text-red-500"
+						onClick={handleRemove}
+					/>
 				</div>
 			</td>
 		</tr>
