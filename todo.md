@@ -33,7 +33,7 @@
   * [*] products
 * [ ] change the uri of the ./utils/api.ts
 * [ ] trabajar en la pagina de Dashboard
-  * [ ] agregar configurador de descuentos
+  * [*] agregar configurador de descuentos
   * [ ] agregar configurador de rangos de precios por kilos
   * [ ] agregar configurador de las vistas para clientes unilevel
 * [ ] trabajar en la vista de ordenes
@@ -43,4 +43,3 @@
   * [ ] logica para descuentos segun si es al total de la orden o
     producto individual
   * [ ] mostar unicamente los productos configurados para los clientes unilevel
-  

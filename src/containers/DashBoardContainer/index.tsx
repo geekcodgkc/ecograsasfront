@@ -2,6 +2,7 @@ import React from "react";
 import "./index.scss";
 import CartWrapper from "../CartWrapper";
 import DiscountsWrapper from "../../components/DiscountsWrapper";
+import WeightConfig from "../../components/WeightConfig";
 
 export default function DashboardContainer() {
 	return (
@@ -10,8 +11,9 @@ export default function DashboardContainer() {
 				<h2 className="font-bold text-4xl text-center mt-8 mb-4">
 					Dashboard Container
 				</h2>
-				<div className="flex flex-wrap w-full">
+				<div className="flex flex-wrap w-full gap-1">
 					<DiscountsWrapper />
+					<WeightConfig />
 				</div>
 			</div>
 		</CartWrapper>

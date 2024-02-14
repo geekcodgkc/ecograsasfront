@@ -106,6 +106,12 @@ export default function DiscountsInput() {
                         mt-4
                         "
 						onClick={() => {
+							if (nameValue.length < 1 || percent === 0) {
+								alert(
+									"rellena todos los campos para guardar el nuevo descuento",
+								);
+								return;
+							}
 							addDiscounts({
 								name: nameValue,
 								percent,

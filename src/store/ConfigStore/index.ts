@@ -4,6 +4,7 @@ import { persist, createJSONStorage, PersistOptions } from "zustand/middleware";
 
 export interface PricesScalesInterface {
 	MinKg: number;
+	_id: string;
 }
 
 export interface DiscountsInterface {
@@ -23,8 +24,8 @@ export interface ConfigStoreInterface {
 	loading: boolean;
 	_id: null | string;
 	getConfig: () => Promise<void>;
-	updateConfig: (data: ConfigUpdateForm) => Promise<void>;
-	addDiscounts: (data: DiscountsInterface) => Promise<void>;
+	updateConfig: (data: PricesScalesInterface[]) => Promise<void>;
+	addDiscounts: (config: DiscountsInterface) => Promise<void>;
 	changeOrder: (currIndex: number, nextIndex: number) => Promise<void>;
 	remove: (index: number) => Promise<void>;
 }
@@ -56,9 +57,20 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 					set((state) => ({ ...state, loading: false }));
 				}
 			},
-			updateConfig: async (data) => {
+			updateConfig: async (config) => {
 				try {
-					console.log(data);
+					set((state) => ({ ...state, loading: true }));
+					await api.put(`/config/${get()._id}`, {
+						PriceScales: config,
+					});
+					const { data } = await api.get("/config");
+					set((state) => ({
+						...state,
+						loading: false,
+						Discounts: data.Discounts,
+						PriceScales: data.PriceScales,
+						_id: data._id,
+					}));
 				} catch (error) {
 					set((state) => ({ ...state, loading: false }));
 				}
@@ -89,7 +101,6 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 					const Discounts = get().Discounts;
 					if (Discounts) {
 						const dis = Discounts[currIndex];
-						console.log(dis);
 						const newDiscounts = [
 							...Discounts.slice(0, currIndex),
 							...Discounts.slice(currIndex + 1, Discounts.length),
