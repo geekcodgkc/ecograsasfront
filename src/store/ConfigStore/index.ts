@@ -24,6 +24,7 @@ export interface ConfigStoreInterface {
 	_id: null | string;
 	getConfig: () => Promise<void>;
 	updateConfig: (data: ConfigUpdateForm) => Promise<void>;
+	addDiscounts: (data: DiscountsInterface) => Promise<void>;
 }
 
 type MyPersist = (
@@ -33,7 +34,7 @@ type MyPersist = (
 
 export const useConfigStore = create<ConfigStoreInterface, []>(
 	(persist as MyPersist)(
-		(set): ConfigStoreInterface => ({
+		(set, get): ConfigStoreInterface => ({
 			PriceScales: null,
 			Discounts: null,
 			loading: false,
@@ -56,6 +57,27 @@ export const useConfigStore = create<ConfigStoreInterface, []>(
 			updateConfig: async (data) => {
 				try {
 					console.log(data);
+				} catch (error) {
+					set((state) => ({ ...state, loading: false }));
+				}
+			},
+			addDiscounts: async (data) => {
+				try {
+					set((state) => ({ ...state, loading: true }));
+					const currentDiscounts = get().Discounts;
+					console.log(currentDiscounts);
+					const discounts = currentDiscounts
+						? [...currentDiscounts, data]
+						: [data];
+					await api.put(`/config/${get()._id}`, {
+						Discounts: discounts,
+					});
+					const { data: newData } = await api.get("/config");
+					set((state) => ({
+						...state,
+						loading: false,
+						Discounts: newData.Discounts,
+					}));
 				} catch (error) {
 					set((state) => ({ ...state, loading: false }));
 				}

@@ -24,7 +24,12 @@ export default function DiscountsWrapper() {
 				{Discounts ? (
 					<tbody>
 						{Discounts.map((discount, i) => {
-							return <DiscountsContainer data={{ ...discount, index: i }} />;
+							return (
+								<DiscountsContainer
+									data={{ ...discount, index: i }}
+									key={`${i}${Math.random()}`}
+								/>
+							);
 						})}
 					</tbody>
 				) : (

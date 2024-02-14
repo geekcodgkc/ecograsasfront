@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { useConfigStore } from "../../store/ConfigStore";
 
 export default function DiscountsInput() {
 	const [open, setOpen] = useState(false);
+	const [percent, setPercent] = useState(0);
+	const [nameValue, setNameValue] = useState("");
+	const [isGlobal, setIsGlobal] = useState(false);
+
+	const { addDiscounts } = useConfigStore((store) => store);
 
 	return (
 		<div className="w-full mb-6 flex flex-wrap">
@@ -19,15 +25,40 @@ export default function DiscountsInput() {
 						<tbody>
 							<tr>
 								<td className="p1 border border-slate-300">
-									<input type="text" name="name" />
+									<input
+										placeholder="nombre del descuento"
+										type="text"
+										name="name"
+										className="pl-2 rounded"
+										value={nameValue}
+										onChange={(e) => {
+											setNameValue(e.target.value);
+										}}
+									/>
 								</td>
 								<td className="p1 border border-slate-300">
 									<div className="flex justify-center align-center h-full">
-										<input type="checkbox" name="global" />
+										<input
+											type="checkbox"
+											name="global"
+											className="p1"
+											checked={isGlobal}
+											onChange={() => {
+												setIsGlobal(!isGlobal);
+											}}
+										/>
 									</div>
 								</td>
 								<td className="p1 border border-slate-300">
-									<input type="number" name="percent" className="max-w-12" />
+									<input
+										type="number"
+										name="percent"
+										className="pl-2 rounded"
+										onChange={(e) => {
+											const value = parseFloat(e.target.value);
+											setPercent(value);
+										}}
+									/>
 								</td>
 								<td className="p1 border border-slate-300">
 									<div
@@ -45,7 +76,10 @@ export default function DiscountsInput() {
                                     hover:text-red-500
                                 "
 										onClick={() => {
-											setOpen(true);
+											setPercent(0);
+											setIsGlobal(false);
+											setNameValue("");
+											setOpen(false);
 										}}
 										onKeyUp={() => {}}
 									>
@@ -72,6 +106,11 @@ export default function DiscountsInput() {
                         mt-4
                         "
 						onClick={() => {
+							addDiscounts({
+								name: nameValue,
+								percent,
+								global: isGlobal,
+							});
 							setOpen(false);
 						}}
 						onKeyUp={() => {}}
