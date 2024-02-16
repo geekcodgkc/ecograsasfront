@@ -20,7 +20,7 @@ export default function WeightConfig() {
 	};
 
 	return (
-		<div className="flex flex-wrap basis-2/4 bg-slate-200 p-2 max-w-[49%] rounded-md items-start">
+		<div className="flex flex-wrap basis-2/4 bg-slate-200 p-2 max-w-[49.8%] rounded-md items-start">
 			<h3 className="w-full font-bold text-4xl text-center mt-8 ">
 				Escalas de precio
 			</h3>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useConfigStore } from "../../store/ConfigStore";
+import { useConfigStore } from "../../store";
 import DiscountsContainer from "./Discount";
 import DiscountsInput from "./DiscountsInputs";
 
@@ -7,7 +7,7 @@ export default function DiscountsWrapper() {
 	const { Discounts } = useConfigStore((store) => store);
 
 	return (
-		<div className="flex flex-wrap basis-2/4 gap-y-4 bg-slate-200 p-2 max-w-[49%] rounded-md">
+		<div className="flex flex-wrap basis-2/4 gap-y-4 bg-slate-200 p-2 max-w-[49.8%] rounded-md">
 			<h3 className="w-full font-bold text-4xl text-center mt-8 mb-4">
 				Descuentos
 			</h3>

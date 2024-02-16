@@ -14,6 +14,8 @@ export default function ProfileContainer() {
 	const store = isBrowser && useUserStore((state) => state);
 	const [open, setOpen] = useState(false);
 
+	console.log(store);
+
 	useEffect(() => {
 		if (isBrowser && store && store?.id) {
 			store.getUserData(store.id);
@@ -38,13 +40,28 @@ export default function ProfileContainer() {
 				)}
 				<header className="w-full flex flex-wrap justify-between items-center px-2 pt-8 gap-y-2">
 					<h1 className="flex items-center gap-2 text-2xl font-bold">
-						{isBrowser && store && store.name}{" "}
-						<AiFillEdit
-							className="hover:cursor-pointer editButton"
-							onClick={() => {
-								setOpen(true);
-							}}
-						/>
+						{isBrowser && store && !store.isSuper && (
+							<>
+								{store.name}{" "}
+								<AiFillEdit
+									className="hover:cursor-pointer editButton"
+									onClick={() => {
+										setOpen(true);
+									}}
+								/>
+							</>
+						)}
+						{isBrowser && store && store.isSuper && (
+							<span
+								className="hover:cursor-pointer editButton p-2 border-2 rounded-md"
+								onClick={() => {
+									navigate("/Dashboard");
+								}}
+								onKeyDown={() => {}}
+							>
+								ir al Dashboard
+							</span>
+						)}
 					</h1>
 					<button
 						type="button"

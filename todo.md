@@ -34,8 +34,10 @@
 * [ ] change the uri of the ./utils/api.ts
 * [ ] trabajar en la pagina de Dashboard
   * [*] agregar configurador de descuentos
-  * [ ] agregar configurador de rangos de precios por kilos
+  * [*] agregar configurador de rangos de precios por kilos
   * [ ] agregar configurador de las vistas para clientes unilevel
+  * [ ] agregar link en la vista de profile si el usuario es super para 
+        redirigirlo a la vista de Dashboard
 * [ ] trabajar en la vista de ordenes
   * [ ] mostrar los rangos de precios segun los kilos
   * [ ] calcular el precio segun los kilos de los clientes y el que se suma por la orden actual

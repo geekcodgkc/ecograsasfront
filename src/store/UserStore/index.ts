@@ -71,6 +71,7 @@ export interface UserStoreInterface {
 	error: null | string;
 	isAdmin: boolean;
 	zones: null | zones[];
+	isSuper: boolean;
 	getZones: () => Promise<void>;
 	login: (data: LoginObject, cb: () => Promise<void>) => Promise<void>;
 	logout: () => Promise<void>;
@@ -97,6 +98,7 @@ export const useUserStore = create<UserStoreInterface, []>(
 			error: null,
 			isAdmin: false,
 			zones: null,
+			isSuper: false,
 			logout: async () => {
 				set((state) => ({ ...state, loading: true }));
 				try {
@@ -131,6 +133,7 @@ export const useUserStore = create<UserStoreInterface, []>(
 						loading: false,
 						error: null,
 						token: loginResponse.data.token,
+						isSuper: parsed.isSuper,
 					}));
 					cb();
 				} catch (e) {
